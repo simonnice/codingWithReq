@@ -5,8 +5,12 @@ class DateTimeView {
 
 	public function show() {
 
-		$timeString = date('l jS \of F Y\, \the \time \is h:i:s');
-		
+		$timeStringDay = date('l');
+		$timeStringDate = date('jS');
+		$timeStringMonth = date('F');
+		$timeStringYear = date('Y');
+
+		//  jS \of F Y h:i:s
 
 		return '<p>' . $timeString . '</p>';
 	}
