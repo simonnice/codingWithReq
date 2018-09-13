@@ -5,7 +5,7 @@ class DateTimeView {
 
 	public function show() {
 
-		$timeString = date("1");
+		$timeString = date("l");
 
 		return '<p>' . $timeString . '</p>';
 	}
