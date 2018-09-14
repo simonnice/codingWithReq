@@ -14,7 +14,9 @@ class loginController {
      */
 
     private function checkLoginCredentials() {
-
+        if (this->loginView->fetchLoginData() == true) {
+            
+        }
     }
 
 }

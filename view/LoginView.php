@@ -66,10 +66,12 @@ class LoginView {
 		';
     }
 
-    public function fetchLoginData() {
+    public function isLoginButtonClicked() {
         if (isset($_POST[self::$login])) {
-            $userName = $_POST[self::$name];
-            return $userName;
+			return true;
+		} else {
+			return false;
+		}
         }
     }
 
