@@ -12,14 +12,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 //CREATE OBJECTS OF THE VIEWS
-$v = new LoginView();
-$dtv = new DateTimeView();
-$lv = new LayoutView();
+$loginView = new LoginView();
+$dateTimeView = new DateTimeView();
+$layoutView = new LayoutView();
 
 //CREATE OBJECTS OF THE MODELS
 $state = new \model\LoginState();
 
 // CREATE OBJECTS OF THE CONTROLLER
-$loginController = new loginController($state, $lv);
+$loginController = new loginController($state, $v);
 
 $lv->render(false, $v, $dtv);
