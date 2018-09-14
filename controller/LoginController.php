@@ -21,7 +21,9 @@ class loginController {
 
             // Debug purpose echo
             $loginData = $this->loginView->getFormData();
-            var_dump($loginData);
+            // var_dump($loginData);
+            echo $loginData['LoginView::UserName'];
+            echo $loginData['LoginView::Password'];
         }
     }
 
