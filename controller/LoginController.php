@@ -2,7 +2,7 @@
 
 class loginController {
 
-    public function __construct(\model\loginState $state, $login) {
+    public function __construct(\model\LoginState $state, $login) {
         $this->state = $state;
         $this->loginView = $login;
         $this->checkLoginCredentials();
@@ -14,8 +14,9 @@ class loginController {
      */
 
     private function checkLoginCredentials() {
-        if (this->loginView->fetchLoginData() == true) {
-            
+        if ($this->loginView->isLoginButtonClicked() == true) {
+            // Debug purpose echo
+            echo $this->loginView->getFormUserName();
         }
     }
 

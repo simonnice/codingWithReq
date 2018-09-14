@@ -68,11 +68,14 @@ class LoginView {
 
     public function isLoginButtonClicked() {
         if (isset($_POST[self::$login])) {
-			return true;
-		} else {
-			return false;
-		}
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    public function getFormUserName() {
+        return $_GET[self::$name];
     }
 
     //CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
