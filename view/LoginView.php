@@ -67,8 +67,9 @@ class LoginView {
     }
 
     public function fetchLoginData() {
-        if (empty($_POST[self::$name])) {
-            echo "Post namn";
+        if (isset($_POST[self::$login])) {
+            $userName = $_POST[self::$name];
+            return $userName;
         }
     }
 
