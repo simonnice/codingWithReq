@@ -18,8 +18,10 @@ class loginController {
 
     private function checkLoginCredentials() {
         if ($this->loginView->isLoginButtonClicked() == true) {
+
             // Debug purpose echo
-            echo $this->loginView->getFormUserName();
+            $loginData = $this->loginView->getFormData();
+            var_dump($loginData);
         }
     }
 
