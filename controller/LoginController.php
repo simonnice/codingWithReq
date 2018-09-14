@@ -21,9 +21,7 @@ class loginController {
 
             $loginData = $this->loginView->getFormData();
 
-            $this->loginView->response($this->state->checkInputData($loginData))
-            
-
+            $this->loginView->response($this->state->checkInputData($loginData));
             // var_dump($loginData);
             // Debug purpose echo
             // echo $loginData['LoginView::UserName'];
