@@ -20,9 +20,10 @@ class loginController {
         if ($this->loginView->isLoginButtonClicked() == true) {
 
             $loginData = $this->loginView->getFormData();
+            $loginResult = $this->state->checkInputData($loginData);
 
-            $this->loginView->response($this->state->checkInputData($loginData));
-            // var_dump($loginData);
+            //$this->loginView->response($loginResult);
+            var_dump($this->loginView->response($loginResult));
             // Debug purpose echo
             // echo $loginData['LoginView::UserName'];
             // echo $loginData['LoginView::Password'];
