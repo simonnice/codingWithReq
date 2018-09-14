@@ -75,7 +75,7 @@ class LoginView {
     }
 
     public function getFormUserName() {
-        return $_GET[self::$name];
+        return $_POST[self::$name];
     }
 
     //CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES

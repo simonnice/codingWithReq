@@ -20,6 +20,6 @@ $layoutView = new LayoutView();
 $state = new \model\LoginState();
 
 // CREATE OBJECTS OF THE CONTROLLER
-$loginController = new loginController($state, $v);
+$loginController = new loginController($state, $loginView);
 
-$lv->render(false, $v, $dtv);
+$layoutView->render(false, $loginView, $dateTimeView);

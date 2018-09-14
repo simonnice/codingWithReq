@@ -2,6 +2,9 @@
 
 class loginController {
 
+    private $state;
+    private $loginView;
+
     public function __construct(\model\LoginState $state, $login) {
         $this->state = $state;
         $this->loginView = $login;
