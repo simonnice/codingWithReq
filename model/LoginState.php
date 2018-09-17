@@ -8,6 +8,8 @@ class LoginState {
 
         if ($loginData['LoginView::UserName'] == "") {
             return $loginData['LoginView::Message'] = "Username is missing";
+        } else if ($loginData['LoginView::Password'] == "") {
+            return $loginData['LoginView::Message'] = "Password is missing";
         }
     }
 }

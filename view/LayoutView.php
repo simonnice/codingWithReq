@@ -6,6 +6,7 @@ class LayoutView {
     public function render($isLoggedIn, LoginView $v, DateTimeView $dtv, $lc) {
 
         $responseValue = $lc->checkLoginCredentials();
+
         echo '<!DOCTYPE html>
       <html>
         <head>
