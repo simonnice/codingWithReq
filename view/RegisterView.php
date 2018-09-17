@@ -8,6 +8,7 @@ class RegisterView {
     private static $name = 'RegisterView::UserName';
     private static $password = 'RegisterView::Password';
     private static $messageId = 'RegisterView::message'
+    private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
     /**
      * Generate HTML code on the output buffer for the register button
@@ -21,14 +22,24 @@ class RegisterView {
                 <fieldset>
                     <legend>Register a new user - Write username and password</legend>
                     <p id="' . self::$messageId . '">' . $message . '</p>
-                    
+                    <br>
+
                     <label for="' . self::$name . '">Username :</label>
                     <input type="text" id="' . self::$name . '" name"' . self::$name . '" value="" />
+                    <br>
 
                     <label for="' . self::$password . '">Password :</label>
-                    <input type="text" id="' . self::$password . '" name"' . self::$password . '" />
+                    <input type="password" id="' . self::$password . '" name"' . self::$password . '" />
+                    <br>
 
-                    <
-                    '
+                    <label for="' . self::$passwordRepeat . '">Repeat password :</label>
+                    <input type="password" id="' . self::$passwordRepeat . '" name"' . self::passwordRepeat . '" />
+                    <br>
+
+                    <input type="submit" id="submit" name="' . self::$Register . '" value="Register" />
+                </fieldset>
+            </form>
+                    
+            ';
      }
 }
