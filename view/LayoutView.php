@@ -3,7 +3,7 @@ namespace view;
 
 class LayoutView {
 
-    public function render($isLoggedIn, LoginView $v, DateTimeView $dtv, $lc) {
+    public function render($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc) {
 
         if ($isLoggedIn == false) {
             $responseValue = $lc->checkLoginCredentials();
