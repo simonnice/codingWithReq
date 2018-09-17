@@ -4,14 +4,10 @@ namespace model;
 
 class LoginState {
 
-    private $inputResult;
-
     public function checkInputData($loginData) {
 
-        $this->inputResult = $loginData;
-
-        if ($this->inputResult['LoginView::UserName'] == 'hej') {
-            return "Username is missing";
+        if ($loginData['LoginView::UserName'] == "") {
+            return $loginData['LoginView::Message'] = "Username is missing";
         }
     }
 }

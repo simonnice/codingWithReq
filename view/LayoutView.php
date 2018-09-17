@@ -3,7 +3,9 @@ namespace view;
 
 class LayoutView {
 
-    public function render($isLoggedIn, LoginView $v, DateTimeView $dtv) {
+    public function render($isLoggedIn, LoginView $v, DateTimeView $dtv, $lc) {
+
+        $responseValue = $lc->checkLoginCredentials();
         echo '<!DOCTYPE html>
       <html>
         <head>
@@ -15,7 +17,7 @@ class LayoutView {
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
           <div class="container">
-              ' . $v->response('') . '
+              ' . $v->response($responseValue) . '
 
               ' . $dtv->show() . '
           </div>

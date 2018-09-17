@@ -18,10 +18,10 @@ class LoginView {
      *
      * @return  void BUT writes to standard output and cookies!
      */
-    public function response($inputErrorMessage) {
-        $message = $inputErrorMessage;
+    public function response($message) {
 
         $response = $this->generateLoginFormHTML($message);
+
         //$response .= $this->generateLogoutButtonHTML($message);
         return $response;
     }
@@ -47,7 +47,7 @@ class LoginView {
      */
     private function generateLoginFormHTML($message) {
         return '
-			<form method="post" >
+			<form method="post">
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
 					<p id="' . self::$messageId . '">' . $message . '</p>
@@ -61,22 +61,23 @@ class LoginView {
 					<label for="' . self::$keep . '">Keep me logged in  :</label>
 					<input type="checkbox" id="' . self::$keep . '" name="' . self::$keep . '" />
 
-					<input type="submit" name="' . self::$login . '" value="login" />
+					<input type="submit" id="submit" name="' . self::$login . '" value="login" />
 				</fieldset>
 			</form>
 		';
     }
 
-    public function isLoginButtonClicked() {
-        if (isset($_POST)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function getFormData() {
         return $_POST;
+    }
+
+    public function isLoginButtonClicked() {
+        if (isset($_POST['LoginView::Login'])) {
+            return true;
+        } else {
+
+            return false;
+        }
     }
 
     //CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
