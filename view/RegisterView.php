@@ -37,6 +37,7 @@ class RegisterView {
     private function generateRegisterFormHTML($message) {
         return '
         <div class>
+        <a href="?">Back to login</a>
         <h2>Register new user</h2>
             <form method="post">
                 <fieldset>
