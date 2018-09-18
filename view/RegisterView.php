@@ -52,7 +52,8 @@ class RegisterView {
     }
 
     public function registerLinkIsClicked() {
-        if (isset($_POST)) {
+        if (isset($_GET['RegisterView::Register'])) {
+            echo "This Works";
         }
     }
 }
