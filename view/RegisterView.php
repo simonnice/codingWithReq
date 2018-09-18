@@ -24,12 +24,7 @@ class RegisterView {
 
     public function generateRegisterLink() {
         return '
-        <form method="post">
-          <fieldset>
-            <input type="submit" id="submit" name="' . self::$register . '" value="register" />
-          </fieldset>
-        </form>
-
+        <a href="?register">Register a new user</a>
 		';
     }
     // <a href="register.php" id="' . self::$register . '"> Register a new user</a>
@@ -67,7 +62,7 @@ class RegisterView {
     }
 
     public function registerLinkIsClicked() {
-        if (isset($_GET['RegisterView::Register'])) {
+        if (isset($_GET['register'])) {
             return true;
         } else {
 
