@@ -36,10 +36,8 @@ class RegisterView {
 
     private function generateRegisterFormHTML($message) {
         return '
-        <div>
-        <a href="?index.php">Back to login</a>
         <h2>Register new user</h2>
-            <form method="post">
+            <form action ="?register" form method="post">
                 <fieldset>
                     <legend>Register a new user - Write username and password</legend>
                     <p id="' . self::$messageId . '">' . $message . '</p>
@@ -60,7 +58,7 @@ class RegisterView {
                     <input type="submit" id="submit" name="' . self::$register . '" value="Register" />
                 </fieldset>
             </form>
-        </div>
+
 
             ';
     }

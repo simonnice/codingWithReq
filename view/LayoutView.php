@@ -7,30 +7,32 @@ class LayoutView {
 
         if ($isLoggedIn == false) {
 
-            /*$registerResponseValue = 'Derp'; // Placeholder Value
+            $registerResponseValue = 'Derp'; // Placeholder Value
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
-            echo '<!DOCTYPE html>
-            <html>
-            <head>
-            <meta charset="utf-8">
-            <title>Login Example</title>
-            </head>
-            <body>
-            <h1>Assignment 2</h1>
-            ' . $this->renderIsLoggedIn($isLoggedIn) . '
+                echo '<!DOCTYPE html>
+              <html>
+                <head>
+                  <meta charset="utf-8">
+                  <title>Login Example</title>
+                </head>
+                <body>
 
-            <div class="container">
-            ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, $registerResponseValue) . '
+                  <h1>Assignment 2</h1>
+                  <a href="?">Back to login</a>
+                  ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
-            ' . $dtv->show() . '
-            </div>
-            </body>
-            </html>
-            ';*/
+                  <div class="container">
+                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, $registerResponseValue) . '
 
-            $responseValue = $lc->checkLoginCredentials();
-            echo '<!DOCTYPE html>
+                      ' . $dtv->show() . '
+                  </div>
+                 </body>
+              </html>
+            ';
+            } else {
+                $responseValue = $lc->checkLoginCredentials();
+                echo '<!DOCTYPE html>
               <html>
                 <head>
                   <meta charset="utf-8">
@@ -49,6 +51,8 @@ class LayoutView {
                  </body>
               </html>
             ';
+            }
+
         } else if ($isLoggedIn == true) {
             echo '<!DOCTYPE html>
             <html>
