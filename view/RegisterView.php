@@ -10,6 +10,14 @@ class RegisterView {
     private static $messageId = 'RegisterView::message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
+    public function generateRegisterLink() {
+        return '
+
+				<a href="register.php" id="' . self::$register . '"> Register a new user</a>
+
+		';
+    }
+
     /**
      * Generate HTML code on the output buffer for the register button
      * @param $message, String output message

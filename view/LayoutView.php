@@ -6,7 +6,7 @@ class LayoutView {
     public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc) {
 
         if ($isLoggedIn == false) {
-            $this->registerLinkIsClicked();
+
             $responseValue = $lc->checkLoginCredentials();
             echo '<!DOCTYPE html>
           <html>
@@ -16,7 +16,7 @@ class LayoutView {
             </head>
             <body>
               <h1>Assignment 2</h1>
-              <a href="register.php?link"> Register a new user</a>
+              ' . $registerView->generateRegisterLink() . '
               ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
               <div class="container">
