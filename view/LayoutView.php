@@ -7,8 +7,8 @@ class LayoutView {
 
         if ($isLoggedIn == false) {
 
-            $responseRegister = $rc->checkClick();
-            if ($responseRegister == true) {
+            $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
+            if ($isRegisterLinkClicked == true) {
                 echo '<!DOCTYPE html>
               <html>
                 <head>
@@ -20,7 +20,7 @@ class LayoutView {
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
-                  ' . $registerView->responseReg($responseRegister) . '
+                  ' . $registerView->responseReg($isRegisterLinkClicked) . '
 
                       ' . $dtv->show() . '
                   </div>

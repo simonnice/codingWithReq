@@ -17,7 +17,7 @@ class registerController {
      *
      */
 
-    public function checkClick() {
+    public function checkIfRegisterIsClicked() {
         if ($this->registerView->registerLinkIsClicked() == true) {
 
             return true;
