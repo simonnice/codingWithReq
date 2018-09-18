@@ -10,9 +10,9 @@ class RegisterView {
     private static $messageId = 'RegisterView::message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
-    public function responseReg($bool) {
+    public function echoRegisterHtml($registerLinkIsClicked) {
 
-        if ($bool == false) {
+        if ($registerLinkIsClicked == false) {
             $response = $this->generateRegisterLink();
         } else {
             $response = $this->generateRegisterFormHTML('');
@@ -36,6 +36,8 @@ class RegisterView {
 
     private function generateRegisterFormHTML($message) {
         return '
+        <div class>
+        <h2>Register new user</h2>
             <form method="post">
                 <fieldset>
                     <legend>Register a new user - Write username and password</legend>
@@ -57,6 +59,7 @@ class RegisterView {
                     <input type="submit" id="submit" name="' . self::$register . '" value="Register" />
                 </fieldset>
             </form>
+        </div>
 
             ';
     }

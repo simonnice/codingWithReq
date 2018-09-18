@@ -20,7 +20,7 @@ class LayoutView {
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
-                  ' . $registerView->responseReg($isRegisterLinkClicked) . '
+                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked) . '
 
                       ' . $dtv->show() . '
                   </div>
@@ -37,7 +37,7 @@ class LayoutView {
                 </head>
                 <body>
                   <h1>Assignment 2</h1>
-                  ' . $registerView->responseReg('') . '
+                  ' . $registerView->echoRegisterHtml('') . '
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
