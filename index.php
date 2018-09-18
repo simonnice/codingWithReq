@@ -17,7 +17,7 @@ session_start();
 $loginView = new \view\LoginView();
 $dateTimeView = new \view\DateTimeView();
 $layoutView = new \view\LayoutView();
-$RegisterView = new \view\RegisterView();
+$registerView = new \view\RegisterView();
 
 //CREATE OBJECTS OF THE MODELS
 $state = new \model\LoginState();
@@ -25,4 +25,4 @@ $state = new \model\LoginState();
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($state, $loginView);
 
-$layoutView->render(false, $loginView, $dateTimeView, $loginController, $registerView);
+$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController);

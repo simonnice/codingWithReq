@@ -7,7 +7,7 @@ class RegisterView {
     private static $register = 'RegisterView::Register';
     private static $name = 'RegisterView::UserName';
     private static $password = 'RegisterView::Password';
-    private static $messageId = 'RegisterView::message'
+    private static $messageId = 'RegisterView::message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
     /**
@@ -16,8 +16,8 @@ class RegisterView {
      * @return  void, BUT writes to standard output!
      */
 
-     private function generateRegisterFormHTML($message) {
-         return '
+    private function generateRegisterFormHTML($message) {
+        return '
             <form method="post">
                 <fieldset>
                     <legend>Register a new user - Write username and password</legend>
@@ -39,7 +39,12 @@ class RegisterView {
                     <input type="submit" id="submit" name="' . self::$Register . '" value="Register" />
                 </fieldset>
             </form>
-                    
+
             ';
-     }
+    }
+
+    public function registerLinkIsClicked() {
+        if (isset($_POST)) {
+        }
+    }
 }

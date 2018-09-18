@@ -3,9 +3,10 @@ namespace view;
 
 class LayoutView {
 
-    public function render($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc) {
+    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc) {
 
         if ($isLoggedIn == false) {
+            $this->registerLinkIsClicked();
             $responseValue = $lc->checkLoginCredentials();
             echo '<!DOCTYPE html>
           <html>
@@ -15,7 +16,7 @@ class LayoutView {
             </head>
             <body>
               <h1>Assignment 2</h1>
-              <a href="register.php"> Register a new user</a>
+              <a href="register.php?link"> Register a new user</a>
               ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
               <div class="container">

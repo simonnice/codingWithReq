@@ -22,7 +22,6 @@ class loginController {
 
             $data = $this->loginView->getFormData();
             return $this->state->checkInputData($data);
-            // var_dump($this->loginView->response($this->state->checkInputData($data)));
         }
 
     }
