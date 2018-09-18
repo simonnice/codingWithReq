@@ -10,12 +10,12 @@ class RegisterView {
     private static $messageId = 'RegisterView::message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
-    public function echoRegisterHtml($registerLinkIsClicked) {
+    public function echoRegisterHtml($registerLinkIsClicked, $message) {
 
         if ($registerLinkIsClicked == false) {
             $response = $this->generateRegisterLink();
         } else {
-            $response = $this->generateRegisterFormHTML('');
+            $response = $this->generateRegisterFormHTML($message);
         }
 
         //$response .= $this->generateLogoutButtonHTML($message);

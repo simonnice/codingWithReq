@@ -7,6 +7,7 @@ class LayoutView {
 
         if ($isLoggedIn == false) {
 
+            $registerResponseValue = 'Derp'; // Placeholder Value
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
                 echo '<!DOCTYPE html>
@@ -20,7 +21,7 @@ class LayoutView {
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
-                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked) . '
+                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, $registerResponseValue) . '
 
                       ' . $dtv->show() . '
                   </div>
@@ -37,7 +38,7 @@ class LayoutView {
                 </head>
                 <body>
                   <h1>Assignment 2</h1>
-                  ' . $registerView->echoRegisterHtml('') . '
+                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, $registerResponseValue) . '
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
