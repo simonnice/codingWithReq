@@ -3,30 +3,53 @@ namespace view;
 
 class LayoutView {
 
-    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc) {
+    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc) {
 
         if ($isLoggedIn == false) {
 
-            $responseValue = $lc->checkLoginCredentials();
-            echo '<!DOCTYPE html>
-          <html>
-            <head>
-              <meta charset="utf-8">
-              <title>Login Example</title>
-            </head>
-            <body>
-              <h1>Assignment 2</h1>
-              ' . $registerView->generateRegisterLink() . '
-              ' . $this->renderIsLoggedIn($isLoggedIn) . '
+            $responseRegister = $rc->checkClick();
+            if ($responseRegister == true) {
+                echo '<!DOCTYPE html>
+              <html>
+                <head>
+                  <meta charset="utf-8">
+                  <title>Login Example</title>
+                </head>
+                <body>
+                  <h1>Assignment 2</h1>
+                  ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
-              <div class="container">
-                  ' . $v->response($responseValue) . '
+                  <div class="container">
+                  ' . $registerView->responseReg($responseRegister) . '
 
-                  ' . $dtv->show() . '
-              </div>
-             </body>
-          </html>
-        ';
+                      ' . $dtv->show() . '
+                  </div>
+                 </body>
+              </html>
+            ';
+            } else {
+                $responseValue = $lc->checkLoginCredentials();
+                echo '<!DOCTYPE html>
+              <html>
+                <head>
+                  <meta charset="utf-8">
+                  <title>Login Example</title>
+                </head>
+                <body>
+                  <h1>Assignment 2</h1>
+                  ' . $registerView->responseReg('') . '
+                  ' . $this->renderIsLoggedIn($isLoggedIn) . '
+
+                  <div class="container">
+                      ' . $v->response($responseValue) . '
+
+                      ' . $dtv->show() . '
+                  </div>
+                 </body>
+              </html>
+            ';
+            }
+
         } else if ($isLoggedIn == true) {
             echo '<!DOCTYPE html>
             <html>

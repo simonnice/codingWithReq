@@ -10,14 +10,29 @@ class RegisterView {
     private static $messageId = 'RegisterView::message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
+    public function responseReg($bool) {
+
+        if ($bool == false) {
+            $response = $this->generateRegisterLink();
+        } else {
+            $response = $this->generateRegisterFormHTML('');
+        }
+
+        //$response .= $this->generateLogoutButtonHTML($message);
+        return $response;
+    }
+
     public function generateRegisterLink() {
         return '
-
-				<a href="register.php" id="' . self::$register . '"> Register a new user</a>
+        <form method="post">
+          <fieldset>
+            <input type="submit" id="submit" name="' . self::$register . '" value="register" />
+          </fieldset>
+        </form>
 
 		';
     }
-
+    // <a href="register.php" id="' . self::$register . '"> Register a new user</a>
     /**
      * Generate HTML code on the output buffer for the register button
      * @param $message, String output message
@@ -41,10 +56,10 @@ class RegisterView {
                     <br>
 
                     <label for="' . self::$passwordRepeat . '">Repeat password :</label>
-                    <input type="password" id="' . self::$passwordRepeat . '" name"' . self::passwordRepeat . '" />
+                    <input type="password" id="' . self::$passwordRepeat . '" name"' . self::$passwordRepeat . '" />
                     <br>
 
-                    <input type="submit" id="submit" name="' . self::$Register . '" value="Register" />
+                    <input type="submit" id="submit" name="' . self::$register . '" value="Register" />
                 </fieldset>
             </form>
 
@@ -53,7 +68,10 @@ class RegisterView {
 
     public function registerLinkIsClicked() {
         if (isset($_GET['RegisterView::Register'])) {
-            echo "This Works";
+            return true;
+        } else {
+
+            return false;
         }
     }
 }

@@ -7,8 +7,8 @@ class registerController {
     private $state;
     private $registerView;
 
-    public function __construct(\model\registerState $state, $register) {
-        $this->state = $state;
+    public function __construct($register) {
+        // $this->state = $state;
         $this->registerView = $register;
     }
 
@@ -17,11 +17,10 @@ class registerController {
      *
      */
 
-    public function checkLoginCredentials() {
-        if ($this->loginView->isLoginButtonClicked() == true) {
+    public function checkClick() {
+        if ($this->registerView->registerLinkIsClicked() == true) {
 
-            $data = $this->loginView->getFormData();
-            return $this->state->checkInputData($data);
+            return true;
         }
 
     }

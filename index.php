@@ -6,6 +6,7 @@ require_once 'view/registerView.php';
 require_once 'view/DateTimeView.php';
 require_once 'view/LayoutView.php';
 require_once 'controller/LoginController.php';
+require_once 'controller/RegisterController.php';
 require_once 'model/LoginState.php';
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
@@ -24,5 +25,6 @@ $state = new \model\LoginState();
 
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($state, $loginView);
+$registerController = new \controller\registerController($registerView);
 
-$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController);
+$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $registerController);
