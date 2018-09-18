@@ -24,7 +24,7 @@ class RegisterView {
 
     public function generateRegisterLink() {
         return '
-        <a href="?register">Register a new user</a>
+        <a href="/?register">Register a new user</a>
 		';
     }
     // <a href="register.php" id="' . self::$register . '"> Register a new user</a>
