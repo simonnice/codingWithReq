@@ -7,8 +7,8 @@ class registerController {
     private $state;
     private $registerView;
 
-    public function __construct($register) {
-        // $this->state = $state;
+    public function __construct($state, $register) {
+        $this->state = $state;
         $this->registerView = $register;
     }
 
