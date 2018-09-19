@@ -14,7 +14,7 @@ class registerController {
 
     /**
      * Handle a GET request to Register.php
-     *
+     *testing
      */
 
     public function checkIfRegisterIsClicked() {
