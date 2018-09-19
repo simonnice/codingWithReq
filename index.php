@@ -26,6 +26,6 @@ $registerState = new \model\RegisterState();
 
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($loginState, $loginView);
-$registerController = new \controller\registerController($registerState, $registerView);
+$registerController = new \controller\RegisterController($registerState, $registerView);
 
 $layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $registerController);
