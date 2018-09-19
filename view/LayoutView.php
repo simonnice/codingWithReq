@@ -19,7 +19,7 @@ class LayoutView {
                 <body>
 
                   <h1>Assignment 2</h1>
-                  <a href="?index.php">Back to login</a>
+                  <a href="?">Back to login</a>
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
