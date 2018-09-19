@@ -3,6 +3,7 @@
 namespace view;
 
 class RegisterView {
+    // derp
 
     private static $register = 'RegisterView::Register';
     private static $name = 'RegisterView::UserName';
