@@ -46,18 +46,18 @@ class RegisterView {
                     <br>
 
                     <label for="' . self::$name . '">Username :</label>
-                    <input type="text" id="' . self::$name . '" name"' . self::$name . '" value="" />
+                    <input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
                     <br>
 
                     <label for="' . self::$password . '">Password :</label>
-                    <input type="password" id="' . self::$password . '" name"' . self::$password . '" />
+                    <input type="password" id="' . self::$password . '" name="' . self::$password . '" />
                     <br>
 
                     <label for="' . self::$passwordRepeat . '">Repeat password :</label>
-                    <input type="password" id="' . self::$passwordRepeat . '" name"' . self::$passwordRepeat . '" />
+                    <input type="password" id="' . self::$passwordRepeat . '" name="' . self::$passwordRepeat . '" />
                     <br>
 
-                    <input id="submit" type="submit" name="' . self::$register . '" value="Register" />
+                    <input id="submit" type="submit" name="DoRegistration" value="Register" />
                 </fieldset>
             </form>
 
