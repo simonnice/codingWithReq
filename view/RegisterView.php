@@ -57,7 +57,7 @@ class RegisterView {
                     <input type="password" id="' . self::$passwordRepeat . '" name"' . self::$passwordRepeat . '" />
                     <br>
 
-                    <input type="submit" id="submit" name="' . self::$register . '" value="Register" />
+                    <input id="submit" type="submit" name="' . self::$register . '" value="Register" />
                 </fieldset>
             </form>
 
