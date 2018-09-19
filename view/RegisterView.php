@@ -8,7 +8,7 @@ class RegisterView {
     private static $register = 'RegisterView::Register';
     private static $name = 'RegisterView::UserName';
     private static $password = 'RegisterView::Password';
-    private static $messageId = 'RegisterView::message';
+    private static $messageId = 'RegisterView::Message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
     public function echoRegisterHtml($registerLinkIsClicked, $message) {
