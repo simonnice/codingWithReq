@@ -7,7 +7,7 @@ class LayoutView {
 
         if ($isLoggedIn == false) {
 
-            $registerResponseValue = 'Derp'; // Placeholder Value
+            $registerResponseValue = '';
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
                 echo '<!DOCTYPE html>
@@ -19,7 +19,7 @@ class LayoutView {
                 <body>
 
                   <h1>Assignment 2</h1>
-                  <a href="?">Back to login</a>
+                  <a href="?index.php">Back to login</a>
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
