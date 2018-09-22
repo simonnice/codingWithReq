@@ -73,4 +73,8 @@ class RegisterView {
             return false;
         }
     }
+
+    public function getRegisterFormData() {
+        return $_POST;
+    }
 }

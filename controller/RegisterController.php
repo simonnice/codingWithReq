@@ -17,4 +17,14 @@ class registerController {
             return true;
         }
     }
+
+    public function checkRegisterInputs() {
+        if (isset($_POST['DoRegistration'])) {
+            try {
+
+            } catch (\Exception $e) {
+
+            }
+        }
+    }
 }
