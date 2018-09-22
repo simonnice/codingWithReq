@@ -19,7 +19,7 @@ class registerController {
     }
 
     public function checkRegisterInputs() {
-        if (isset($_POST['DoRegistration'])) {
+        if ($this->registerView->isRegisterButtonClicked() == true) {
 
             $data = $this->registerView->getRegisterFormData();
 
@@ -29,5 +29,6 @@ class registerController {
                 return $e->getMessage();
             }
         }
+
     }
 }

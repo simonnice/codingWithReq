@@ -74,6 +74,15 @@ class RegisterView {
         }
     }
 
+    public function isRegisterButtonClicked() {
+        if (isset($_POST['DoRegistration'])) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
     public function getRegisterFormData() {
         return $_POST;
     }
