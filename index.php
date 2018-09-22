@@ -9,8 +9,8 @@ require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
 require_once 'model/LoginState.php';
 require_once 'model/RegisterState.php';
-require 'config/config.php';
-require 'config/db.php';
+require_once 'config/config.php';
+require_once 'config/db.php';
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 //error_reporting(E_ALL);
@@ -49,4 +49,4 @@ $registerState = new \model\RegisterState();
 $loginController = new \controller\LoginController($loginState, $loginView);
 $registerController = new \controller\RegisterController($registerState, $registerView);
 
-$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $registerController);
+$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $registerController, $conn);

@@ -18,14 +18,14 @@ class registerController {
         }
     }
 
-    public function checkRegisterInputs() {
+    public function checkRegisterInputs($conn) {
         if ($this->registerView->isRegisterButtonClicked() == true) {
 
             $data = $this->registerView->getRegisterFormData();
 
             try {
                 $this->state->ValidateRegisterInputData($data);
-                $this->state->CreateNewUserFromInput($data);
+                $this->state->CreateNewUserFromInput($data, $conn);
             } catch (\Exception $e) {
                 return $e->getMessage();
             }

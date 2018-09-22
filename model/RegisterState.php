@@ -27,11 +27,17 @@ class RegisterState {
 
     }
 
-    public function CreateNewUserFromInput($data) {
-        $userName = mysqli_real_escape_string($data['RegisterView::UserName']);
-        $password = mysqli_real_escape_string($data['RegisterView::Password']);
+    public function CreateNewUserFromInput($data, $conn) {
+        $userName = mysqli_real_escape_string($conn, $data['RegisterView::UserName']);
+        $password = mysqli_real_escape_string($conn, $data['RegisterView::Password']);
 
-        $query = "INSERT INTO user(name, password) VALUES('$userName', '$password')"
+        $query = "INSERT INTO user(name, password) VALUES('$userName', '$password')";
+
+        if (mysqli_query($conn, $query)) {
+            header('Location: ' . ROOT_URL . '');
+        } else {
+            echo 'ERROR: ' . mysqli_error($conn);
+        }
 
     }
 }

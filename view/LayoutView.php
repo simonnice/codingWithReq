@@ -3,13 +3,13 @@ namespace view;
 
 class LayoutView {
 
-    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc) {
+    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc, $conn) {
 
         if ($isLoggedIn == false) {
 
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
-                $registerResponseValue = $rc->checkRegisterInputs();
+                $registerResponseValue = $rc->checkRegisterInputs($conn);
                 echo '<!DOCTYPE html>
               <html>
                 <head>
