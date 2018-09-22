@@ -7,9 +7,12 @@ class LoginState {
     public function checkInputData($loginData) {
 
         if ($loginData['LoginView::UserName'] == "") {
-            return $loginData['LoginView::Message'] = "Username is missing";
+            throw new \Exception('Username is missing');
+
         } else if ($loginData['LoginView::Password'] == "") {
-            return $loginData['LoginView::Message'] = "Password is missing";
+            throw new \Exception('Password is missing');
         }
+
     }
+
 }

@@ -21,7 +21,13 @@ class loginController {
         if ($this->loginView->isLoginButtonClicked() == true) {
 
             $data = $this->loginView->getFormData();
-            return $this->state->checkInputData($data);
+
+            try {
+                $this->state->checkInputData($data);
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+
         }
 
     }

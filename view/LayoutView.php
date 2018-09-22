@@ -10,6 +10,17 @@ class LayoutView {
             $registerResponseValue = '';
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
+
+                // Small test to test filter_has_var function for checking input on submitbutton
+                /*if (filter_has_var(INPUT_POST, 'DoRegistration')) {
+                echo 'Registered';
+                }*/
+
+                // Small test to test isset on the value of the submit button in RegisterView
+                /*if (isset($_POST['DoRegistration'])) {
+                header('Location: index.php'); // Testing header redirect on submission // Brad Traversy Part 16
+                }*/
+
                 echo '<!DOCTYPE html>
               <html>
                 <head>
