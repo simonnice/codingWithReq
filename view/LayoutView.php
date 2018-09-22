@@ -7,10 +7,9 @@ class LayoutView {
 
         if ($isLoggedIn == false) {
 
-            $registerResponseValue = $rc->checkRegisterInputs();
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
-                $rc->checkRegisterInputs();
+                $registerResponseValue = $rc->checkRegisterInputs();
                 echo '<!DOCTYPE html>
               <html>
                 <head>
@@ -41,7 +40,7 @@ class LayoutView {
                 </head>
                 <body>
                   <h1>Assignment 2</h1>
-                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, $registerResponseValue) . '
+                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, '') . '
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
