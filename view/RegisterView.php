@@ -46,15 +46,15 @@ class RegisterView {
                     <br>
 
                     <label for="' . self::$name . '">Username :</label>
-                    <input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="" />
                     <br>
 
                     <label for="' . self::$password . '">Password :</label>
-                    <input type="password" id="' . self::$password . '" name="' . self::$password . '" />
+                    <input type="password" size="20" name="' . self::$password . '" id="' . self::$password . '" value="" />
                     <br>
 
                     <label for="' . self::$passwordRepeat . '">Repeat password :</label>
-                    <input type="password" id="' . self::$passwordRepeat . '" name="' . self::$passwordRepeat . '" />
+                    <input type="password" size="20" name="' . self::$passwordRepeat . '" id="' . self::$passwordRepeat . '" value="" />
                     <br>
 
                     <input id="submit" type="submit" name="DoRegistration" value="Register" />
