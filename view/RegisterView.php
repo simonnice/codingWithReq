@@ -46,7 +46,7 @@ class RegisterView {
                     <br>
 
                     <label for="' . self::$name . '">Username :</label>
-                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="" />
+                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="' . (isset($_POST[self::$name]) ? $_POST[self::$name] : "") . '" />
                     <br>
 
                     <label for="' . self::$password . '">Password :</label>
