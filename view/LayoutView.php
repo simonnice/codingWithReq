@@ -6,10 +6,11 @@ class LayoutView {
     public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc) {
 
         if ($isLoggedIn == false) {
-            $registerResponseValue = '';
+
+            $registerResponseValue = $rc->checkRegisterInputs();
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
-                $registerResponseValue = $rc->checkRegisterInputs();
+                $rc->checkRegisterInputs();
                 echo '<!DOCTYPE html>
               <html>
                 <head>
