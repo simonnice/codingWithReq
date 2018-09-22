@@ -16,10 +16,23 @@ require 'config/db.php';
 //ini_set('display_errors', 'On');
 
 // Test connection to DB
+// Working
+/*
 
 $query = 'SELECT * from user';
 
-$result = mysqli_query($query);
+$result = mysqli_query($conn, $query);
+
+// Fetch Data
+$users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+var_dump($users);
+
+// Free result
+mysqli_free_result($result);
+
+// Close connection
+mysqli_close($conn);
+ */
 
 //CREATE OBJECTS OF THE VIEWS
 $loginView = new \view\LoginView();
