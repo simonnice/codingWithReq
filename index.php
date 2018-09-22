@@ -9,8 +9,8 @@ require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
 require_once 'model/LoginState.php';
 require_once 'model/RegisterState.php';
-require 'config/db.php';
 require 'config/config.php';
+require 'config/db.php';
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 //error_reporting(E_ALL);
