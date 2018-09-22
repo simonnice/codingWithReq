@@ -23,7 +23,7 @@ class loginController {
             $data = $this->loginView->getFormData();
 
             try {
-                $this->state->checkInputData($data);
+                $this->state->validateLoginInputData($data);
             } catch (\Exception $e) {
                 return $e->getMessage();
             }

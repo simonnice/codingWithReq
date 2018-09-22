@@ -4,7 +4,7 @@ namespace model;
 
 class LoginState {
 
-    public function checkInputData($loginData) {
+    public function validateLoginInputData($loginData) {
 
         if ($loginData['LoginView::UserName'] == "") {
             throw new \Exception('Username is missing');
