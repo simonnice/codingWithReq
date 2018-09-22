@@ -11,11 +11,11 @@ class RegisterState {
         $sanitizedRepeatPassword = filter_var($data['RegisterView::PasswordRepeat'], FILTER_SANITIZE_STRING);
 
         if (strlen($sanitizedName) < 3) {
-            throw new \Exception('Username has too few characters, at least 3 characters.');
+            throw new \Exception('"Username has too few characters, at least 3 characters."');
         } else if (strlen($sanitizedPassword) < 6) {
-            throw new \Exception('Password has too few characters, at least 6 characters.');
+            throw new \Exception('"Password has too few characters, at least 6 characters."');
         } else if ($sanitizedPassword != $sanitizedRepeatPassword) {
-            throw new \Exception('Passwords do not match.');
+            throw new \Exception('"Passwords do not match."');
         }
 
     }
