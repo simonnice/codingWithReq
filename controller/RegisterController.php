@@ -21,12 +21,12 @@ class registerController {
     public function checkRegisterInputs() {
         if (isset($_POST['DoRegistration'])) {
 
-            $data = $this->RegisterView->getRegisterFormData();
+            $data = $this->registerView->getRegisterFormData();
 
             try {
                 $this->state->ValidateRegisterInputData($data);
             } catch (\Exception $e) {
-
+                return $e->getMessage();
             }
         }
     }

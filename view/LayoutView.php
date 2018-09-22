@@ -7,7 +7,7 @@ class LayoutView {
 
         if ($isLoggedIn == false) {
 
-            $registerResponseValue = '';
+            $registerResponseValue = $rc->checkRegisterInputs();
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
                 $doRegistration = $rc->checkRegisterInputs();
