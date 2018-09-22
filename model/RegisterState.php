@@ -26,4 +26,12 @@ class RegisterState {
         }
 
     }
+
+    public function CreateNewUserFromInput($data) {
+        $userName = mysqli_real_escape_string($data['RegisterView::UserName']);
+        $password = mysqli_real_escape_string($data['RegisterView::Password']);
+
+        $query = "INSERT INTO user(name, password) VALUES('$userName', '$password')"
+
+    }
 }
