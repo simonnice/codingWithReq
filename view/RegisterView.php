@@ -24,7 +24,7 @@ class RegisterView {
     }
 
     public function generateRegisterLink() {
-        $registerLink = '?register';
+        $registerLink = 'register?';
         return '
         <a href="' . $registerLink . '">Register a new user</a>
 		';
