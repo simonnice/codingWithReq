@@ -17,15 +17,13 @@ class LayoutView {
                   <title>Login Example</title>
                 </head>
                 <body>
-
                   <h1>Assignment 2</h1>
                   <a href="?">Back to login</a>
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
                   ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, $registerResponseValue) . '
-
-                      ' . $dtv->show() . '
+                  ' . $dtv->show() . '
                   </div>
                  </body>
               </html>
