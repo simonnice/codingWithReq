@@ -27,7 +27,7 @@ class LoginState {
         $row = mysqli_fetch_assoc($result);
 
         if ($userName === $row['name'] && password_verify($password, $row['password'])) {
-            echo 'Correct Login';
+            return true;
         } else {
             throw new \Exception("Wrong name or password");
         }
