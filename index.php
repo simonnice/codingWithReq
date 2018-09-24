@@ -15,25 +15,7 @@ require_once 'config/db.php';
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 //error_reporting(E_ALL);
 //ini_set('display_errors', 'On');
-
-// Test connection to DB
-// Working
-/*
-
-$query = 'SELECT * from user';
-
-$result = mysqli_query($conn, $query);
-
-// Fetch Data
-$users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-var_dump($users);
-
-// Free result
-mysqli_free_result($result);
-
-// Close connection
-mysqli_close($conn);
- */
+session_start();
 
 //CREATE OBJECTS OF THE VIEWS
 $loginView = new \view\LoginView();
