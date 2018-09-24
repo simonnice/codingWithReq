@@ -67,8 +67,12 @@ class LoginView {
 		';
     }
 
-    public function getFormData() {
-        return $_POST;
+    public function getLoginUserName() {
+        return $_POST[self::$name];
+    }
+
+    public function getLoginPassword() {
+        return $_POST[self::$password];
     }
 
     public function isLoginButtonClicked() {

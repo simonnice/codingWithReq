@@ -12,4 +12,12 @@ class User{
         $this->password = $password;
         $this->loggedIn = $loggedIn;
     }
+
+    public function getUserName() {
+        return $this->userName;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
 }

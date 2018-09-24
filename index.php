@@ -9,6 +9,7 @@ require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
 require_once 'model/LoginState.php';
 require_once 'model/RegisterState.php';
+require_once 'model/User.php';
 require_once 'config/config.php';
 require_once 'config/db.php';
 
