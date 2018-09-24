@@ -41,9 +41,11 @@ class RegisterState {
 
         $checkIfUserNameExistsQuery = "SELECT id FROM user WHERE name= '" . $userName . "'";
 
-        if (checkIfUserNameExistsQuery->num_rows == 1) {
+        $result = mysqli_query($conn, $checkIfUserNameExistsQuery);
+        $row = mysqli_fetch_assoc($result);
+
+        if (!empty($row)) {
             throw new \Exception("User exists, pick another username.");
-        
         } else {
             $query = "INSERT INTO user(name, password) VALUES('$userName', '$encryptedPassword')";
 
@@ -53,8 +55,6 @@ class RegisterState {
                 echo 'ERROR: ' . mysqli_error($conn);
             }
         }
-
-       
 
     }
 }
