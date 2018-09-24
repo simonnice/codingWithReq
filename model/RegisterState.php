@@ -39,13 +39,22 @@ class RegisterState {
 
         $encryptedPassword = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
 
-        $query = "INSERT INTO user(name, password) VALUES('$userName', '$encryptedPassword')";
+        $checkIfUserNameExistsQuery = "SELECT id FROM user WHERE name= '" . $userName . "'";
 
-        if (mysqli_query($conn, $query)) {
-            header('Location: ' . ROOT_URL . '');
+        if (checkIfUserNameExistsQuery->num_rows == 1) {
+            throw new \Exception("User exists, pick another username.");
+        
         } else {
-            echo 'ERROR: ' . mysqli_error($conn);
+            $query = "INSERT INTO user(name, password) VALUES('$userName', '$encryptedPassword')";
+
+            if (mysqli_query($conn, $query)) {
+                header('Location: ' . ROOT_URL . '');
+            } else {
+                echo 'ERROR: ' . mysqli_error($conn);
+            }
         }
+
+       
 
     }
 }
