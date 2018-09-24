@@ -2,9 +2,9 @@
 
 namespace model;
 
-class User{
+class User {
     private $userName;
-    private $password
+    private $password;
     private $loggedIn;
 
     public function __construct($userName, $password, $loggedIn) {

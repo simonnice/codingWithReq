@@ -76,7 +76,7 @@ class LoginView {
     }
 
     public function isLoginButtonClicked() {
-        if (isset($_POST['LoginView::Login'])) {
+        if (isset($_POST[self::$login])) {
             return true;
         } else {
 

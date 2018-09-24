@@ -16,7 +16,7 @@ class LoginState {
     }
 
     public function validateDatabaseQuery($data) {
-
+        $username 
     }
 
 }

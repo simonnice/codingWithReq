@@ -2,6 +2,8 @@
 
 namespace controller;
 
+require_once 'model/User.php';
+
 class loginController {
 
     private $state;
@@ -20,7 +22,10 @@ class loginController {
     public function checkLoginCredentials() {
         if ($this->loginView->isLoginButtonClicked() == true) {
 
-            $data = $this->loginView->getFormData();
+            // $data = $this->loginView->getFormData();
+
+            $userName = $this->loginView->getLoginUserName();
+            $password = $this->loginView->getLoginPassword();
 
             try {
                 $this->state->validateLoginInputData($data);
