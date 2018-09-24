@@ -24,12 +24,12 @@ class LoginState {
 
         $result = mysqli_query($conn, $query);
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            if ($row['name'] === $userName && password_verify($password, $row['password'])) {
-                echo 'Correct Login';
-            } else {
-                throw new \Exception("Wrong name or password");
-            }
+        $row = mysqli_fetch_assoc($result);
+
+        if ($userName === $row['name'] && password_verify($password, $row['password'])) {
+            echo 'Correct Login';
+        } else {
+            throw new \Exception("Wrong name or password");
         }
 
     }
