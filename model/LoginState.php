@@ -4,19 +4,22 @@ namespace model;
 
 class LoginState {
 
-    public function validateLoginInputData($loginData) {
+    public function validateLoginInputData($userData) {
 
-        if ($loginData['LoginView::UserName'] == "") {
+        if ($userData->getUserName() == "") {
             throw new \Exception('Username is missing');
 
-        } else if ($loginData['LoginView::Password'] == "") {
+        } else if ($userData->getPassword() == "") {
             throw new \Exception('Password is missing');
         }
 
     }
 
-    public function validateDatabaseQuery($data) {
-        $username 
-    }
+    public function validateDatabaseQuery($userData) {
+
+        $userName = $userData->getUserName();
+        $password = $userData->getPassword();
+        $query = 'SELECT name, password FROM user WHERE name= .$userData'
+}
 
 }

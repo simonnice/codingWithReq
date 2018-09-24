@@ -27,9 +27,11 @@ class loginController {
             $userName = $this->loginView->getLoginUserName();
             $password = $this->loginView->getLoginPassword();
 
+            $actualUser = new \model\User($userName, $password, false);
+
             try {
-                $this->state->validateLoginInputData($data);
-                $this->state->validateDatabaseQuery($data);
+                $this->state->validateLoginInputData($actualUser);
+                $this->state->validateDatabaseQuery($actualUser);
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
