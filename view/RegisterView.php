@@ -11,7 +11,7 @@ class RegisterView {
     private static $messageId = 'RegisterView::Message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
-    public function echoRegisterHtml($registerLinkIsClicked, $message) {
+    public function responseRegister($registerLinkIsClicked, $message) {
 
         if ($registerLinkIsClicked == false) {
             $response = $this->generateRegisterLink();
@@ -76,7 +76,7 @@ class RegisterView {
     }
 
     public function isRegisterButtonClicked() {
-        if (isset($_POST['DoRegistration'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return true;
         } else {
 

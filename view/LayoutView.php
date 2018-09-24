@@ -9,7 +9,7 @@ class LayoutView {
 
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
-                $registerResponseValue = $rc->checkRegisterInputs($conn);
+                $registerResponseString = $rc->checkRegisterInputs($conn);
                 echo '<!DOCTYPE html>
               <html>
                 <head>
@@ -22,7 +22,7 @@ class LayoutView {
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
-                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, $registerResponseValue) . '
+                  ' . $registerView->responseRegister($isRegisterLinkClicked, $registerResponseString) . '
                   ' . $dtv->show() . '
                   </div>
                  </body>
@@ -38,7 +38,7 @@ class LayoutView {
                 </head>
                 <body>
                   <h1>Assignment 2</h1>
-                  ' . $registerView->echoRegisterHtml($isRegisterLinkClicked, '') . '
+                  ' . $registerView->responseRegister($isRegisterLinkClicked, '') . '
                   ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                   <div class="container">
