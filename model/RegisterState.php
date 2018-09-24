@@ -31,7 +31,9 @@ class RegisterState {
         $userName = mysqli_real_escape_string($conn, $data['RegisterView::UserName']);
         $password = mysqli_real_escape_string($conn, $data['RegisterView::Password']);
 
-        $query = "INSERT INTO user(name, password) VALUES('$userName', '$password')";
+        $encryptedPassword = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
+
+        $query = "INSERT INTO user(name, password) VALUES('$userName', '$encryptedPassword')";
 
         if (mysqli_query($conn, $query)) {
             header('Location: ' . ROOT_URL . '');

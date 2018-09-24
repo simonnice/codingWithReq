@@ -24,6 +24,7 @@ class loginController {
 
             try {
                 $this->state->validateLoginInputData($data);
+                $this->state->validateDatabaseQuery($data);
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
