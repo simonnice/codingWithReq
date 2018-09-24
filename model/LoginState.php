@@ -15,11 +15,23 @@ class LoginState {
 
     }
 
-    public function validateDatabaseQuery($userData) {
+    public function validateDatabaseQuery($userData, $conn) {
 
         $userName = $userData->getUserName();
         $password = $userData->getPassword();
-        $query = 'SELECT name, password FROM user WHERE name= .$userData'
-}
+
+        $query = "SELECT name, password FROM user WHERE name= '" . $userName . "'";
+
+        $result = mysqli_query($conn, $query);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            if ($row['name'] === $userName && password_verify($password, $row['password'])) {
+                echo 'Correct Login';
+            } else {
+                throw new \Exception("Wrong name or password");
+            }
+        }
+
+    }
 
 }

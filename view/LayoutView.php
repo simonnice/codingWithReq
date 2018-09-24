@@ -29,7 +29,7 @@ class LayoutView {
               </html>
             ';
             } else {
-                $responseValue = $lc->checkLoginCredentials();
+                $responseValue = $lc->checkLoginCredentials($conn);
                 echo '<!DOCTYPE html>
               <html>
                 <head>

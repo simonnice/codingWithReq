@@ -19,7 +19,7 @@ class loginController {
      *
      */
 
-    public function checkLoginCredentials() {
+    public function checkLoginCredentials($conn) {
         if ($this->loginView->isLoginButtonClicked() == true) {
 
             // $data = $this->loginView->getFormData();
@@ -31,7 +31,7 @@ class loginController {
 
             try {
                 $this->state->validateLoginInputData($actualUser);
-                $this->state->validateDatabaseQuery($actualUser);
+                $this->state->validateDatabaseQuery($actualUser, $conn);
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
