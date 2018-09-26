@@ -30,7 +30,7 @@ class loginController {
             try {
                 $this->state->validateLoginInputData($actualUser);
                 if ($this->state->validateDatabaseQuery($actualUser, $conn) == true) {
-                    return true;
+                    return true
                 }
             } catch (\Exception $e) {
                 return $e->getMessage();

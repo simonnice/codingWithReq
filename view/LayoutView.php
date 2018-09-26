@@ -5,6 +5,7 @@ class LayoutView {
 
     public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc, $conn) {
 
+        echo $isLoggedIn;
         if (isset($_SESSION['loggedInUser'])) {
             $isLoggedIn = true;
         } else {
