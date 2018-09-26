@@ -25,7 +25,7 @@ class registerController {
 
             try {
                 $this->state->ValidateRegisterInputData($data);
-                if ($this->state->CreateNewUserFromInput($data, $conn)) === true {
+                if ($this->state->CreateNewUserFromInput($data, $conn)) == true {
                     return true;
                 };
 

@@ -16,7 +16,7 @@ class LayoutView {
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
                 $isValidRegisterInputs = $rc->checkRegisterInputs($conn);
-                if ($isValidRegisterInputs === true) {
+                if ($isValidRegisterInputs == true) {
                     echo '<!DOCTYPE html>
                     <html>
                       <head>
