@@ -42,4 +42,11 @@ class loginController {
 
     }
 
+    public function checkIfLogoutButtonIsClicked() {
+        if ($this->loginView->isLogoutButtonClicked() == true) {
+            session_destroy();
+            return true;
+        }
+    }
+
 }

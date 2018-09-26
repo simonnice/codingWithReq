@@ -49,6 +49,7 @@ class RegisterState {
 
             if (mysqli_query($conn, $query)) {
                 $_SESSION['loggedInUser'] = $userName;
+
                 header('Location: ' . ROOT_URL . '');
             } else {
                 echo 'ERROR: ' . mysqli_error($conn);
