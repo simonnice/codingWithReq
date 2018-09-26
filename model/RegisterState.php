@@ -37,19 +37,18 @@ class RegisterState {
         $userName = mysqli_real_escape_string($conn, $data['RegisterView::UserName']);
         $password = mysqli_real_escape_string($conn, $data['RegisterView::Password']);
 
-        $encryptedPassword = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
-
         $checkIfUserNameExistsQuery = "SELECT id FROM user WHERE name= '" . $userName . "'";
-
         $result = mysqli_query($conn, $checkIfUserNameExistsQuery);
         $row = mysqli_fetch_assoc($result);
 
         if (!empty($row)) {
             throw new \Exception("User exists, pick another username.");
         } else {
+            $encryptedPassword = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
             $query = "INSERT INTO user(name, password) VALUES('$userName', '$encryptedPassword')";
 
             if (mysqli_query($conn, $query)) {
+                $_SESSION['login_user'] = $userName;
                 header('Location: ' . ROOT_URL . '');
             } else {
                 echo 'ERROR: ' . mysqli_error($conn);
