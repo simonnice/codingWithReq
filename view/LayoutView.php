@@ -70,7 +70,7 @@ class LayoutView {
               <body>
                 <h1>Assignment 2</h1>
                 ' . $this->renderIsLoggedIn($isLoggedIn) . '
-                    <p>Welcome</p>
+
                 <div class="container">
                 ' . $v->response('Bye bye!', $isLoggedIn) . '
 
