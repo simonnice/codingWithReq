@@ -7,6 +7,7 @@ class RegisterState {
     public function ValidateRegisterInputData($data) {
 
         $sanitizedName = filter_var($data['RegisterView::UserName'], FILTER_SANITIZE_STRING);
+
         $sanitizedPassword = filter_var($data['RegisterView::Password'], FILTER_SANITIZE_STRING);
         $sanitizedRepeatPassword = filter_var($data['RegisterView::PasswordRepeat'], FILTER_SANITIZE_STRING);
 
@@ -29,6 +30,10 @@ class RegisterState {
 
         if ($sanitizedPassword != $sanitizedRepeatPassword) {
             throw new \Exception("Passwords do not match.");
+        }
+
+        if ($sanitizedName != $data['RegisterView::UserName']) {
+            throw new \Exception("Username contains invalid characters.");
         }
 
     }
