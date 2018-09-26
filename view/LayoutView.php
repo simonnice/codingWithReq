@@ -5,9 +5,9 @@ class LayoutView {
 
     public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc, $conn) {
 
-        /*if (isset($_SESSION['loggedInUser']) {
-        $isLoggedIn = true;
-        })*/
+        if (isset($_SESSION['loggedInUser'])) {
+            $isLoggedIn = true;
+        }
 
         if ($isLoggedIn == false) {
 
@@ -67,9 +67,9 @@ class LayoutView {
                 ' . $this->renderIsLoggedIn($isLoggedIn) . '
                     <p>Welcome</p>
                 <div class="container">
-                <input type="submit" id="submit" name="' . self::$logout . '" value="logout" />
+                ' . $v->response('', $isLoggedIn) . '
 
-                    ' . $dtv->show() . '
+                ' . $dtv->show() . '
                 </div>
                </body>
             </html>

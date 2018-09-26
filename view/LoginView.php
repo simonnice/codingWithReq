@@ -88,6 +88,15 @@ class LoginView {
         }
     }
 
+    public function isLogoutButtonClicked() {
+        if (isset($_POST[self::$logout])) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
     //CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
     private function getRequestUserName() {
         //RETURN REQUEST VARIABLE: USERNAME
