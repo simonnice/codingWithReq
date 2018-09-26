@@ -53,6 +53,7 @@ class RegisterState {
             $query = "INSERT INTO user(name, password) VALUES('$userName', '$encryptedPassword')";
 
             if (mysqli_query($conn, $query)) {
+                $_SESSION['newUser'] = $userName;
                 return true;
             } else {
                 echo 'ERROR: ' . mysqli_error($conn);
