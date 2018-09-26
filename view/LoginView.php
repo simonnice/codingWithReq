@@ -91,7 +91,7 @@ class LoginView {
     }
 
     public function isLogoutButtonClicked() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST[self::$logout])) {
             return true;
         } else {
 

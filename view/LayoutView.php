@@ -36,9 +36,9 @@ class LayoutView {
             ';
             } else {
                 $responseValue = $lc->checkLoginCredentials($conn);
-                if ($responseValue == true) {
+
+                if ($responseValue === true) {
                     $isLoggedIn = true;
-                    echo "We're Here";
                     echo '<!DOCTYPE html>
                     <html>
                       <head>
@@ -57,7 +57,7 @@ class LayoutView {
                        </body>
                     </html>
                   ';
-                } else if ($responseValue != true) {
+                } else {
                     $isLoggedIn = false;
                     echo '<!DOCTYPE html>
                     <html>

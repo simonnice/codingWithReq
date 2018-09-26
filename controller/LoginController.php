@@ -21,23 +21,17 @@ class loginController {
 
     public function checkLoginCredentials($conn) {
         if ($this->loginView->isLoginButtonClicked() == true) {
-
             $userName = $this->loginView->getLoginUserName();
             $password = $this->loginView->getLoginPassword();
-
             $actualUser = new \model\User($userName, $password, false);
-
             try {
                 $this->state->validateLoginInputData($actualUser);
-                if ($this->state->validateDatabaseQuery($actualUser, $conn) == true) {
-                    return true;
-                }
+                return $this->state->validateDatabaseQuery($actualUser, $conn);
+                // return "passed";
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
-
         }
-
     }
 
     public function checkIfLogoutButtonIsClicked() {
