@@ -52,8 +52,8 @@ class RegisterState {
             $encryptedPassword = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
             $query = "INSERT INTO user(name, password) VALUES('$userName', '$encryptedPassword')";
 
-            mysqli_query($conn, $query);
-            return true; 
+            return mysqli_query($conn, $query);
+            
         
 
     }
