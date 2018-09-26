@@ -11,6 +11,8 @@ class LoginView {
     private static $keep = 'LoginView::KeepMeLoggedIn';
     private static $messageId = 'LoginView::Message';
 
+    private $message = '';
+
     /**
      * Create HTTP response
      *
@@ -95,6 +97,10 @@ class LoginView {
 
             return false;
         }
+    }
+
+    public function returnedStringToOutput($message) {
+        $this->message = $message;
     }
 
     //CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
