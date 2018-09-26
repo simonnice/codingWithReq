@@ -57,7 +57,7 @@ class LayoutView {
                        </body>
                     </html>
                   ';
-                } else {
+                } else if ($responseValue != true) {
                     $isLoggedIn = false;
                     echo '<!DOCTYPE html>
                     <html>
