@@ -28,6 +28,7 @@ class LoginState {
 
         if ($userName === $row['name'] && password_verify($password, $row['password'])) {
             return true;
+            // Test
         } else {
             throw new \Exception("Wrong name or password");
         }
