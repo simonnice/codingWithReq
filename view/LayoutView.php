@@ -16,7 +16,8 @@ class LayoutView {
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
                 $isValidRegisterInputs = $rc->checkRegisterInputs($conn);
-                if ($isValidRegisterInputs == true) {
+
+                if ($isValidRegisterInputs === true) {
                     echo '<!DOCTYPE html>
                     <html>
                       <head>
@@ -48,7 +49,7 @@ class LayoutView {
                         ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                         <div class="container">
-                        ' . $registerView->responseRegister($isRegisterLinkClicked, '') . '
+                        ' . $registerView->responseRegister($isRegisterLinkClicked, $isValidRegisterInputs) . '
                         ' . $dtv->show() . '
                         </div>
                        </body>
