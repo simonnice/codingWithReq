@@ -25,7 +25,9 @@ class registerController {
 
             try {
                 $this->state->ValidateRegisterInputData($data);
-                return $this->state->CreateNewUserFromInput($data, $conn);
+                if ($this->state->CreateNewUserFromInput($data, $conn)) === true {
+                    return true;
+                };
 
             } catch (\Exception $e) {
 
