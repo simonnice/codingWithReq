@@ -5,6 +5,10 @@ class LayoutView {
 
     public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc, $conn) {
 
+        if (isset($_SESSION['loggedInUser']) {
+            $isLoggedIn = true;
+        })
+
         if ($isLoggedIn == false) {
 
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
