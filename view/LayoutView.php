@@ -5,7 +5,6 @@ class LayoutView {
 
     public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc, $conn) {
 
-        echo $isLoggedIn;
         if (isset($_SESSION['loggedInUser'])) {
             $isLoggedIn = true;
         } else {
@@ -39,6 +38,7 @@ class LayoutView {
                 $responseValue = $lc->checkLoginCredentials($conn);
                 if ($responseValue == true) {
                     $isLoggedIn = true;
+                    echo "We're Here";
                     echo '<!DOCTYPE html>
                     <html>
                       <head>
