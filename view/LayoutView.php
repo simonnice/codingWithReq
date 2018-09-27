@@ -62,7 +62,7 @@ class LayoutView {
 
                 if ($responseValue === true) {
                     if (isset($_COOKIE['username'])) {
-                        $welcomeString = 'Welcome back with cookie';
+                        $welcomeString = 'Welcome and you will be remembered';
                     } else {
                         $welcomeString = 'Welcome';
                     }
@@ -134,6 +134,11 @@ class LayoutView {
             </html>
             ';
             } else {
+                if (isset($_COOKIE['username'])) {
+                    $welcomeString = 'Welcome back with cookie';
+                } else {
+                    $welcomeString = 'Welcome';
+                }
                 echo '<!DOCTYPE html>
                 <html>
                   <head>
@@ -143,7 +148,7 @@ class LayoutView {
                   <body>
                     <h1>Assignment 2</h1>
                     ' . $this->renderIsLoggedIn($isLoggedIn) . '
-                        <p>Welcome</p>
+                        <p>' . $welcomeString . '</p>
                     <div class="container">
                     ' . $v->response('', $isLoggedIn) . '
 

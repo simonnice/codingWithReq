@@ -54,6 +54,7 @@ class RegisterState {
 
             if (mysqli_query($conn, $query)) {
                 $_SESSION['newUser'] = $userName;
+
                 return true;
             } else {
                 echo 'ERROR: ' . mysqli_error($conn);

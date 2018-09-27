@@ -46,6 +46,7 @@ class loginController {
 
     public function checkIfLogoutButtonIsClicked() {
         if ($this->loginView->isLogoutButtonClicked() == true) {
+            setcookie('username', null, time() - 3600);
             session_destroy();
             return true;
         }
