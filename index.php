@@ -12,6 +12,7 @@ require_once 'model/RegisterState.php';
 require_once 'config/config.php';
 require_once 'config/db.php';
 
+date_default_timezone_set('Europe/Stockholm');
 session_start();
 
 //CREATE OBJECTS OF THE VIEWS

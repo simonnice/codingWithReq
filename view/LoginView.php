@@ -59,7 +59,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . (isset($_SESSION['newUser']) ? $_SESSION['newUser'] : "") . '" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . (isset($_SESSION['newUser']) ? $_SESSION['newUser'] : $_POST[self::$name]) . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />

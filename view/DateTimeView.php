@@ -9,7 +9,7 @@ class DateTimeView {
         $timeString .= ", the " . date('jS');
         $timeString .= " of " . date('F');
         $timeString .= " " . date('Y');
-        $timeString .= ", The time is " . date('h:i:s');
+        $timeString .= ", The time is " . date('H:i:s');
 
         return '<p>' . $timeString . '</p>';
     }
