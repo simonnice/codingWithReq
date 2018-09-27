@@ -3,7 +3,6 @@
 namespace view;
 
 class RegisterView {
-    // derp
 
     private static $register = 'RegisterView::Register';
     private static $name = 'RegisterView::UserName';
@@ -19,7 +18,6 @@ class RegisterView {
             $response = $this->generateRegisterFormHTML($message);
         }
 
-        //$response .= $this->generateLogoutButtonHTML($message);
         return $response;
     }
 
@@ -29,7 +27,7 @@ class RegisterView {
         <a href="' . $registerLink . '">Register a new user</a>
 		';
     }
-    // <a href="register.php" id="' . self::$register . '"> Register a new user</a>
+
     /**
      * Generate HTML code on the output buffer for the register button
      * @param $message, String output message
@@ -64,8 +62,6 @@ class RegisterView {
             ';
     }
 
-    // RegisterView::Register=Register &RegisterView::UserName= &RegisterView::Password= &RegisterView::PasswordRepeat=
-
     public function registerLinkIsClicked() {
         if (isset($_GET['register'])) {
             return true;
@@ -74,7 +70,6 @@ class RegisterView {
             return false;
         }
     }
-
     public function isRegisterButtonClicked() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return true;
@@ -83,8 +78,15 @@ class RegisterView {
             return false;
         }
     }
-
     public function getRegisterFormData() {
         return $_POST;
+    }
+
+    public function getRegisterUserName() {
+        return $_POST[self::$name];
+    }
+
+    public function getRegisterPassword() {
+        return $_POST[self::$password];
     }
 }

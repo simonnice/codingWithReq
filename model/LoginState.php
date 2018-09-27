@@ -17,8 +17,8 @@ class LoginState {
 
     public function validateDatabaseQuery($userData, $conn) {
 
-        $userName = $userData->getUserName();
-        $password = $userData->getPassword();
+        $userName = mysqli_real_escape_string($conn, $userData->getUserName());
+        $password = mysqli_real_escape_string($conn, $userData->getPassword());
 
         $query = "SELECT name, password FROM user WHERE name= '" . $userName . "'";
 
