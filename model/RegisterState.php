@@ -4,16 +4,11 @@ namespace model;
 
 class RegisterState {
 
-    public function ValidateRegisterInputData($data) {
+    public function ValidateRegisterInputData($registeredUser) {
 
-        $sanitizedName = filter_var($data['RegisterView::UserName'], FILTER_SANITIZE_STRING);
-
-        $sanitizedPassword = filter_var($data['RegisterView::Password'], FILTER_SANITIZE_STRING);
-        $sanitizedRepeatPassword = filter_var($data['RegisterView::PasswordRepeat'], FILTER_SANITIZE_STRING);
-
-        $sanitizedName = filter_var($data['RegisterView::UserName'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $sanitizedPassword = filter_var($data['RegisterView::Password'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $sanitizedRepeatPassword = filter_var($data['RegisterView::PasswordRepeat'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $sanitizedName = filter_var($registeredUser->getUserName(), FILTER_SANITIZE_STRING);
+        $sanitizedPassword = filter_var($registeredUser->getPassword(), FILTER_SANITIZE_STRING);
+        $sanitizedRepeatPassword = filter_var($registeredUser->getRepeatedPassword(), FILTER_SANITIZE_STRING);
 
         if (empty($sanitizedName) == true && empty($sanitizedPassword) == true) {
             throw new \Exception("Username has too few characters, at least 3 characters.
