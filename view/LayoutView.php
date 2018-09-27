@@ -61,12 +61,12 @@ class LayoutView {
                 $responseValue = $lc->checkLoginCredentials($conn);
 
                 if ($responseValue === true) {
+                    $isLoggedIn = true;
                     if (isset($_COOKIE['username'])) {
                         $welcomeString = 'Welcome and you will be remembered';
                     } else {
                         $welcomeString = 'Welcome';
                     }
-                    $isLoggedIn = true;
                     echo '<!DOCTYPE html>
                     <html>
                       <head>

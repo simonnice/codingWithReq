@@ -28,6 +28,9 @@ class LoginState {
 
         if ($userName === $row['name'] && password_verify($password, $row['password'])) {
             $_SESSION['loggedInUser'] = $row['name'];
+            if ($userData->getLoggedIn() == true) {
+                setcookie('username', $userName, time() + 3600);
+            }
             return true;
         } else {
             throw new \Exception("Wrong name or password");

@@ -32,11 +32,11 @@ class loginController {
 
             $actualUser = new \model\User($userName, $password, $keepMeLoggedIn);
             try {
-                if ($actualUser->getLoggedIn() == true) {
-                    setcookie('username', $userName, time() + 3600);
-                }
+
                 $this->state->validateLoginInputData($actualUser);
-                return $this->state->validateDatabaseQuery($actualUser, $conn);
+
+                return $arrayOfValues = array("value" => $this->state->validateDatabaseQuery($actualUser, $conn);, "keepLoggedIn" => $actualUser->keepMeLoggedIn());
+                
 
             } catch (\Exception $e) {
                 return $e->getMessage();
