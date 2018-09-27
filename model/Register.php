@@ -13,4 +13,16 @@ class Register {
         $this->repeatedPassword = $passwordRepeat;
     }
 
+    public function getUserName() {
+        return $this->userName;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function getRepeatedPassword() {
+        return $this->repeatedPassword;
+    }
+
 }
