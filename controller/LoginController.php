@@ -35,8 +35,7 @@ class loginController {
 
                 $this->state->validateLoginInputData($actualUser);
 
-                return $arrayOfValues = array("value" => $this->state->validateDatabaseQuery($actualUser, $conn);, "keepLoggedIn" => $actualUser->keepMeLoggedIn());
-                
+                return $arrayOfValues = array("value" => $this->state->validateDatabaseQuery($actualUser, $conn), "keepLoggedIn" => $keepMeLoggedIn);
 
             } catch (\Exception $e) {
                 return $e->getMessage();

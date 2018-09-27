@@ -58,11 +58,11 @@ class LayoutView {
                 }
 
             } else {
-                $responseValue = $lc->checkLoginCredentials($conn);
+                $loginStatusArray = $lc->checkLoginCredentials($conn);
 
-                if ($responseValue === true) {
+                if (current($loginStatusArray) === true) {
                     $isLoggedIn = true;
-                    if (isset($_COOKIE['username'])) {
+                    if (next($loginStatusArray) === true) {
                         $welcomeString = 'Welcome and you will be remembered';
                     } else {
                         $welcomeString = 'Welcome';
@@ -99,7 +99,7 @@ class LayoutView {
                         ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                         <div class="container">
-                            ' . $v->response($responseValue, $isLoggedIn) . '
+                            ' . $v->response($loginStatusArray, $isLoggedIn) . '
 
                             ' . $dtv->show() . '
                         </div>
