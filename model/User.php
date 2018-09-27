@@ -5,12 +5,12 @@ namespace model;
 class User {
     private $userName;
     private $password;
-    private $loggedIn;
+    private $keepMeLoggedIn;
 
     public function __construct($userName, $password, $loggedIn) {
         $this->userName = $userName;
         $this->password = $password;
-        $this->loggedIn = $loggedIn;
+        $this->loggedIn = $keepMeLoggedIn;
     }
 
     public function getUserName() {

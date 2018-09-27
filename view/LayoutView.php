@@ -117,7 +117,7 @@ class LayoutView {
               </head>
               <body>
                 <h1>Assignment 2</h1>
-                ' . $registerView->responseRegister($isRegisterLinkClicked, '') . '
+                ' . $registerView->responseRegister(false, '') . '
                 ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                 <div class="container">

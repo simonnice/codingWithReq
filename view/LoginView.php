@@ -90,6 +90,15 @@ class LoginView {
         }
     }
 
+    public function doesUserWantToStayLoggedIn() {
+        if (isset($_POST[self::$keep])) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
     public function isLogoutButtonClicked() {
         if (isset($_POST[self::$logout])) {
             return true;
