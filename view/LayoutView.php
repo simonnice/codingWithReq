@@ -61,6 +61,11 @@ class LayoutView {
                 $responseValue = $lc->checkLoginCredentials($conn);
 
                 if ($responseValue === true) {
+                    if (isset($_COOKIE['username'])) {
+                        $welcomeString = 'Welcome back with cookie';
+                    } else {
+                        $welcomeString = 'Welcome';
+                    }
                     $isLoggedIn = true;
                     echo '<!DOCTYPE html>
                     <html>
@@ -73,7 +78,7 @@ class LayoutView {
                         ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
                         <div class="container">
-                            ' . $v->response('Welcome', $isLoggedIn) . '
+                            ' . $v->response($welcomeString, $isLoggedIn) . '
 
                             ' . $dtv->show() . '
                         </div>

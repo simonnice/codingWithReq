@@ -7,7 +7,7 @@ class User {
     private $password;
     private $keepMeLoggedIn;
 
-    public function __construct($userName, $password, $loggedIn) {
+    public function __construct($userName, $password, $keepMeLoggedIn) {
         $this->userName = $userName;
         $this->password = $password;
         $this->loggedIn = $keepMeLoggedIn;
@@ -19,5 +19,9 @@ class User {
 
     public function getPassword() {
         return $this->password;
+    }
+
+    public function getLoggedIn() {
+        return $this->loggedIn;
     }
 }

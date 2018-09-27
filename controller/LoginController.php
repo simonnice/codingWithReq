@@ -23,11 +23,21 @@ class loginController {
         if ($this->loginView->isLoginButtonClicked() == true) {
             $userName = $this->loginView->getLoginUserName();
             $password = $this->loginView->getLoginPassword();
-            $actualUser = new \model\User($userName, $password, false);
+
+            if ($this->loginView->doesUserWantToStayLoggedIn() == true) {
+                $keepMeLoggedIn = true;
+            } else {
+                $keepMeLoggedIn = false;
+            }
+
+            $actualUser = new \model\User($userName, $password, $keepMeLoggedIn);
             try {
+                if ($actualUser->getLoggedIn() == true) {
+                    setcookie('username', $userName, time() + 3600);
+                }
                 $this->state->validateLoginInputData($actualUser);
                 return $this->state->validateDatabaseQuery($actualUser, $conn);
-                // return "passed";
+
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
