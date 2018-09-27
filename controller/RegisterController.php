@@ -1,6 +1,8 @@
 <?php
 namespace controller;
 
+require_once 'model/Register.php';
+
 class registerController {
     private $state;
     private $registerView;
@@ -8,10 +10,7 @@ class registerController {
         $this->state = $state;
         $this->registerView = $register;
     }
-    /**
-     * Handle a GET request to Register.php
-     *testing
-     */
+
     public function checkIfRegisterIsClicked() {
         if ($this->registerView->registerLinkIsClicked() == true) {
             return true;
@@ -28,8 +27,8 @@ class registerController {
             $registeredUser = new \model\Register($registeredUserName, $registeredPassword, $registeredRepeatPassword);
 
             try {
-                $this->state->ValidateRegisterInputData($data);
-                return $this->state->CreateNewUserFromInput($data, $conn);
+                $this->state->ValidateRegisterInputData($registeredUser);
+                return $this->state->CreateNewUserFromInput($registeredUser, $conn);
 
             } catch (\Exception $e) {
 

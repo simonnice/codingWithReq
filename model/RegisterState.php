@@ -27,15 +27,15 @@ class RegisterState {
             throw new \Exception("Passwords do not match.");
         }
 
-        if ($sanitizedName != $data['RegisterView::UserName']) {
+        if ($sanitizedName != $registeredUser->getUserName()) {
             throw new \Exception("Username contains invalid characters.");
         }
 
     }
 
-    public function CreateNewUserFromInput($data, $conn) {
-        $userName = mysqli_real_escape_string($conn, $data['RegisterView::UserName']);
-        $password = mysqli_real_escape_string($conn, $data['RegisterView::Password']);
+    public function CreateNewUserFromInput($registerUserToDB, $conn) {
+        $userName = mysqli_real_escape_string($conn, $registerUserToDB->getUserName());
+        $password = mysqli_real_escape_string($conn, $registerUserToDB->getPassword());
 
         $checkIfUserNameExistsQuery = "SELECT id FROM user WHERE name= '" . $userName . "'";
         $result = mysqli_query($conn, $checkIfUserNameExistsQuery);
