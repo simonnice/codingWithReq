@@ -78,9 +78,6 @@ class RegisterView {
             return false;
         }
     }
-    public function getRegisterFormData() {
-        return $_POST;
-    }
 
     public function getRegisterUserName() {
         return $_POST[self::$name];
@@ -88,5 +85,9 @@ class RegisterView {
 
     public function getRegisterPassword() {
         return $_POST[self::$password];
+    }
+
+    public function getRegisterRepeatedPassword() {
+        return $_POST[self::$passwordRepeat];
     }
 }

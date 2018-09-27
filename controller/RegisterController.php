@@ -21,7 +21,7 @@ class registerController {
     public function checkRegisterInputs($conn) {
         if ($this->registerView->isRegisterButtonClicked() == true) {
 
-            $data = $this->registerView->getRegisterFormData();
+            $registeredUserName = $this->registerView->getRegisterUserName();
 
             try {
                 $this->state->ValidateRegisterInputData($data);
