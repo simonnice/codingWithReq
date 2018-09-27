@@ -7,23 +7,21 @@ class RegisterState {
     public function ValidateRegisterInputData($registeredUser) {
 
         $sanitizedName = filter_var($registeredUser->getUserName(), FILTER_SANITIZE_STRING);
-        $sanitizedPassword = filter_var($registeredUser->getPassword(), FILTER_SANITIZE_STRING);
-        $sanitizedRepeatPassword = filter_var($registeredUser->getRepeatedPassword(), FILTER_SANITIZE_STRING);
 
-        if (empty($sanitizedName) == true && empty($sanitizedPassword) == true) {
+        if (empty($registeredUser->getUserName()) == true && empty($registeredUser->getPassword()) == true) {
             throw new \Exception("Username has too few characters, at least 3 characters.
             Password has too few characters, at least 6 characters.");
         }
 
-        if (strlen($sanitizedPassword) < 6) {
+        if (strlen($registeredUser->getPassword()) < 6) {
             throw new \Exception("Password has too few characters, at least 6 characters.");
         }
 
-        if (strlen($sanitizedName) < 3) {
+        if (strlen($registeredUser->getUserName()) < 3) {
             throw new \Exception("Username has too few characters, at least 3 characters.");
         }
 
-        if ($sanitizedPassword != $sanitizedRepeatPassword) {
+        if ($registeredUser->getPassword() != $registeredUser->getRepeatedPassword()) {
             throw new \Exception("Passwords do not match.");
         }
 
