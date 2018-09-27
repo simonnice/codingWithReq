@@ -22,6 +22,10 @@ class registerController {
         if ($this->registerView->isRegisterButtonClicked() == true) {
 
             $registeredUserName = $this->registerView->getRegisterUserName();
+            $registeredPassword = $this->registerView->getRegisterPassword();
+            $registeredRepeatPassword = $this->registerView->getRegisterRepeatedPassword();
+
+            $registeredUser = new \model\Register($registeredUserName, $registeredPassword, $registeredRepeatPassword);
 
             try {
                 $this->state->ValidateRegisterInputData($data);
