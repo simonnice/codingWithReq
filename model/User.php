@@ -13,15 +13,20 @@ class User {
         $this->database = new Database;
     }
 
-    public function getUserName() {
-        return $this->userName;
+    // Will take in $data in the form of an array to validate
+    public function validateInputInForm($data) {
+
     }
 
-    public function getPassword() {
-        return $this->password;
-    }
+    // public function getUserName() {
+    //     return $this->userName;
+    // }
 
-    public function getLoggedIn() {
-        return $this->loggedIn;
-    }
+    // public function getPassword() {
+    //     return $this->password;
+    // }
+
+    // public function getLoggedIn() {
+    //     return $this->loggedIn;
+    // }
 }
