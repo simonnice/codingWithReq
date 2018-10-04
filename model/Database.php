@@ -36,23 +36,23 @@ class Database {
     }
 
     // Adding a method to bind the values to the placeholder parameters in the prepared statement
-    public bindValuesToPlaceholdeValues($phParam, $value, $type = null) {
-        if(is_null($type)) {
-            switch(true){
-                case is_int($value)
-                $type = PDO::PARAM_INT;
-                break;
+    public function bindValuesToPlaceholderValues($phParam, $value, $type = null) {
+        if (is_null($type)) {
+            switch (true) {
+                case is_int($value):
+                    $type = PDO::PARAM_INT;
+                    break;
 
-                case is_bool($value)
-                $type = PDO::PARAM_BOOL;
-                break;
+                case is_bool($value):
+                    $type = PDO::PARAM_BOOL;
+                    break;
 
-                case is_null($value)
-                $type = PDO::PARAM_NULL;
-                break;
+                case is_null($value):
+                    $type = PDO::PARAM_NULL;
+                    break;
 
                 default:
-                $type = PDO:PARAM_STR;
+                    $type = PDO::PARAM_STR;
             }
         }
 
@@ -61,21 +61,20 @@ class Database {
 
     // Adding an execute method to execute the prepared statement
 
-    public function executeStatement(){
+    public function executeStatement() {
         return $this->stmt->execute();
     }
 
     // Adding a method for retrieving a single object from DB
-    
+
     public function retriveSingleObject() {
         $this->executeStatement();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
     // Adding a method to check for entries in DB
-    public function checkIfEntryExists(){
+    public function checkIfEntryExists() {
         return $this->stmt->rowCount();
     }
-
 
 }
