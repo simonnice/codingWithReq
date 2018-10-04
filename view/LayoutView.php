@@ -15,7 +15,7 @@ class LayoutView {
 
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
-                $isValidRegisterInputs = $rc->checkRegisterInputs();
+                $isValidRegisterInputs = $rc->registerResponseFromDatabase();
 
                 if ($isValidRegisterInputs === true) {
                     echo '<!DOCTYPE html>

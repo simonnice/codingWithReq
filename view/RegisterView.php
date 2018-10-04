@@ -15,7 +15,13 @@ class RegisterView {
         if ($registerLinkIsClicked == false) {
             $response = $this->generateRegisterLink();
         } else {
-            $response = $this->generateRegisterFormHTML($message);
+            $messageString;
+            foreach ($message as $messages) {
+                if (strlen($messages) > 1) {
+                    $messageString .= $messages . "<br>";
+                }
+            }
+            $response = $this->generateRegisterFormHTML($messageString);
         }
 
         return $response;
