@@ -10,7 +10,7 @@ require_once 'controller/RegisterController.php';
 require_once 'model/LoginState.php';
 require_once 'model/RegisterState.php';
 require_once 'config/config.php';
-require_once 'config/db.php';
+require_once 'model/Database.php';
 
 date_default_timezone_set('Europe/Stockholm');
 session_start();
