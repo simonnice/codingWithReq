@@ -35,8 +35,8 @@ class Database {
         $this->stmt = $this->pdoInstance->prepare($sql);
     }
 
-    // Adding a method to bind the values to the placeholders in the prepared statement
-    public bindValuesToPlaceholdeValues($phValue, $value, $type = null) {
+    // Adding a method to bind the values to the placeholder parameters in the prepared statement
+    public bindValuesToPlaceholdeValues($phParam, $value, $type = null) {
         if(is_null($type)) {
             switch(true){
                 case is_int($value)
@@ -47,9 +47,22 @@ class Database {
                 $type = PDO::PARAM_BOOL;
                 break;
 
-                
+                case is_null($value)
+                $type = PDO::PARAM_NULL;
+                break;
+
+                default:
+                $type = PDO:PARAM_STR;
             }
         }
+
+        $this->stmt->bindValue($phParam, $value, $type);
+    }
+
+    // Adding an execute method to execute the prepared statement
+
+    public function executeStatement(){
+        return $this->stmt->execute();
     }
 
 
