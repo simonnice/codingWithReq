@@ -48,6 +48,20 @@ class User {
 
     }
 
+    public function registerNewUser($data) {
+
+        // Hashing password
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        // Register the user
+        $this->db->prepareStatementWithQuerytoDb('INSERT INTO users (name, password) VALUES (:name, :password');
+
+        // Bind the values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':password', $data['password']);
+
+    }
+
     // public function getUserName() {
     //     return $this->userName;
     // }
