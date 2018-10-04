@@ -1,17 +1,18 @@
 <?php
 
 //INCLUDE THE FILES NEEDED...
+
+require_once 'config/Config.php';
+require_once 'model/Database.php';
 require_once 'view/LoginView.php';
 require_once 'view/RegisterView.php';
 require_once 'view/DateTimeView.php';
 require_once 'view/LayoutView.php';
 require_once 'controller/LoginController.php';
-require_once 'controller/RegisterController.php';
+require_once 'controller/UserController.php';
 require_once 'model/LoginState.php';
 require_once 'model/RegisterState.php';
 require_once 'model/User.php';
-require_once 'config/config.php';
-require_once 'model/Database.php';
 
 date_default_timezone_set('Europe/Stockholm');
 session_start();
@@ -23,12 +24,13 @@ $layoutView = new \view\LayoutView();
 $registerView = new \view\RegisterView();
 
 //CREATE OBJECTS OF THE MODELS
+$db = new Database;
 $loginState = new \model\LoginState();
 $registerState = new \model\RegisterState();
-$user = new \mode\User();
+$user = new \model\User($db);
 
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($loginState, $loginView);
 $userController = new \controller\UserController($registerState, $registerView, $user);
 
-$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $registerController);
+$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $userController);

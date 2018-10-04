@@ -30,6 +30,7 @@ class Database {
             echo $this->error;
         }
     }
+
     // method to prepare a statement with query to the database
     public function prepareStatementWithQuerytoDb($sql) {
         $this->stmt = $this->pdoInstance->prepare($sql);

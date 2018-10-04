@@ -1,8 +1,6 @@
 <?php
 namespace controller;
 
-require_once 'model/Register.php';
-
 class UserController {
     private $state;
     private $registerView;
@@ -21,11 +19,9 @@ class UserController {
     public function checkRegisterInputs() {
         if ($this->registerView->isRegisterButtonClicked() == true) {
 
-            $registeredUserName = $this->registerView->getRegisterUserName();
-            $registeredPassword = $this->registerView->getRegisterPassword();
-            $registeredRepeatPassword = $this->registerView->getRegisterRepeatedPassword();
-
-            $registeredUser = new \model\Register($registeredUserName, $registeredPassword, $registeredRepeatPassword);
+            $sanitizedName = filter_var($this->registerView->getRegisterUserName(), FILTER_SANITIZE_STRING);
+            $sanitizedPassword = filter_var($this->registerView->getRegisterPassword(), FILTER_SANITIZE_STRING);
+            $sanitizedRepeatPassword = filter_var($this->registerView->getRegisterRepeatedPassword(), FILTER_SANITIZE_STRING);
 
             try {
                 $this->state->ValidateRegisterInputData($registeredUser);

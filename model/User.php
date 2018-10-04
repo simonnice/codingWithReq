@@ -9,8 +9,8 @@ class User {
     // private $password;
     // private $keepMeLoggedIn;
 
-    public function __construct() {
-        $this->database = new Database;
+    public function __construct($db) {
+        $this->database = $db;
     }
 
     // Will take in $data in the form of an array to validate
