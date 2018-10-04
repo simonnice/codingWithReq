@@ -9,10 +9,8 @@ class User {
     // private $password;
     // private $keepMeLoggedIn;
 
-    public function __construct($userName, $password, $keepMeLoggedIn) {
-        $this->userName = $userName;
-        $this->password = $password;
-        $this->loggedIn = $keepMeLoggedIn;
+    public function __construct() {
+        $this->database = new Database;
     }
 
     public function getUserName() {
