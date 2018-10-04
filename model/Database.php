@@ -14,4 +14,13 @@ class Database {
     private $pdoInstance;
     private $stmt;
     private $error;
+
+    public function __construct(){
+        // Set Data Source Name
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' .$this->dbname;
+        $options = array(
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        )
+    }
 }
