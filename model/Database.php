@@ -65,5 +65,12 @@ class Database {
         return $this->stmt->execute();
     }
 
+    // Adding a method for retrieving a single object from DB
+    
+    public function retriveSingleObject() {
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_OBJ);
+    }
+
 
 }
