@@ -3,9 +3,11 @@
 namespace model;
 
 class User {
-    private $userName;
-    private $password;
-    private $keepMeLoggedIn;
+
+    private $database;
+    // private $userName;
+    // private $password;
+    // private $keepMeLoggedIn;
 
     public function __construct($userName, $password, $keepMeLoggedIn) {
         $this->userName = $userName;
