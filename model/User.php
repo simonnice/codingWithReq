@@ -9,8 +9,8 @@ class User {
     // private $password;
     // private $keepMeLoggedIn;
 
-    public function __construct($db) {
-        $this->database = $db;
+    public function __construct($database) {
+        $this->database = $database;
     }
 
     // Will take in $data in the form of an array to validate
@@ -54,23 +54,19 @@ class User {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
         // Register the user
-        $this->db->prepareStatementWithQuerytoDb('INSERT INTO users (name, password) VALUES (:name, :password');
+        $this->database->prepareStatementWithQuerytoDb('INSERT INTO user (name, password) VALUES (:name, :password)');
 
         // Bind the values
-        $this->db->bind(':name', $data['name']);
-        $this->db->bind(':password', $data['password']);
+        $this->database->bindValuesToPlaceholder(':name', $data['name']);
+        $this->database->bindValuesToPlaceholder(':password', $data['password']);
+
+        // Execute the statement
+        // Execute
+        if ($this->database->executeStatement()) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
-
-    // public function getUserName() {
-    //     return $this->userName;
-    // }
-
-    // public function getPassword() {
-    //     return $this->password;
-    // }
-
-    // public function getLoggedIn() {
-    //     return $this->loggedIn;
-    // }
 }

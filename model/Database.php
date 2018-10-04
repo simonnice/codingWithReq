@@ -37,7 +37,7 @@ class Database {
     }
 
     // Adding a method to bind the values to the placeholder parameters in the prepared statement
-    public function bindValuesToPlaceholderValues($phParam, $value, $type = null) {
+    public function bindValuesToPlaceholder($phParam, $value, $type = null) {
         if (is_null($type)) {
             switch (true) {
                 case is_int($value):

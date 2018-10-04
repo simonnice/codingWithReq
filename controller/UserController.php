@@ -34,7 +34,13 @@ class UserController {
 
             $validatedInput = $this->user->validateInputInForm($data);
             if (empty($validatedInput['name_err']) && empty($validatedInput['password_err']) && empty($validatedInput['confirm_password_err'])) {
-                $this->user->registerNewUser($validatedInput);
+                $registerUser = $this->user->registerNewUser($validatedInput);
+            }
+
+            if ($registerUser) {
+                echo "Hurray, it should have been saved to db";
+            } else {
+                echo "Something is wrong";
             }
         }
 
