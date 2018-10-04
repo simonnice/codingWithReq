@@ -34,4 +34,23 @@ class Database {
     public function prepareStatementWithQuerytoDb($sql) {
         $this->stmt = $this->pdoInstance->prepare($sql);
     }
+
+    // Adding a method to bind the values to the placeholders in the prepared statement
+    public bindValuesToPlaceholdeValues($phValue, $value, $type = null) {
+        if(is_null($type)) {
+            switch(true){
+                case is_int($value)
+                $type = PDO::PARAM_INT;
+                break;
+
+                case is_bool($value)
+                $type = PDO::PARAM_BOOL;
+                break;
+
+                
+            }
+        }
+    }
+
+
 }
