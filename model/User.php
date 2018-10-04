@@ -61,7 +61,7 @@ class User {
         $this->database->bindValuesToPlaceholder(':password', $data['password']);
 
         // Execute the statement
-        // Execute
+
         if ($this->database->executeStatement()) {
             return true;
         } else {

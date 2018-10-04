@@ -11,7 +11,6 @@ require_once 'view/LayoutView.php';
 require_once 'controller/LoginController.php';
 require_once 'controller/UserController.php';
 require_once 'model/LoginState.php';
-require_once 'model/RegisterState.php';
 require_once 'model/User.php';
 
 date_default_timezone_set('Europe/Stockholm');
@@ -26,11 +25,10 @@ $registerView = new \view\RegisterView();
 //CREATE OBJECTS OF THE MODELS
 $db = new Database;
 $loginState = new \model\LoginState();
-$registerState = new \model\RegisterState();
 $user = new \model\User($db);
 
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($loginState, $loginView);
-$userController = new \controller\UserController($registerState, $registerView, $user);
+$userController = new \controller\UserController($registerView, $user);
 
 $layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $userController);

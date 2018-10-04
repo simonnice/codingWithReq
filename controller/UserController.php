@@ -4,8 +4,7 @@ namespace controller;
 class UserController {
     private $state;
     private $registerView;
-    public function __construct($state, $register, $User) {
-        $this->state = $state;
+    public function __construct($register, $User) {
         $this->registerView = $register;
         $this->user = $User;
     }
@@ -33,6 +32,7 @@ class UserController {
             ];
 
             $validatedInput = $this->user->validateInputInForm($data);
+
             if (empty($validatedInput['name_err']) && empty($validatedInput['password_err']) && empty($validatedInput['confirm_password_err'])) {
                 $registerUser = $this->user->registerNewUser($validatedInput);
             }
