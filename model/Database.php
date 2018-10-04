@@ -10,4 +10,8 @@ class Database {
     private $user = DB_USER;
     private $pass = DB_PASS;
     private $dbname = DB_NAME;
+
+    private $pdoInstance;
+    private $stmt;
+    private $error;
 }
