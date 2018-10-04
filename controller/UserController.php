@@ -23,13 +23,18 @@ class UserController {
             $sanitizedPassword = filter_var($this->registerView->getRegisterPassword(), FILTER_SANITIZE_STRING);
             $sanitizedRepeatPassword = filter_var($this->registerView->getRegisterRepeatedPassword(), FILTER_SANITIZE_STRING);
 
-            try {
-                $this->state->ValidateRegisterInputData($registeredUser);
-                return $this->state->CreateNewUserFromInput($registeredUser, $conn);
+            $data = [
+                'name' => trim($sanitizedName),
+                'password' => trim($sanitizedPassword),
+                'confirm_password' => trim($sanitizedRepeatPassword),
+                'name_err' => '',
+                'password_err' => '',
+                'confirm_password_err' => '',
+            ];
 
-            } catch (\Exception $e) {
-
-                return $e->getMessage();
+            $validatedInput = $this->user->validateInputInForm($data);
+            if (empty($validatedInput['name_err']) && empty($validatedInput['password_err']) && empty($validatedInput['confirm_password_err'])) {
+                $this->user->registerNewUser($validatedInput);
             }
         }
 

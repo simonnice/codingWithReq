@@ -44,6 +44,8 @@ class User {
             $data['name_err'] = "Username contains invalid characters.";
         }
 
+        return $data;
+
     }
 
     // public function getUserName() {
