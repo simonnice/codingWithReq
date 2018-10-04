@@ -19,7 +19,7 @@ class loginController {
      *
      */
 
-    public function checkLoginCredentials($conn) {
+    public function checkLoginCredentials() {
         if ($this->loginView->isLoginButtonClicked() == true) {
             $userName = $this->loginView->getLoginUserName();
             $password = $this->loginView->getLoginPassword();

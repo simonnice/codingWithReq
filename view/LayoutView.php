@@ -3,7 +3,7 @@ namespace view;
 
 class LayoutView {
 
-    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc, $conn) {
+    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc) {
 
         if (isset($_SESSION['loggedInUser'])) {
             $isLoggedIn = true;
@@ -15,7 +15,7 @@ class LayoutView {
 
             $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
             if ($isRegisterLinkClicked == true) {
-                $isValidRegisterInputs = $rc->checkRegisterInputs($conn);
+                $isValidRegisterInputs = $rc->checkRegisterInputs();
 
                 if ($isValidRegisterInputs === true) {
                     echo '<!DOCTYPE html>
@@ -58,7 +58,7 @@ class LayoutView {
                 }
 
             } else {
-                $loginStatusArray = $lc->checkLoginCredentials($conn);
+                $loginStatusArray = $lc->checkLoginCredentials();
 
                 if (current($loginStatusArray) === true) {
                     $isLoggedIn = true;

@@ -3,12 +3,13 @@ namespace controller;
 
 require_once 'model/Register.php';
 
-class registerController {
+class UserController {
     private $state;
     private $registerView;
-    public function __construct($state, $register) {
+    public function __construct($state, $register, $User) {
         $this->state = $state;
         $this->registerView = $register;
+        $this->user = $User;
     }
 
     public function checkIfRegisterIsClicked() {
@@ -17,7 +18,7 @@ class registerController {
         }
     }
 
-    public function checkRegisterInputs($conn) {
+    public function checkRegisterInputs() {
         if ($this->registerView->isRegisterButtonClicked() == true) {
 
             $registeredUserName = $this->registerView->getRegisterUserName();

@@ -9,6 +9,7 @@ require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
 require_once 'model/LoginState.php';
 require_once 'model/RegisterState.php';
+require_once 'model/User.php';
 require_once 'config/config.php';
 require_once 'model/Database.php';
 
@@ -24,9 +25,10 @@ $registerView = new \view\RegisterView();
 //CREATE OBJECTS OF THE MODELS
 $loginState = new \model\LoginState();
 $registerState = new \model\RegisterState();
+$user = new \mode\User();
 
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($loginState, $loginView);
-$registerController = new \controller\RegisterController($registerState, $registerView);
+$userController = new \controller\UserController($registerState, $registerView, $user);
 
-$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $registerController, $conn);
+$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $registerController);
