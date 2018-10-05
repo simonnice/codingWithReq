@@ -89,8 +89,6 @@ class User {
             $this->data['name_err'] = "Username is missing";
         }
 
-
-
         return $this->data;
     }
 
@@ -127,13 +125,13 @@ class User {
     }
 
     public function doesUserExist($userName) {
-        $this-database->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+        $this->database->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
 
-        $this->database->bindValuesToPlaceholder(':name' $userName);
+        $this->database->bindValuesToPlaceholder(':name', $userName);
 
         $row = $this->database->retrieveSingleObject();
 
-        if($this->database->checkIfEntryExists() > 0) {
+        if ($this->database->checkIfEntryExists() > 0) {
             return true;
         } else {
             return false;

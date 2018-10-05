@@ -105,37 +105,27 @@ class UserController extends MainController {
                 // Session Handling.
                 return $validatedData;
             } else {
-                $validatedData['password_err'] = 'Wrong name or password';
-
-                $errorArray = array();
-                foreach ($validatedData as $key => $value) {
-                    if ($key == "name_err") {
-                        array_push($errorArray, $value);
-                    }
-
-                    if ($key == "password_err") {
-                        array_push($errorArray, $value);
-                    }
-                }
-                return $errorArray;
-
+                $validatedData['password_err'] = "Wrong name or password";
+                return $this->produceErrorArray($validatedData);
             }
         } else {
-
-            // See if you can make this prettier
-            $errorArray = array();
-            foreach ($validatedData as $key => $value) {
-                if ($key == "name_err") {
-                    array_push($errorArray, $value);
-                }
-
-                if ($key == "password_err") {
-                    array_push($errorArray, $value);
-                }
-            }
-            return $errorArray;
+            return $this->produceErrorArray($validatedData);
         }
 
+    }
+
+    public function produceErrorArray($arrayToFilter) {
+        $errorArray = array();
+        foreach ($arrayToFilter as $key => $value) {
+            if ($key == "name_err") {
+                array_push($errorArray, $value);
+            }
+
+            if ($key == "password_err") {
+                array_push($errorArray, $value);
+            }
+        }
+        return $errorArray;
     }
 
 }

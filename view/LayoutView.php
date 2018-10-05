@@ -3,11 +3,8 @@ namespace view;
 
 class LayoutView {
 
-    public function prepareHtml() {
-
-    }
-
     public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, $msg) {
+
         echo '<!DOCTYPE html>
       <html>
         <head>
