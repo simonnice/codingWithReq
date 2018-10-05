@@ -32,4 +32,4 @@ $user = new \model\User($db);
 $loginController = new \controller\LoginController($loginState, $loginView);
 $userController = new \controller\UserController($registerView, $loginView, $user);
 
-$layoutView->echoHtml(false, $loginView, $dateTimeView, $registerView, $loginController, $userController);
+$layoutView->echoHtml(false, $loginView, $dateTimeView, $user);
