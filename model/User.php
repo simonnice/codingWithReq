@@ -17,7 +17,7 @@ class User {
     // Will take in $this->data in the form of an array to validate
     public function validateRegisterInputInForm($userInputRegister) {
 
-        $this->data[] = $userInputRegister;
+        $this->data = $userInputRegister;
 
         $sanitizedName = filter_var($this->data['name'], FILTER_SANITIZE_STRING);
 
@@ -53,7 +53,7 @@ class User {
 
     public function registerNewUser($validatedRegisterInput) {
 
-        $this->data[] = $validatedRegisterInput;
+        $this->data = $validatedRegisterInput;
 
         // Hashing password
         $this->data['password'] = password_hash($this->data['password'], PASSWORD_DEFAULT);
@@ -77,16 +77,16 @@ class User {
 
     public function validateLoginInputInForm($userInputLogin) {
 
-        $this->data[] = $userInputLogin;
+        $this->data = $userInputLogin;
 
         //echo $this->data['password'];
         // Validate name && password
-        if (empty($this->data['name'])) {
-            $this->data['name_err'] = "Username is missing";
-        }
-
         if (empty($this->data['password'])) {
             $this->data['password_err'] = "Password is missing";
+        }
+
+        if (empty($this->data['name'])) {
+            $this->data['name_err'] = "Username is missing";
         }
 
         return $this->data;
@@ -94,10 +94,10 @@ class User {
 
     public function loginUser($username, $password) {
 
-        $this->db->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
-        $this->db->bindValuesToPlaceholder(':name', $username);
+        $this->database->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+        $this->database->bindValuesToPlaceholder(':name', $username);
 
-        $row = $this->db->retriveSingleObject();
+        $row = $this->database->retrieveSingleObject();
 
         $hashedPassword = $row->password;
 
@@ -117,7 +117,7 @@ class User {
     }
 
     public function addUserResponse($responseToUser) {
-        $this->data[] = $responseToUser;
+        $this->data = $responseToUser;
     }
 
     public function getResponse() {

@@ -93,15 +93,28 @@ class UserController extends MainController {
 
         $loginInput = $this->loginInputResponse();
         $validatedData = $this->validatedLoginFormData($loginInput);
-        foreach ($validatedData as $msg) {
-            echo $msg . "<br>";
-        }
 
         if (empty($validatedData['name_err']) && empty($validatedData['password_err'])) {
-            $this->user->loginUser($validatedData['name'], $validatedData['password']);
-        } else {
-            echo "this is run in loginResponseFromDatabase";
+            $isLoggedIn = $this->user->loginUser($validatedData['name'], $validatedData['password']);
             return $validatedData;
+        } else {
+
+            // See if you can make this prettier
+            $errorArray = array();
+            foreach ($validatedData as $key => $value) {
+
+                if ($key == "password_err") {
+                    array_push($errorArray, $value);
+                }
+
+                if ($key == "name_err") {
+                    array_push($errorArray, $value);
+                }
+
+            }
+
+            var_dump($errorArray);
+            return $errorArray;
         }
 
     }

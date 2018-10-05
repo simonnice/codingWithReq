@@ -22,10 +22,9 @@ class MainController {
 
     public function startApp() {
         if ($this->loginView->isLoginButtonClicked()) {
-            $responseArray = $this->userController->loginResponseFromDatabase();
+            $this->responseArray = $this->userController->loginResponseFromDatabase();
             $this->layoutView->echoHtml(false, $this->loginView, $this->dateView, $this->responseArray);
         } else {
-            echo "this is run";
             $this->layoutView->echoHtml(false, $this->loginView, $this->dateView, $this->responseArray);
         }
     }
