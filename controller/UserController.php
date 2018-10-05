@@ -49,15 +49,16 @@ class UserController extends MainController {
 
     public function registerResponseFromDatabase() {
 
-        if ($this->registerView->isRegisterButtonClicked() == true) {
+        if ($this->registerView->isRegisterButtonClicked()) {
 
             $registerInput = $this->registerInputResponse();
             $validatedData = $this->validateFormData($registerInput);
 
             if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err'])) {
-                $isRegistered = $this->user->registerNewUser($validatedData);
+                $this->user->registerNewUser($validatedData);
+                $this->user->handleUserResponse($validatedData);
             } else {
-                return $validatedData;
+                $this->user->handleUserResponse($validatedData);
             }
 
         } else {
