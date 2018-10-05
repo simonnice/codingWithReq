@@ -5,56 +5,83 @@ namespace model;
 class User {
 
     private $database;
+    private $data = array();
     // private $userName;
     // private $password;
     // private $keepMeLoggedIn;
 
-    public function __construct() {
-        $this->database = new Database;
+    public function __construct($database) {
+        $this->database = $database;
     }
 
-    // Will take in $data in the form of an array to validate
-    public function validateInputInForm($data) {
+    // Will take in $this->data in the form of an array to validate
+    public function validateInputInForm($userInput) {
 
-        $sanitizedName = filter_var($data['name'], FILTER_SANITIZE_STRING);
+        $this->data[] = $userInput;
+
+        $sanitizedName = filter_var($this->data['name'], FILTER_SANITIZE_STRING);
 
         // Validate name && password
-        if (empty($data['name']) && empty($data['password'])) {
-            $data['name_err'] = "Username has too few characters, at least 3 characters.";
-            $data['password_err'] = "Password has too few characters, at least 6 characters.";
+        if (empty($this->data['name']) && empty($this->data['password'])) {
+            $this->data['name_err'] = "Username has too few characters, at least 3 characters.";
+            $this->data['password_err'] = "Password has too few characters, at least 6 characters.";
         }
 
         // Validate password
-        if (strlen($data['password']) < 6) {
-            $data['password_err'] = "Password has too few characters, at least 6 characters.";
+        if (strlen($this->data['password']) < 6) {
+            $this->data['password_err'] = "Password has too few characters, at least 6 characters.";
         }
 
         // Validate name
-        if (strlen($data['name']) < 3) {
-            $data['name_err'] = "Username has too few characters, at least 3 characters.";
+        if (strlen($this->data['name']) < 3) {
+            $this->data['name_err'] = "Username has too few characters, at least 3 characters.";
         }
 
         // Validate Confirm password && password
-        if ($data['password'] != $data['confirm_password']) {
-            $data['confirm_password_err'] = "Passwords do not match.";
+        if ($this->data['password'] != $this->data['confirm_password']) {
+            $this->data['confirm_password_err'] = "Passwords do not match.";
         }
 
         // Validate for invalid characters in name
-        if ($data['name'] != $sanitizedName) {
-            $data['name_err'] = "Username contains invalid characters.";
+        if ($this->data['name'] != $sanitizedName) {
+            $this->data['name_err'] = "Username contains invalid characters.";
+        }
+
+        return $this->data;
+
+    }
+
+    public function registerNewUser($validatedInput) {
+
+        $this->data[] = $validatedInput;
+
+        // Hashing password
+        $this->data['password'] = password_hash($this->data['password'], PASSWORD_DEFAULT);
+
+        // Register the user
+        $this->database->prepareStatementWithQuerytoDb('INSERT INTO user (name, password) VALUES (:name, :password)');
+
+        // Bind the values
+        $this->database->bindValuesToPlaceholder(':name', $this->data['name']);
+        $this->database->bindValuesToPlaceholder(':password', $this->data['password']);
+
+        // Execute the statement
+
+        if ($this->database->executeStatement()) {
+            return true;
+        } else {
+            return false;
         }
 
     }
 
-    // public function getUserName() {
-    //     return $this->userName;
-    // }
+    public function handleUserResponse($responseToUser) {
+        $this->data[] = $responseToUser;
+        $formattedString;
+        foreach ($data as $msg) {
+            $formattedString .= $msg . "br";
+        }
 
-    // public function getPassword() {
-    //     return $this->password;
-    // }
-
-    // public function getLoggedIn() {
-    //     return $this->loggedIn;
-    // }
+        return $formattedString;
+    }
 }
