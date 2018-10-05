@@ -91,31 +91,19 @@ class UserController extends MainController {
 
     public function loginResponseFromDatabase() {
 
-        if ($this->loginView->isLoginButtonClicked()) {
-
-            $loginInput = $this->loginInputResponse();
-            $validatedData = $this->validatedLoginFormData($loginInput);
-
-            if (empty($validatedData['name_err']) && empty($validatedData['password_err'])) {
-                $this->user->loginUser($validatedData['name'], $validatedData['password']);
-                $this->user->handleUserResponse($validatedData);
-            } else {
-                $this->user->handleUserResponse($validatedData);
-            }
-
-        } else {
-
-            // Init data
-            $data = [
-                'name' => '',
-                'password' => '',
-                'name_err' => '',
-                'password_err' => '',
-
-            ];
-
-            return $data;
+        $loginInput = $this->loginInputResponse();
+        $validatedData = $this->validatedLoginFormData($loginInput);
+        foreach ($validatedData as $msg) {
+            echo $msg . "<br>";
         }
+
+        if (empty($validatedData['name_err']) && empty($validatedData['password_err'])) {
+            $this->user->loginUser($validatedData['name'], $validatedData['password']);
+        } else {
+            echo "this is run in loginResponseFromDatabase";
+            return $validatedData;
+        }
+
     }
 
 }

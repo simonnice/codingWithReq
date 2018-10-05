@@ -11,7 +11,7 @@ class LoginView {
     private static $keep = 'LoginView::KeepMeLoggedIn';
     private static $messageId = 'LoginView::Message';
 
-    private $message = '';
+    private $messageString = '';
 
     // Read only access to User model
     private $userManager;
@@ -32,7 +32,14 @@ class LoginView {
         if ($isLoggedIn) {
             $response = $this->generateLogoutButtonHTML($message);
         } else {
-            $response = $this->generateLoginFormHTML($message);
+            if ($this->userManager->hasResponseChanged($message)) {
+                foreach ($message as $msgs) {
+                    $messageString .= $msgs . "<br>";
+                }
+                $response = $this->generateLoginFormHTML($messageString);
+            } else {
+                $response = $this->generateLoginFormHTML('');
+            }
         }
 
         //$response .= $this->generateLogoutButtonHTML($message);

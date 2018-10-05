@@ -3,7 +3,11 @@ namespace view;
 
 class LayoutView {
 
-    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv) {
+    public function prepareHtml() {
+
+    }
+
+    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, $msg) {
         echo '<!DOCTYPE html>
       <html>
         <head>
@@ -15,7 +19,7 @@ class LayoutView {
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
           <div class="container">
-              ' . $v->response($isLoggedIn, 'Derp') . '
+              ' . $v->response($isLoggedIn, $msg) . '
 
               ' . $dtv->show() . '
           </div>

@@ -79,9 +79,13 @@ class User {
 
         $this->data[] = $userInputLogin;
 
+        //echo $this->data['password'];
         // Validate name && password
-        if (empty($this->data['name']) || empty($this->data['password'])) {
+        if (empty($this->data['name'])) {
             $this->data['name_err'] = "Username is missing";
+        }
+
+        if (empty($this->data['password'])) {
             $this->data['password_err'] = "Password is missing";
         }
 
@@ -104,17 +108,19 @@ class User {
         }
     }
 
-    public function hasResponseChanged(): bool {
-        return $this->handleUserResponse > 0;
+    public function hasResponseChanged($response): bool {
+        if (empty($response)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    public function handleUserResponse($responseToUser) {
+    public function addUserResponse($responseToUser) {
         $this->data[] = $responseToUser;
-        $formattedString;
-        foreach ($data as $msg) {
-            $formattedString .= $msg . "br";
-        }
+    }
 
-        return $formattedString;
+    public function getResponse() {
+        return $this->data;
     }
 }

@@ -31,5 +31,6 @@ $registerView = new \view\RegisterView();
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($loginState, $loginView);
 $userController = new \controller\UserController($registerView, $loginView, $user);
+$mainController = new \controller\MainController($layoutView, $userController, $user, $loginView, $dateTimeView);
 
-$layoutView->echoHtml(false, $loginView, $dateTimeView, $user);
+$mainController->startApp();
