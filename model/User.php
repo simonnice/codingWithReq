@@ -5,7 +5,7 @@ namespace model;
 class User {
 
     private $database;
-    private $data;
+    private $data = array();
     // private $userName;
     // private $password;
     // private $keepMeLoggedIn;
@@ -17,7 +17,7 @@ class User {
     // Will take in $this->data in the form of an array to validate
     public function validateInputInForm($userInput) {
 
-        $this->data = $userInput;
+        $this->data[] = $userInput;
 
         $sanitizedName = filter_var($this->data['name'], FILTER_SANITIZE_STRING);
 
@@ -53,7 +53,7 @@ class User {
 
     public function registerNewUser($validatedInput) {
 
-        $this->data = $validatedInput;
+        $this->data[] = $validatedInput;
 
         // Hashing password
         $this->data['password'] = password_hash($this->data['password'], PASSWORD_DEFAULT);
@@ -76,6 +76,12 @@ class User {
     }
 
     public function handleUserResponse($responseToUser) {
+        $this->data[] = $responseToUser;
+        $formattedString;
+        foreach ($data as $msg) {
+            $formattedString .= $msg . "br";
+        }
 
+        return $formattedString;
     }
 }
