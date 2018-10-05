@@ -17,16 +17,16 @@ require_once 'model/User.php';
 date_default_timezone_set('Europe/Stockholm');
 session_start();
 
-//CREATE OBJECTS OF THE VIEWS
-$loginView = new \view\LoginView();
-$dateTimeView = new \view\DateTimeView();
-$layoutView = new \view\LayoutView();
-$registerView = new \view\RegisterView();
-
 //CREATE OBJECTS OF THE MODELS
 $db = new Database;
 $loginState = new \model\LoginState();
 $user = new \model\User($db);
+
+//CREATE OBJECTS OF THE VIEWS
+$loginView = new \view\LoginView($user);
+$dateTimeView = new \view\DateTimeView();
+$layoutView = new \view\LayoutView();
+$registerView = new \view\RegisterView();
 
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($loginState, $loginView);

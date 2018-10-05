@@ -73,4 +73,20 @@ class UserController extends MainController {
         }
     }
 
+    public function loginInputResponse() {
+        $sanitizedName = filter_var($this->loginView->getLoginUserName(), FILTER_SANITIZE_STRING);
+        $sanitizedPassword = filter_var($this->loginView->getLoginPassword(), FILTER_SANITIZE_STRING);
+
+        $data = [
+            'name' => trim($sanitizedName),
+            'password' => trim($sanitizedPassword),
+            'confirm_password' => trim($sanitizedRepeatPassword),
+            'name_err' => '',
+            'password_err' => '',
+            'confirm_password_err' => '',
+        ];
+
+        return $data;
+    }
+
 }

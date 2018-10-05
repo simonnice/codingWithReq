@@ -75,6 +75,10 @@ class User {
 
     }
 
+    public function hasResponseChanged(): bool {
+        return $this->handleUserResponse > 0;
+    }
+
     public function handleUserResponse($responseToUser) {
         $this->data[] = $responseToUser;
         $formattedString;

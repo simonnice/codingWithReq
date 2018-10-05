@@ -13,6 +13,13 @@ class LoginView {
 
     private $message = '';
 
+    // Read only access to User model
+    private $userManager;
+
+    public function __construct(\model\User $toBeViewed) {
+        $this->userManager = $toBeViewed;
+    }
+
     /**
      * Create HTTP response
      *
