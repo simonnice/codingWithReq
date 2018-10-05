@@ -60,11 +60,9 @@ class UserController extends MainController {
             // Init data
             $data = [
                 'name' => '',
-                'email' => '',
                 'password' => '',
                 'confirm_password' => '',
                 'name_err' => '',
-                'email_err' => '',
                 'password_err' => '',
                 'confirm_password_err' => '',
             ];
@@ -93,13 +91,13 @@ class UserController extends MainController {
 
     public function loginResponseFromDatabase() {
 
-        if ($this->registerView->isRegisterButtonClicked()) {
+        if ($this->loginView->isLoginButtonClicked()) {
 
-            $registerInput = $this->registerInputResponse();
-            $validatedData = $this->validatetRegisterFormData($registerInput);
+            $loginInput = $this->loginInputResponse();
+            $validatedData = $this->validatedLoginFormData($loginInput);
 
-            if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err'])) {
-                $this->user->registerNewUser($validatedData);
+            if (empty($validatedData['name_err']) && empty($validatedData['password_err'])) {
+                $this->user->loginUser($validatedData['name'], $validatedData['password']);
                 $this->user->handleUserResponse($validatedData);
             } else {
                 $this->user->handleUserResponse($validatedData);
@@ -110,13 +108,10 @@ class UserController extends MainController {
             // Init data
             $data = [
                 'name' => '',
-                'email' => '',
                 'password' => '',
-                'confirm_password' => '',
                 'name_err' => '',
-                'email_err' => '',
                 'password_err' => '',
-                'confirm_password_err' => '',
+
             ];
 
             return $data;

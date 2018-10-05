@@ -51,9 +51,9 @@ class User {
 
     }
 
-    public function registerNewUser($validatedInput) {
+    public function registerNewUser($validatedRegisterInput) {
 
-        $this->data[] = $validatedInput;
+        $this->data[] = $validatedRegisterInput;
 
         // Hashing password
         $this->data['password'] = password_hash($this->data['password'], PASSWORD_DEFAULT);
@@ -86,6 +86,22 @@ class User {
         }
 
         return $this->data;
+    }
+
+    public function loginUser($username, $password) {
+
+        $this->db->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+        $this->db->bindValuesToPlaceholder(':name', $username);
+
+        $row = $this->db->retriveSingleObject();
+
+        $hashedPassword = $row->password;
+
+        if (password_verify($password, $hashedPassword)) {
+            return $row;
+        } else {
+            return false;
+        }
     }
 
     public function hasResponseChanged(): bool {
