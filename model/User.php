@@ -15,9 +15,9 @@ class User {
     }
 
     // Will take in $this->data in the form of an array to validate
-    public function validateInputInForm($userInput) {
+    public function validateRegisterInputInForm($userInputRegister) {
 
-        $this->data[] = $userInput;
+        $this->data[] = $userInputRegister;
 
         $sanitizedName = filter_var($this->data['name'], FILTER_SANITIZE_STRING);
 
@@ -73,6 +73,19 @@ class User {
             return false;
         }
 
+    }
+
+    public function validateLoginInputInForm($userInputLogin) {
+
+        $this->data[] = $userInputLogin;
+
+        // Validate name && password
+        if (empty($this->data['name']) || empty($this->data['password'])) {
+            $this->data['name_err'] = "Username is missing";
+            $this->data['password_err'] = "Password is missing";
+        }
+
+        return $this->data;
     }
 
     public function hasResponseChanged(): bool {

@@ -36,7 +36,7 @@ class UserController extends MainController {
     // returns the response from validation in User Model
 
     public function validateFormData($data) {
-        return $validatedInput = $this->user->validateInputInForm($data);
+        return $validatedInput = $this->user->validateRegisterInputInForm($data);
     }
 
     // Returns a boolean to determine if registration was successful or not
@@ -80,10 +80,8 @@ class UserController extends MainController {
         $data = [
             'name' => trim($sanitizedName),
             'password' => trim($sanitizedPassword),
-            'confirm_password' => trim($sanitizedRepeatPassword),
             'name_err' => '',
             'password_err' => '',
-            'confirm_password_err' => '',
         ];
 
         return $data;
