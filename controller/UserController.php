@@ -89,6 +89,10 @@ class UserController extends MainController {
         return $validatedLoginInput = $this->user->validateLoginInputInForm($data);
     }
 
+    // TODO - MUST FIX VALIDATION OF THE ACTUAL USER IN DB, BOTH NAME AND PASSWORD BEFORE REGISTERING
+    // IT IS POSSIBLE SINCE USER HAS A DB-CONNECTION, YOU CAN DO THIS IN
+    // VALIDATEDLOGINFORMDATA
+
     public function loginResponseFromDatabase() {
 
         $loginInput = $this->loginInputResponse();
@@ -96,24 +100,39 @@ class UserController extends MainController {
 
         if (empty($validatedData['name_err']) && empty($validatedData['password_err'])) {
             $isLoggedIn = $this->user->loginUser($validatedData['name'], $validatedData['password']);
-            return $validatedData;
+
+            if ($isLoggedIn) {
+                // Session Handling.
+                return $validatedData;
+            } else {
+                $validatedData['password_err'] = 'Wrong name or password';
+
+                $errorArray = array();
+                foreach ($validatedData as $key => $value) {
+                    if ($key == "name_err") {
+                        array_push($errorArray, $value);
+                    }
+
+                    if ($key == "password_err") {
+                        array_push($errorArray, $value);
+                    }
+                }
+                return $errorArray;
+
+            }
         } else {
 
             // See if you can make this prettier
             $errorArray = array();
             foreach ($validatedData as $key => $value) {
-
-                if ($key == "password_err") {
-                    array_push($errorArray, $value);
-                }
-
                 if ($key == "name_err") {
                     array_push($errorArray, $value);
                 }
 
+                if ($key == "password_err") {
+                    array_push($errorArray, $value);
+                }
             }
-
-            var_dump($errorArray);
             return $errorArray;
         }
 
