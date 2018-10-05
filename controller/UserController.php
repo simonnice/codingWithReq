@@ -13,12 +13,6 @@ class UserController extends MainController {
         $this->user = $User;
     }
 
-    public function checkIfRegisterIsClicked() {
-        if ($this->registerView->registerLinkIsClicked() == true) {
-            return true;
-        }
-    }
-
     // Cleans up input from register form and returns it
     public function registerInputResponse() {
 
