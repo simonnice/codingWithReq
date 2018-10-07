@@ -2,8 +2,33 @@
 namespace view;
 
 class LayoutView {
+    private $dateTimeView;
+    private $loginView;
+    private $registerView;
 
-    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, $msg) {
+    public function __construct($dateTime, $login, $register) {
+        $this->dateTimeView = $dateTime;
+        $this->loginView = $login;
+        $this->registerView = $register;
+    }
+
+    public function viewLoader($view, $msg, $isLoggedIn) {
+        if ($view == "login") {
+            return $this->loginView->response($isLoggedIn, $msg);
+        } else if ($view == "register") {
+            return $this->registerView->responseRegister($msg);
+        }
+    }
+
+    public function linkLoader($view) {
+        if ($view == 'login') {
+            return $this->registerView->generateRegisterLink();
+        } else {
+            return $this->loginView->generateLoginLink();
+        }
+    }
+
+    public function echoHtml($isLoggedIn, $msg, $view) {
 
         echo '<!DOCTYPE html>
       <html>
@@ -13,12 +38,12 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
+          ' . $this->linkLoader($view) . '
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
           <div class="container">
-              ' . $v->response($isLoggedIn, $msg) . '
-
-              ' . $dtv->show() . '
+              ' . $this->viewLoader($view, $msg, $isLoggedIn) . '
+              ' . $this->dateTimeView->show() . '
           </div>
          </body>
       </html>

@@ -103,6 +103,7 @@ class UserController extends MainController {
 
             if ($isLoggedIn) {
                 // Session Handling.
+                $this->createUserSessions($isLoggedIn);
                 return $validatedData;
             } else {
                 $validatedData['password_err'] = "Wrong name or password";

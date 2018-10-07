@@ -3,6 +3,7 @@
 //INCLUDE THE FILES NEEDED...
 require_once 'config/Config.php';
 require_once 'helper/UrlRedirect.php';
+require_once 'helper/SessionHelper.php';
 require_once 'model/Database.php';
 require_once 'view/LoginView.php';
 require_once 'view/RegisterView.php';
@@ -25,12 +26,13 @@ $user = new \model\User($db);
 //CREATE OBJECTS OF THE VIEWS
 $loginView = new \view\LoginView($user);
 $dateTimeView = new \view\DateTimeView();
-$layoutView = new \view\LayoutView();
 $registerView = new \view\RegisterView();
+
+$layoutView = new \view\LayoutView($dateTimeView, $loginView, $registerView);
 
 // CREATE OBJECTS OF THE CONTROLLER
 $loginController = new \controller\LoginController($loginState, $loginView);
 $userController = new \controller\UserController($registerView, $loginView, $user);
-$mainController = new \controller\MainController($layoutView, $userController, $user, $loginView, $dateTimeView);
+$mainController = new \controller\MainController($layoutView, $userController, $loginView, $registerView);
 
 $mainController->startApp();

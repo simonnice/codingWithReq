@@ -10,19 +10,9 @@ class RegisterView {
     private static $messageId = 'RegisterView::Message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
-    public function responseRegister($registerLinkIsClicked, $message) {
+    public function responseRegister($message) {
 
-        if ($registerLinkIsClicked == false) {
-            $response = $this->generateRegisterLink();
-        } else {
-            $messageString;
-            foreach ($message as $messages) {
-                if (strlen($messages) > 1) {
-                    $messageString .= $messages . "<br>";
-                }
-            }
-            $response = $this->generateRegisterFormHTML($messageString);
-        }
+        $response = $this->generateRegisterFormHTML($message);
 
         return $response;
     }
