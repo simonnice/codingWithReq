@@ -18,6 +18,9 @@ require_once 'model/User.php';
 date_default_timezone_set('Europe/Stockholm');
 session_start();
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 //CREATE OBJECTS OF THE MODELS
 $db = new Database;
 $loginState = new \model\LoginState();
