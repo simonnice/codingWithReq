@@ -49,7 +49,7 @@ class User {
 
         // Validate if User Exists
         if ($this->doesUserExist($this->data['name'])) {
-            $this->data['name_err'] = "User exists, pick another username.";
+            $this->data['db_err'] = "User exists, pick another username.";
         } else {
             $this->data['db_msg'] = "Registered new user.";
         }

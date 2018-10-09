@@ -28,6 +28,7 @@ class UserController extends MainController {
             'name_err' => '',
             'password_err' => '',
             'confirm_password_err' => '',
+            'db_err' => '',
         ];
 
         return $data;
@@ -47,13 +48,13 @@ class UserController extends MainController {
         $registerInput = $this->registerInputResponse();
         $validatedData = $this->validatetRegisterFormData($registerInput);
 
-        if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err'])) {
+        if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err']) && empty($validatedData['db_err'])) {
             $this->user->registerNewUser($validatedData);
             return $this->produceSuccessArray($validatedData);
 
         } else {
 
-            return $this->produceErrorArray($validatedData);
+            return $this->produceResponseArray($validatedData);
         }
 
     }
@@ -65,6 +66,7 @@ class UserController extends MainController {
         $data = [
             'name' => trim($sanitizedName),
             'password' => trim($sanitizedPassword),
+            'db_msg' => '',
             'name_err' => '',
             'password_err' => '',
             'db_err' => '',
@@ -91,31 +93,36 @@ class UserController extends MainController {
             $this->createUserSessions($isLoggedIn);
             return $validatedData;
         } else {
-            return $this->produceErrorArray($validatedData);
+            return $this->produceResponseArray($validatedData);
         }
 
     }
 
-    public function produceErrorArray($arrayToFilter) {
-        $errorArray = array();
+    public function produceResponseArray($arrayToFilter) {
+        $responseArray = array();
         foreach ($arrayToFilter as $key => $value) {
+
+            if ($key == "name") {
+                $responseArray[$key] = $value;
+            }
+
             if ($key == "name_err") {
-                array_push($errorArray, $value);
+                $responseArray[$key] = $value;
             }
 
             if ($key == "password_err") {
-                array_push($errorArray, $value);
+                $responseArray[$key] = $value;
             }
 
             if ($key == "confirm_password_err") {
-                array_push($errorArray, $value);
+                $responseArray[$key] = $value;
             }
 
             if ($key == "db_err") {
-                array_push($errorArray, $value);
+                $responseArray[$key] = $value;
             }
         }
-        return $errorArray;
+        return $responseArray;
     }
 
     public function produceSuccessArray($arrayToFilter) {

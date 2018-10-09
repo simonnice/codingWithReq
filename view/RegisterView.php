@@ -13,9 +13,26 @@ class RegisterView {
     public function responseRegister($message) {
 
         $messageString = '';
-        foreach ($message as $messages) {
-            if (strlen($messages) > 1) { // Magic Number
-                $messageString .= $messages . "<br>";
+        $nameString = '';
+        foreach ($message as $key => $value) {
+            if ($key == 'name_err') {
+                $messageString .= $value;
+            }
+
+            if ($key == 'db_err') {
+                $messageString .= $value;
+            }
+
+            if ($key == 'password_err') {
+                $messageString .= $value;
+            }
+
+            if ($key == 'confirm_password_err') {
+                $messageString .= $value;
+            }
+
+            if ($key == 'name') {
+                $nameString = $value;
             }
         }
 

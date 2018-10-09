@@ -31,12 +31,33 @@ class LoginView {
             $response = $this->generateLogoutButtonHTML($message);
         } else {
             $messageString = '';
-            foreach ($message as $messages) {
-                if (strlen($messages) > 1) { // Magic Number
-                    $messageString .= $messages . "<br>";
+            $nameString = '';
+            foreach ($message as $key => $value) {
+                if ($key == 'name_err') {
+                    $messageString .= $value;
+                }
+
+                if ($key == 'db_msg') {
+                    $messageString .= $value;
+                }
+
+                if ($key == 'db_err') {
+                    $messageString .= $value;
+                }
+
+                if ($key == 'password_err') {
+                    $messageString .= $value;
+                }
+
+                if ($key == 'db_err') {
+                    $messageString .= $value;
+                }
+
+                if ($key == 'name') {
+                    $nameString = $value;
                 }
             }
-            $response = $this->generateloginFormHTML($messageString);
+            $response = $this->generateloginFormHTML($messageString, $nameString);
         }
         return $response;
     }
@@ -67,7 +88,7 @@ class LoginView {
      * @param $message, String output message
      * @return  void, BUT writes to standard output!
      */
-    private function generateLoginFormHTML($message) {
+    private function generateLoginFormHTML($message, $name) {
         return '
 			<form method="post" form action="?">
 				<fieldset>
@@ -75,7 +96,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $name . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
