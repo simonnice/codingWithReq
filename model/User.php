@@ -86,24 +86,17 @@ class User {
 
         //echo $this->data['password'];
         // Validate name && password
-
-        if (empty($this->data['name']) && empty($this->data['password'])) {
+        if (empty($this->data['name'])) {
             $this->data['name_err'] = "Username is missing";
+
+        } else if (empty($this->data['password'])) {
             $this->data['password_err'] = "Password is missing";
         } else {
-            if (empty($this->data['name'])) {
-                $this->data['name_err'] = "Username is missing";
-            } else if (empty($this->data['password'])) {
-                $this->data['password_err'] = "Password is missing";
-            } else {
-                if (!$this->doesInputUserMatchDbUser($this->data['name'], $this->data['password'])) {
-                    $this->data['db_err'] = "Wrong name or password";
-                }
+            if (!$this->doesInputUserMatchDbUser($this->data['name'], $this->data['password'])) {
+                $this->data['db_err'] = "Wrong name or password";
             }
         }
-
         return $this->data;
-
     }
 
     public function loginUser($validatedUser) {
