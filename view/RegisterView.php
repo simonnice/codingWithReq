@@ -36,7 +36,7 @@ class RegisterView {
             }
         }
 
-        $response = $this->generateRegisterFormHTML($messageString);
+        $response = $this->generateRegisterFormHTML($messageString, $nameString);
 
         return $response;
     }
@@ -54,7 +54,7 @@ class RegisterView {
      * @return  void, BUT writes to standard output!
      */
 
-    private function generateRegisterFormHTML($message) {
+    private function generateRegisterFormHTML($message, $name) {
         return '
         <h2>Register new user</h2>
             <form action="?register" form method="post">
@@ -63,7 +63,7 @@ class RegisterView {
                     <p id="' . self::$messageId . '">' . $message . '</p>
 
                     <label for="' . self::$name . '">Username :</label>
-                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="' . (isset($_POST[self::$name]) ? $_POST[self::$name] : "") . '" />
+                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="' . $name . '" />
                     <br>
 
                     <label for="' . self::$password . '">Password :</label>
