@@ -94,23 +94,23 @@ class User {
             $this->data['name_err'] = "Username is missing";
         }
 
+        if (!$this->doesInputUserMatchDbUser($this->data['name'], $this->data['password'])) {
+            $this->data['db_err'] = "Wrong name or password";
+        }
+
         return $this->data;
+
     }
 
-    public function loginUser($username, $password) {
+    public function loginUser($validatedUser) {
 
         $this->database->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
-        $this->database->bindValuesToPlaceholder(':name', $username);
+        $this->database->bindValuesToPlaceholder(':name', $validatedUser);
 
         $row = $this->database->retrieveSingleObject();
 
-        $hashedPassword = $row->password;
+        return $row;
 
-        if (password_verify($password, $hashedPassword)) {
-            return $row;
-        } else {
-            return false;
-        }
     }
 
     public function hasResponseChanged($response): bool {
@@ -137,6 +137,25 @@ class User {
         $row = $this->database->retrieveSingleObject();
 
         if ($this->database->checkIfEntryExists() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function doesInputUserMatchDbUser($username, $password) {
+
+        $this->database->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+        $this->database->bindValuesToPlaceholder(':name', $username);
+
+        if ($this->doesUserExist($username)) {
+            $row = $this->database->retrieveSingleObject();
+            $hashedPassword = $row->password;
+        } else {
+            return false;
+        }
+
+        if (password_verify($password, $hashedPassword)) {
             return true;
         } else {
             return false;

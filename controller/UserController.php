@@ -81,6 +81,7 @@ class UserController extends MainController {
             'password' => trim($sanitizedPassword),
             'name_err' => '',
             'password_err' => '',
+            'db_err' => '',
         ];
 
         return $data;
@@ -99,17 +100,10 @@ class UserController extends MainController {
         $loginInput = $this->loginInputResponse();
         $validatedData = $this->validatedLoginFormData($loginInput);
 
-        if (empty($validatedData['name_err']) && empty($validatedData['password_err'])) {
-            $isLoggedIn = $this->user->loginUser($validatedData['name'], $validatedData['password']);
-
-            if ($isLoggedIn) {
-                // Session Handling.
-                $this->createUserSessions($isLoggedIn);
-                return $validatedData;
-            } else {
-                $validatedData['password_err'] = "Wrong name or password";
-                return $this->produceErrorArray($validatedData);
-            }
+        if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['db_err'])) {
+            $isLoggedIn = $this->user->loginUser($validatedData['name']);
+            $this->createUserSessions($isLoggedIn);
+            return $validatedData;
         } else {
             return $this->produceErrorArray($validatedData);
         }
