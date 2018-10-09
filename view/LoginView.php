@@ -49,10 +49,6 @@ class LoginView {
                     $messageString .= $value;
                 }
 
-                if ($key == 'db_err') {
-                    $messageString .= $value;
-                }
-
                 if ($key == 'name') {
                     $nameString = $value;
                 }
