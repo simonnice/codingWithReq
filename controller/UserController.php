@@ -120,6 +120,10 @@ class UserController extends MainController {
             if ($key == "password_err") {
                 array_push($errorArray, $value);
             }
+
+            if ($key == "db_err") {
+                array_push($errorArray, $value);
+            }
         }
         return $errorArray;
     }
