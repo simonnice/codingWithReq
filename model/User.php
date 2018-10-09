@@ -47,6 +47,11 @@ class User {
             $this->data['name_err'] = "Username contains invalid characters.";
         }
 
+        // Validate if User Exists
+        if ($this->doesUserExist($this->data['name'])) {
+            $this->data['name_err'] = "User exists, pick another username.";
+        }
+
         return $this->data;
 
     }

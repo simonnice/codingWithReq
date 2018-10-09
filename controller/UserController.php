@@ -50,9 +50,10 @@ class UserController extends MainController {
 
             if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err'])) {
                 $this->user->registerNewUser($validatedData);
-                $this->user->handleUserResponse($validatedData);
+                return $validatedData;
             } else {
-                $this->user->handleUserResponse($validatedData);
+
+                return $this->produceErrorArray($validatedData);
             }
 
         } else {

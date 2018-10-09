@@ -12,7 +12,14 @@ class RegisterView {
 
     public function responseRegister($message) {
 
-        $response = $this->generateRegisterFormHTML($message);
+        $messageString = '';
+        foreach ($message as $messages) {
+            if (strlen($messages) > 1) { // Magic Number
+                $messageString .= $messages . "<br>";
+            }
+        }
+
+        $response = $this->generateRegisterFormHTML($messageString);
 
         return $response;
     }

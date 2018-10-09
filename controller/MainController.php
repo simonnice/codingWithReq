@@ -23,6 +23,7 @@ class MainController {
             $this->responseArray = $this->userController->loginResponseFromDatabase();
             $this->layoutView->echoHtml(false, $this->responseArray, 'login');
         } else if ($this->registerView->registerLinkIsClicked()) {
+            $this->responseArray = $this->userController->registerResponseFromDatabase();
             $this->layoutView->echoHtml(false, $this->responseArray, 'register');
         } else {
             $this->layoutView->echoHtml(false, $this->responseArray, 'login');
