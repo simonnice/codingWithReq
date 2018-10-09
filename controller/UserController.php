@@ -24,6 +24,7 @@ class UserController extends MainController {
             'name' => trim($sanitizedName),
             'password' => trim($sanitizedPassword),
             'confirm_password' => trim($sanitizedRepeatPassword),
+            'db_msg' => '',
             'name_err' => '',
             'password_err' => '',
             'confirm_password_err' => '',
@@ -43,33 +44,18 @@ class UserController extends MainController {
 
     public function registerResponseFromDatabase() {
 
-        if ($this->registerView->isRegisterButtonClicked()) {
+        $registerInput = $this->registerInputResponse();
+        $validatedData = $this->validatetRegisterFormData($registerInput);
 
-            $registerInput = $this->registerInputResponse();
-            $validatedData = $this->validatetRegisterFormData($registerInput);
-
-            if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err'])) {
-                $this->user->registerNewUser($validatedData);
-                return $validatedData;
-            } else {
-
-                return $this->produceErrorArray($validatedData);
-            }
+        if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err'])) {
+            $this->user->registerNewUser($validatedData);
+            return $this->produceSuccessArray($validatedData);
 
         } else {
 
-            // Init data
-            $data = [
-                'name' => '',
-                'password' => '',
-                'confirm_password' => '',
-                'name_err' => '',
-                'password_err' => '',
-                'confirm_password_err' => '',
-            ];
-
-            return $data;
+            return $this->produceErrorArray($validatedData);
         }
+
     }
 
     public function loginInputResponse() {
@@ -121,11 +107,26 @@ class UserController extends MainController {
                 array_push($errorArray, $value);
             }
 
+            if ($key == "confirm_password_err") {
+                array_push($errorArray, $value);
+            }
+
             if ($key == "db_err") {
                 array_push($errorArray, $value);
             }
         }
         return $errorArray;
+    }
+
+    public function produceSuccessArray($arrayToFilter) {
+        $successArray = array();
+        foreach ($arrayToFilter as $key => $value) {
+            if ($key == "db_msg") {
+                $successArray[$key] = $value;
+            }
+        }
+
+        return $successArray;
     }
 
 }
