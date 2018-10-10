@@ -9,6 +9,7 @@ class MainController {
     private $registerView;
     private $dateTimeView;
     private $userController;
+    private $registerController;
     private $session;
     private $db;
 
@@ -25,7 +26,8 @@ class MainController {
         $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView);
 
         // CREATE OBJECTS OF THE CONTROLLER
-        $this->userController = new \controller\UserController($this->registerView, $this->loginView, $this->user, $this->session);
+        $this->userController = new \controller\UserController($this->loginView, $this->user, $this->session);
+        $this->registerController = new \controller\RegisterController($this->registerView, $this->user, $this->session);
     }
 
     public function startApp() {

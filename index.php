@@ -11,6 +11,7 @@ require_once 'view/DateTimeView.php';
 require_once 'view/LayoutView.php';
 require_once 'controller/MainController.php';
 require_once 'controller/UserController.php';
+require_once 'controller/RegisterController.php';
 require_once 'model/User.php';
 
 date_default_timezone_set('Europe/Stockholm');

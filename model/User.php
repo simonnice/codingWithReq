@@ -7,6 +7,7 @@ class User {
     private $database;
     private $session;
     private $data = array();
+
     // private $userName;
     // private $password;
     // private $keepMeLoggedIn;
