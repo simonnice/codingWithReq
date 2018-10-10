@@ -71,7 +71,6 @@ class UserController extends MainController {
             'password_err' => '',
             'db_err' => '',
         ];
-
         return $data;
     }
 

@@ -52,8 +52,12 @@ class MainController {
             $this->layoutView->echoHtml(false, $this->responseArray, 'login');
 
         } else {
-
-            $this->layoutView->echoHtml(false, $this->responseArray, 'login');
+            if (isset($_SESSION['user_name'])) {
+                $this->responseArray['db_msg'] = '';
+                $this->layoutView->echoHtml(true, $this->responseArray, 'login');
+            } else {
+                $this->layoutView->echoHtml(false, $this->responseArray, 'login');
+            }
 
         }
 
