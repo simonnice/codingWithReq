@@ -7,83 +7,88 @@ class MainController {
     private $layoutView;
     private $loginView;
     private $registerView;
+    private $dateTimeView;
     private $userController;
-    private $responseArray;
+    private $session;
+    private $db;
 
-    public function __construct($layout, $userC, $login, $register) {
-        $this->layoutView = $layout;
-        $this->loginView = $login;
-        $this->registerView = $register;
-        $this->userController = $userC;
-        $this->responseArray = array();
+    public function __construct() {
+        $this->session = new \model\Session();
+        $this->db = new \model\Database();
+        $this->user = new \model\User($this->db, $this->session);
+
+        //CREATE OBJECTS OF THE VIEWS
+        $this->loginView = new \view\LoginView($this->user);
+        $this->dateTimeView = new \view\DateTimeView();
+        $this->registerView = new \view\RegisterView();
+
+        $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView);
+
+        // CREATE OBJECTS OF THE CONTROLLER
+        $this->userController = new \controller\UserController($this->registerView, $this->loginView, $this->user, $this->session);
     }
 
     public function startApp() {
 
+        $responseArray = array();
         if ($this->loginView->isLoginButtonClicked()) {
 
-            $this->responseArray = $this->userController->loginResponseFromDatabase();
-            if (array_key_exists('db_msg', $this->responseArray)) {
+            $responseArray = $this->userController->loginResponseFromDatabase();
+            if (array_key_exists('db_msg', $responseArray)) {
 
-                $this->layoutView->echoHtml(true, $this->responseArray, 'login');
+                $this->layoutView->echoHtml(true, $responseArray, 'login');
 
             } else {
 
-                $this->layoutView->echoHtml(false, $this->responseArray, 'login');
+                $this->layoutView->echoHtml(false, $responseArray, 'login');
             }
 
         } else if ($this->registerView->registerLinkIsClicked()) {
             if ($this->registerView->isRegisterButtonClicked()) {
 
-                $this->responseArray = $this->userController->registerResponseFromDatabase();
-                if (array_key_exists('db_msg', $this->responseArray)) {
-                    $this->layoutView->echoHtml(false, $this->responseArray, 'login');
+                $responseArray = $this->userController->registerResponseFromDatabase();
+                if (array_key_exists('db_msg', $responseArray)) {
+                    $this->layoutView->echoHtml(false, $responseArray, 'login');
                 } else {
-                    $this->layoutView->echoHtml(false, $this->responseArray, 'register');
+                    $this->layoutView->echoHtml(false, $responseArray, 'register');
                 }
 
             } else {
 
-                $this->layoutView->echoHtml(false, $this->responseArray, 'register');
+                $this->layoutView->echoHtml(false, $responseArray, 'register');
             }
         } else if ($this->loginView->isLogoutButtonClicked()) {
 
-            $this->responseArray = $this->userController->logoutResponse();
-            $this->layoutView->echoHtml(false, $this->responseArray, 'login');
-
+            $responseArray = $this->userController->logoutResponse();
+            $this->layoutView->echoHtml(false, $responseArray, 'login');
         } else {
-            if ($this->userController->isLoggedIn()) {
-                $this->userController->
-                    $this->layoutView->echoHtml(true, $this->responseArray, 'login');
-            } else {
-                $this->layoutView->echoHtml(false, $this->responseArray, 'login');
-            }
-
+            $this->layoutView->echoHtml(false, $responseArray, 'login');
         }
 
     }
+
 }
 
 /*switch ($pageState) {
 case ($this->loginView->isLoginButtonClicked() == true):
-$this->responseArray = $this->userController->loginResponseFromDatabase();
-$this->layoutView->echoHtml(false, $this->responseArray, 'login');
+$responseArray = $this->userController->loginResponseFromDatabase();
+$this->layoutView->echoHtml(false, $responseArray, 'login');
 break;
 
 case ($this->registerView->registerLinkIsClicked() == true);
 if ($this->registerView->isRegisterButtonClicked()) {
-$this->responseArray = $this->userController->registerResponseFromDatabase();
-if (array_key_exists('db_msg', $this->responseArray)) {
-$this->layoutView->echoHtml(false, $this->responseArray, 'login');
+$responseArray = $this->userController->registerResponseFromDatabase();
+if (array_key_exists('db_msg', $responseArray)) {
+$this->layoutView->echoHtml(false, $responseArray, 'login');
 } else {
-$this->layoutView->echoHtml(false, $this->responseArray, 'register');
+$this->layoutView->echoHtml(false, $responseArray, 'register');
 }
 } else {
-$this->layoutView->echoHtml(false, $this->responseArray, 'register');
+$this->layoutView->echoHtml(false, $responseArray, 'register');
 }
 break;
 
 default:
-$this->layoutView->echoHtml(false, $this->responseArray, 'login');
+$this->layoutView->echoHtml(false, $responseArray, 'login');
 break;
 }*/

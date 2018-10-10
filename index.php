@@ -18,19 +18,5 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 //CREATE OBJECTS OF THE MODELS
-$session = new \model\Session();
-$db = new Database;
-$user = new \model\User($db, $session);
-
-//CREATE OBJECTS OF THE VIEWS
-$loginView = new \view\LoginView($user);
-$dateTimeView = new \view\DateTimeView();
-$registerView = new \view\RegisterView();
-
-$layoutView = new \view\LayoutView($dateTimeView, $loginView, $registerView);
-
-// CREATE OBJECTS OF THE CONTROLLER
-$userController = new \controller\UserController($registerView, $loginView, $user, $session);
-$mainController = new \controller\MainController($layoutView, $userController, $loginView, $registerView);
-
+$mainController = new \controller\MainController();
 $mainController->startApp();

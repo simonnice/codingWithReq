@@ -50,9 +50,10 @@ class UserController extends MainController {
         $registerInput = $this->registerInputResponse();
         $validatedData = $this->validatetRegisterFormData($registerInput);
 
-        if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err']) && empty($validatedData['db_err'])) {
+        if (strlen($validatedData) == 0)) {
             $this->user->registerNewUser($validatedData);
-            return $this->user->generateSuccessResponseToView($validatedData);
+            $successfulRegistration = true;
+            return $this->user->generateSuccessResponseToView($successfulRegistration);
 
         } else {
 

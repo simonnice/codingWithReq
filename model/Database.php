@@ -4,6 +4,9 @@
 // This is part of the refactor of CodingWithReq
 // I'm starting with switching to prepared statements
 // Through the use of PDO and a Database class
+namespace model;
+
+use PDO;
 
 class Database {
     private $host = DB_HOST;
