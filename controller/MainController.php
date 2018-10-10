@@ -21,20 +21,20 @@ class MainController {
     public function startApp() {
 
         if ($this->loginView->isLoginButtonClicked()) {
-            echo "This runs if loginbutton is  clicked";
+
             $this->responseArray = $this->userController->loginResponseFromDatabase();
             if (array_key_exists('db_msg', $this->responseArray)) {
-                echo "This runs if login is successeful";
+
                 $this->layoutView->echoHtml(true, $this->responseArray, 'login');
-                print_r($_SESSION);
+
             } else {
-                echo "This runs if login is unsuccesseful";
+
                 $this->layoutView->echoHtml(false, $this->responseArray, 'login');
             }
 
         } else if ($this->registerView->registerLinkIsClicked()) {
             if ($this->registerView->isRegisterButtonClicked()) {
-                echo "This runs if someone registers, first startup";
+
                 $this->responseArray = $this->userController->registerResponseFromDatabase();
                 if (array_key_exists('db_msg', $this->responseArray)) {
                     $this->layoutView->echoHtml(false, $this->responseArray, 'login');
@@ -43,16 +43,16 @@ class MainController {
                 }
 
             } else {
-                echo "This runs if register page is loaded";
+
                 $this->layoutView->echoHtml(false, $this->responseArray, 'register');
             }
         } else if ($this->loginView->isLogoutButtonClicked()) {
-            echo "this runs if logoutbutton is clicked";
+
             $this->responseArray = $this->userController->logoutResponse();
             $this->layoutView->echoHtml(false, $this->responseArray, 'login');
-            print_r($_SESSION);
+
         } else {
-            echo "This runs if nothing is clicked, first startup";
+
             $this->layoutView->echoHtml(false, $this->responseArray, 'login');
 
         }
