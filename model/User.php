@@ -117,9 +117,14 @@ class User {
 
     }
 
-    public function logoutUser($user) {
-        $this->session->destroyCurrentSession($user);
-        $this->data['db_msg'] = "Bye bye!";
+    public function logoutUser() {
+        if ($this->session->isSessionSet()) {
+            $this->session->destroyCurrentSession();
+            $this->data['db_msg'] = "Bye bye!";
+        } else {
+            $this->data['db_msg'] = "";
+        }
+
         return $this->generateSuccessResponseToView($this->data);
     }
 
