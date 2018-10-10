@@ -88,8 +88,6 @@ class User {
 
         $this->data = $userInputLogin;
 
-        //echo $this->data['password'];
-        // Validate name && password
         if (empty($this->data['name'])) {
             $this->data['name_err'] = "Username is missing";
 
@@ -98,7 +96,11 @@ class User {
         } else if (!$this->doesInputUserMatchDbUser($this->data['name'], $this->data['password'])) {
             $this->data['db_err'] = "Wrong name or password";
         } else {
-            $this->data['db_msg'] = "Welcome";
+            if ($this->session->isSessionSet()) {
+                $this->data['db_msg'] = "";
+            } else {
+                $this->data['db_msg'] = "Welcome";
+            }
         }
 
         return $this->data;
@@ -126,22 +128,6 @@ class User {
         }
 
         return $this->generateSuccessResponseToView($this->data);
-    }
-
-    public function hasResponseChanged($response): bool {
-        if (empty($response)) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public function addUserResponse($responseToUser) {
-        $this->data = $responseToUser;
-    }
-
-    public function getResponse() {
-        return $this->data;
     }
 
     public function doesUserExist($userName) {

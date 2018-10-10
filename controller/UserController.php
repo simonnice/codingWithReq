@@ -6,11 +6,13 @@ class UserController extends MainController {
     private $registerView;
     private $loginView;
     private $user;
+    private $session;
 
-    public function __construct($register, $login, $User) {
+    public function __construct($register, $login, $User, $session) {
         $this->registerView = $register;
         $this->loginView = $login;
         $this->user = $User;
+        $this->session = $session;
     }
 
     // Cleans up input from register form and returns it
@@ -101,6 +103,14 @@ class UserController extends MainController {
         $response = $this->user->logoutUser();
         return $this->user->generateSuccessResponseToView($response);
 
+    }
+
+    public function isLoggedIn() {
+        if ($this->session->isSessionSet()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

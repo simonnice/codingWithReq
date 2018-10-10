@@ -30,7 +30,7 @@ $registerView = new \view\RegisterView();
 $layoutView = new \view\LayoutView($dateTimeView, $loginView, $registerView);
 
 // CREATE OBJECTS OF THE CONTROLLER
-$userController = new \controller\UserController($registerView, $loginView, $user);
+$userController = new \controller\UserController($registerView, $loginView, $user, $session);
 $mainController = new \controller\MainController($layoutView, $userController, $loginView, $registerView);
 
 $mainController->startApp();
