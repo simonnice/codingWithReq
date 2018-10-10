@@ -13,7 +13,7 @@ class User {
 
     public function __construct($database, $session) {
         $this->database = $database;
-        $this->session = $session
+        $this->session = $session;
     }
 
     // Will take in $this->data in the form of an array to validate
@@ -95,11 +95,12 @@ class User {
 
         } else if (empty($this->data['password'])) {
             $this->data['password_err'] = "Password is missing";
+        } else if (!$this->doesInputUserMatchDbUser($this->data['name'], $this->data['password'])) {
+            $this->data['db_err'] = "Wrong name or password";
         } else {
-            if (!$this->doesInputUserMatchDbUser($this->data['name'], $this->data['password'])) {
-                $this->data['db_err'] = "Wrong name or password";
-            }
+            $this->data['db_msg'] = "Welcome";
         }
+
         return $this->data;
     }
 
@@ -109,6 +110,8 @@ class User {
         $this->database->bindValuesToPlaceholder(':name', $validatedUser);
 
         $row = $this->database->retrieveSingleObject();
+
+        $this->session->createUserSessions($row);
 
         return $row;
 
@@ -161,5 +164,43 @@ class User {
         } else {
             return false;
         }
+    }
+
+    public function generateErrorResponseToView($arrayToFilter) {
+        $responseArray = array();
+        foreach ($arrayToFilter as $key => $value) {
+
+            if ($key == "name") {
+                $responseArray[$key] = $value;
+            }
+
+            if ($key == "name_err") {
+                $responseArray[$key] = $value;
+            }
+
+            if ($key == "password_err") {
+                $responseArray[$key] = $value;
+            }
+
+            if ($key == "confirm_password_err") {
+                $responseArray[$key] = $value;
+            }
+
+            if ($key == "db_err") {
+                $responseArray[$key] = $value;
+            }
+        }
+        return $responseArray;
+    }
+
+    public function generateSuccessResponseToView($arrayToFilter) {
+        $successArray = array();
+        foreach ($arrayToFilter as $key => $value) {
+            if ($key == "db_msg") {
+                $successArray[$key] = $value;
+            }
+        }
+
+        return $successArray;
     }
 }

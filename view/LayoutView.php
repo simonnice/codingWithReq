@@ -20,8 +20,11 @@ class LayoutView {
         }
     }
 
-    public function linkLoader($view) {
-        if ($view == 'login') {
+    public function linkLoader($view, $isLoggedIn) {
+
+        if ($view == 'login' && $isLoggedIn == true) {
+            return;
+        } else if ($view == 'login') {
             return $this->registerView->generateRegisterLink();
         } else {
             return $this->loginView->generateLoginLink();
@@ -38,7 +41,7 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
-          ' . $this->linkLoader($view) . '
+          ' . $this->linkLoader($view, $isLoggedIn) . '
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
           <div class="container">

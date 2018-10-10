@@ -20,9 +20,18 @@ class MainController {
 
     public function startApp() {
 
+        if (isset($_SESSION['user_name'])) {
+            echo "It is set";
+        }
+
         if ($this->loginView->isLoginButtonClicked()) {
             $this->responseArray = $this->userController->loginResponseFromDatabase();
-            $this->layoutView->echoHtml(false, $this->responseArray, 'login');
+            if (array_key_exists('db_msg', $this->responseArray)) {
+                $this->layoutView->echoHtml(true, $this->responseArray, 'login');
+            } else {
+                $this->layoutView->echoHtml(false, $this->responseArray, 'login');
+            }
+
         } else if ($this->registerView->registerLinkIsClicked()) {
             if ($this->registerView->isRegisterButtonClicked()) {
                 $this->responseArray = $this->userController->registerResponseFromDatabase();

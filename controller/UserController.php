@@ -50,11 +50,11 @@ class UserController extends MainController {
 
         if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err']) && empty($validatedData['db_err'])) {
             $this->user->registerNewUser($validatedData);
-            return $this->produceSuccessArray($validatedData);
+            return $this->user->generateSuccessResponseToView($validatedData);
 
         } else {
 
-            return $this->produceResponseArray($validatedData);
+            return $this->user->generateErrorResponseToView($validatedData);
         }
 
     }
@@ -89,51 +89,13 @@ class UserController extends MainController {
         $validatedData = $this->validatedLoginFormData($loginInput);
 
         if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['db_err'])) {
-            $isLoggedIn = $this->user->loginUser($validatedData['name']);
-            $this->createUserSessions($isLoggedIn);
-            return $validatedData;
+            $this->user->loginUser($validatedData['name']);
+            return $this->user->generateSuccessResponseToView($validatedData);
+
         } else {
-            return $this->produceResponseArray($validatedData);
+            return $this->user->generateErrorResponseToView($validatedData);
         }
 
-    }
-
-    public function produceResponseArray($arrayToFilter) {
-        $responseArray = array();
-        foreach ($arrayToFilter as $key => $value) {
-
-            if ($key == "name") {
-                $responseArray[$key] = $value;
-            }
-
-            if ($key == "name_err") {
-                $responseArray[$key] = $value;
-            }
-
-            if ($key == "password_err") {
-                $responseArray[$key] = $value;
-            }
-
-            if ($key == "confirm_password_err") {
-                $responseArray[$key] = $value;
-            }
-
-            if ($key == "db_err") {
-                $responseArray[$key] = $value;
-            }
-        }
-        return $responseArray;
-    }
-
-    public function produceSuccessArray($arrayToFilter) {
-        $successArray = array();
-        foreach ($arrayToFilter as $key => $value) {
-            if ($key == "db_msg") {
-                $successArray[$key] = $value;
-            }
-        }
-
-        return $successArray;
     }
 
 }

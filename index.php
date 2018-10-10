@@ -3,7 +3,7 @@
 //INCLUDE THE FILES NEEDED...
 require_once 'config/Config.php';
 require_once 'helper/UrlRedirect.php';
-require_once 'helper/SessionHelper.php';
+require_once 'model/Session.php';
 require_once 'model/Database.php';
 require_once 'view/LoginView.php';
 require_once 'view/RegisterView.php';
@@ -16,15 +16,14 @@ require_once 'model/LoginState.php';
 require_once 'model/User.php';
 
 date_default_timezone_set('Europe/Stockholm');
-session_start();
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 //CREATE OBJECTS OF THE MODELS
+$session = new \model\Session();
 $db = new Database;
 $loginState = new \model\LoginState();
-$user = new \model\User($db);
+$user = new \model\User($db, $session);
 
 //CREATE OBJECTS OF THE VIEWS
 $loginView = new \view\LoginView($user);

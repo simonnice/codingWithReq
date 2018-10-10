@@ -28,7 +28,7 @@ class LoginView {
     public function response($isLoggedIn, $message) {
 
         if ($isLoggedIn) {
-            $response = $this->generateLogoutButtonHTML($message);
+            $response = $this->generateLogoutButtonHTML($message['db_msg']);
         } else {
             $messageString = '';
             $nameString = '';
