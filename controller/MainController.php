@@ -48,7 +48,7 @@ class MainController {
         } else if ($this->registerView->registerLinkIsClicked()) {
             if ($this->registerView->isRegisterButtonClicked()) {
 
-                $responseArray = $this->userController->registerResponseFromDatabase();
+                $responseArray = $this->registerController->registerResponseFromDatabase();
                 if (array_key_exists('db_msg', $responseArray)) {
                     $this->layoutView->echoHtml(false, $responseArray, 'login');
                 } else {

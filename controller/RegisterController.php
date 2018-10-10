@@ -7,11 +7,13 @@ class RegisterController extends MainController {
     private $registerView;
     private $user;
     private $session;
+    private $message;
 
-    public function __construct($register, $user, $session) {
+    public function __construct($register, $user, $session, $message) {
         $this->registerView = $register;
         $this->user = $user;
         $this->session = $session;
+        $this->message = $message;
     }
 
     // Cleans up input from register form and returns it
