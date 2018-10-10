@@ -5,13 +5,15 @@ namespace model;
 class User {
 
     private $database;
+    private $session;
     private $data = array();
     // private $userName;
     // private $password;
     // private $keepMeLoggedIn;
 
-    public function __construct($database) {
+    public function __construct($database, $session) {
         $this->database = $database;
+        $this->session = $session
     }
 
     // Will take in $this->data in the form of an array to validate
