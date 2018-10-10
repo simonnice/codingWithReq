@@ -7,7 +7,6 @@ class User {
     private $database;
     private $session;
     private $data = array();
-
     // private $userName;
     // private $password;
     // private $keepMeLoggedIn;
@@ -21,42 +20,40 @@ class User {
     public function validateRegisterInputInForm($userInputRegister) {
 
         $this->data = $userInputRegister;
-        $returnString = "";
 
         $sanitizedName = filter_var($this->data['name'], FILTER_SANITIZE_STRING);
 
         // Validate name && password
         if (empty($this->data['name']) && empty($this->data['password'])) {
-            $returnString .= "Username has too few characters, at least 3 characters. <br>";
-            $returnString .= "Password has too few characters, at least 6 characters.";
+            $this->data['name_err'] = "Username has too few characters, at least 3 characters.";
+            $this->data['password_err'] = "Password has too few characters, at least 6 characters.";
         } else
 
         // Validate password
         if (strlen($this->data['password']) < 6) {
-            $returnString .= "Password has too few characters, at least 6 characters.";
+            $this->data['password_err'] = "Password has too few characters, at least 6 characters.";
         } else
 
         // Validate name
         if (strlen($this->data['name']) < 3) {
-            $returnString .= "Username has too few characters, at least 3 characters.";
+            $this->data['name_err'] = "Username has too few characters, at least 3 characters.";
         } else
 
         // Validate Confirm password && password
         if ($this->data['password'] !== $this->data['confirm_password']) {
-            $returnString .= "Passwords do not match.";
+            $this->data['confirm_password_err'] = "Passwords do not match.";
         } else
 
         // Validate for invalid characters in name
         if ($this->data['name'] != $sanitizedName) {
-            $returnString .= "Username contains invalid characters.";
+            $this->data['name_err'] = "Username contains invalid characters.";
         } else
 
         // Validate if User Exists
         if ($this->doesUserExist($this->data['name'])) {
-            $returnString .= "User exists, pick another username.";
+            $this->data['db_err'] = "User exists, pick another username.";
         }
-
-        return $returnString;
+        return $this->data;
 
     }
 
@@ -164,8 +161,7 @@ class User {
     }
 
     public function generateErrorResponseToView($arrayToFilter) {
-        $messageString = "";
-
+        $responseArray = array();
         foreach ($arrayToFilter as $key => $value) {
 
             if ($key == "name") {
@@ -188,21 +184,11 @@ class User {
                 $responseArray[$key] = $value;
             }
         }
-        return $messageString;
+        return $responseArray;
     }
 
-    public function generateSuccessResponseToView($typeOfMessage) {
-        $successArray = array();
-        foreach ($arrayToFilter as $key => $value) {
-            if ($key == "db_msg") {
-                $successArray[$key] = $value;
-            }
+    public function generateSuccessResponseToView($typeOfSuccess) {
 
-            if ($key == "name") {
-                $successArray[$key] = $value;
-            }
-        }
-
-        return $successArray;
+        return $typeOfSuccess;
     }
 }

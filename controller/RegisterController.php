@@ -2,7 +2,7 @@
 
 namespace controller;
 
-class RegisterController extends MainController {
+class RegisterController {
 
     private $registerView;
     private $user;
@@ -40,7 +40,7 @@ class RegisterController extends MainController {
 
     // returns the response from validation in User Model
 
-    public function validatetRegisterFormData($data) {
+    public function validatedRegisterFormData($data) {
         return $validatedRegisterInput = $this->user->validateRegisterInputInForm($data);
     }
 
@@ -49,16 +49,15 @@ class RegisterController extends MainController {
     public function registerResponseFromDatabase() {
 
         $registerInput = $this->registerInputResponse();
-        $validatedData = $this->validatetRegisterFormData($registerInput);
+        $validatedData = $this->validatedRegisterFormData($registerInput);
 
-        if (strlen($validatedData) == 0) {
+        if (empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['db_err'])) {
             $this->user->registerNewUser($validatedData);
-            $successfulRegistration = true;
-            return $this->user->generateSuccessResponseToView($successfulRegistration);
+            return true;
 
         } else {
 
-            return $this->user->generateErrorResponseToView($validatedData);
+            return $validatedData;
         }
 
     }

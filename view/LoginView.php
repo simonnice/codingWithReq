@@ -30,30 +30,8 @@ class LoginView {
         if ($isLoggedIn) {
             $response = $this->generateLogoutButtonHTML($message['db_msg']);
         } else {
-            $messageString = '';
-            $nameString = '';
-            foreach ($message as $key => $value) {
-                if ($key == 'name_err') {
-                    $messageString .= $value;
-                }
 
-                if ($key == 'db_msg') {
-                    $messageString .= $value;
-                }
-
-                if ($key == 'db_err') {
-                    $messageString .= $value;
-                }
-
-                if ($key == 'password_err') {
-                    $messageString .= $value;
-                }
-
-                if ($key == 'name') {
-                    $nameString = $value;
-                }
-            }
-            $response = $this->generateloginFormHTML($messageString, $nameString);
+            $response = $this->generateloginFormHTML($message);
         }
         return $response;
     }
@@ -84,7 +62,7 @@ class LoginView {
      * @param $message, String output message
      * @return  void, BUT writes to standard output!
      */
-    private function generateLoginFormHTML($message, $name) {
+    private function generateLoginFormHTML($message) {
         return '
 			<form method="post" form action="?">
 				<fieldset>
@@ -92,7 +70,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $name . '" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />

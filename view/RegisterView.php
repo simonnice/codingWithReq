@@ -12,31 +12,7 @@ class RegisterView {
 
     public function responseRegister($message) {
 
-        $messageString = '';
-        $nameString = '';
-        foreach ($message as $key => $value) {
-            if ($key == 'name_err') {
-                $messageString .= $value;
-            }
-
-            if ($key == 'db_err') {
-                $messageString .= $value;
-            }
-
-            if ($key == 'password_err') {
-                $messageString .= $value;
-            }
-
-            if ($key == 'confirm_password_err') {
-                $messageString .= $value;
-            }
-
-            if ($key == 'name') {
-                $nameString = $value;
-            }
-        }
-
-        $response = $this->generateRegisterFormHTML($messageString, $nameString);
+        $response = $this->generateRegisterFormHTML($message);
 
         return $response;
     }
@@ -54,7 +30,7 @@ class RegisterView {
      * @return  void, BUT writes to standard output!
      */
 
-    private function generateRegisterFormHTML($message, $name) {
+    private function generateRegisterFormHTML($message) {
         return '
         <h2>Register new user</h2>
             <form action="?register" form method="post">
@@ -63,7 +39,7 @@ class RegisterView {
                     <p id="' . self::$messageId . '">' . $message . '</p>
 
                     <label for="' . self::$name . '">Username :</label>
-                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="' . $name . '" />
+                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="" />
                     <br>
 
                     <label for="' . self::$password . '">Password :</label>
