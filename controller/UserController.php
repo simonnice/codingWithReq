@@ -46,20 +46,19 @@ class UserController extends MainController {
     // Returns a boolean to determine if registration was successful or not
 
     public function registerResponseFromDatabase() {
-
-        $registerInput = $this->registerInputResponse();
-        $validatedData = $this->validatetRegisterFormData($registerInput);
-
-        if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['confirm_password_err']) && empty($validatedData['db_err'])) {
+        try {
+            $registerInput = $this->registerInputResponse();
+            $validatedData = $this->validatetRegisterFormData($registerInput);
             $this->user->registerNewUser($validatedData);
             return $this->user->generateSuccessResponseToView($validatedData);
-
-        } else {
-
-            return $this->user->generateErrorResponseToView($validatedData);
+            }catch (\Exception $e) {
+                return $e->getMessage();
+            
         }
 
-    }
+      
+
+    
 
     public function loginInputResponse() {
         $sanitizedName = filter_var($this->loginView->getLoginUserName(), FILTER_SANITIZE_STRING);

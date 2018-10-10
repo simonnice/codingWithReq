@@ -25,33 +25,33 @@ class User {
 
         // Validate name && password
         if (empty($this->data['name']) && empty($this->data['password'])) {
-            $this->data['name_err'] = "Username has too few characters, at least 3 characters.";
-            $this->data['password_err'] = "Password has too few characters, at least 6 characters.";
-        } else
+            throw new \Exception("Username has too few characters, at least 3 characters.
+            Password has too few characters, at least 6 characters.");
+        }
 
         // Validate password
         if (strlen($this->data['password']) < 6) {
-            $this->data['password_err'] = "Password has too few characters, at least 6 characters.";
-        } else
+            throw new \Exception("Password has too few characters, at least 6 characters.");
+        }
 
         // Validate name
         if (strlen($this->data['name']) < 3) {
-            $this->data['name_err'] = "Username has too few characters, at least 3 characters.";
-        } else
+            throw new \Exception("Username has too few characters, at least 3 characters.");
+        }
 
         // Validate Confirm password && password
         if ($this->data['password'] !== $this->data['confirm_password']) {
-            $this->data['confirm_password_err'] = "Passwords do not match.";
-        } else
+            throw new \Exception("Passwords do not match.");
+        }
 
         // Validate for invalid characters in name
         if ($this->data['name'] != $sanitizedName) {
-            $this->data['name_err'] = "Username contains invalid characters.";
+            throw new \Exception("Username contains invalid characters.");
         } else
 
         // Validate if User Exists
         if ($this->doesUserExist($this->data['name'])) {
-            $this->data['db_err'] = "User exists, pick another username.";
+            throw new \Exception("User exists, pick another username.");
         } else {
             $this->data['db_msg'] = "Registered new user.";
         }
