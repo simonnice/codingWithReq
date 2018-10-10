@@ -119,6 +119,8 @@ class User {
 
     public function logoutUser($user) {
         $this->session->destroyCurrentSession($user);
+        $this->data['db_msg'] = "Bye bye!";
+        return $this->generateSuccessResponseToView($this->data);
     }
 
     public function hasResponseChanged($response): bool {

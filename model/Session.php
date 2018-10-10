@@ -21,6 +21,7 @@ class Session {
     }
 
     public function destroyCurrentSession($user) {
-        unset($user);
+        session_unset();
+        session_destroy();
     }
 }

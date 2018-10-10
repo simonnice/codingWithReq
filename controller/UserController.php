@@ -99,7 +99,9 @@ class UserController extends MainController {
     }
 
     public function logoutResponse() {
-        $this->user->logoutUser($_SESSION['user_name']);
+        $response = $this->user->logoutUser($_SESSION['user_name']);
+
+        return $this->user->generateSuccessResponseToView($response);
 
     }
 
