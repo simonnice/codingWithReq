@@ -20,14 +20,16 @@ class MainController {
 
     public function startApp() {
 
-        if (isset($_SESSION['user_name'])) {
-            echo "It is set";
-        }
+        print_r($_SESSION);
 
         if ($this->loginView->isLoginButtonClicked()) {
             $this->responseArray = $this->userController->loginResponseFromDatabase();
             if (array_key_exists('db_msg', $this->responseArray)) {
                 $this->layoutView->echoHtml(true, $this->responseArray, 'login');
+                if ($this->loginView->isLogoutButtonClicked()) {
+                    $this->userController->logoutResponse();
+                    $this->layoutView->echoHtml(false, $this->responseArray, 'login');
+                }
             } else {
                 $this->layoutView->echoHtml(false, $this->responseArray, 'login');
             }

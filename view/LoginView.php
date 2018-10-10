@@ -72,7 +72,7 @@ class LoginView {
      */
     private function generateLogoutButtonHTML($message) {
         return '
-			<form  method="post" >
+			<form  method="post" form action="?" >
 				<p id="' . self::$messageId . '">' . $message . '</p>
 				<input type="submit" name="' . self::$logout . '" value="logout"/>
 			</form>

@@ -19,4 +19,8 @@ class Session {
     public function createUserSessions($user) {
         $_SESSION['user_name'] = $user->name;
     }
+
+    public function destroyCurrentSession($user) {
+        unset($user);
+    }
 }

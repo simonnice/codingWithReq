@@ -117,6 +117,10 @@ class User {
 
     }
 
+    public function logoutUser($user) {
+        $this->session->destroyCurrentSession($user);
+    }
+
     public function hasResponseChanged($response): bool {
         if (empty($response)) {
             return false;

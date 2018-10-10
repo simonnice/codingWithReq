@@ -10,9 +10,7 @@ require_once 'view/RegisterView.php';
 require_once 'view/DateTimeView.php';
 require_once 'view/LayoutView.php';
 require_once 'controller/MainController.php';
-require_once 'controller/LoginController.php';
 require_once 'controller/UserController.php';
-require_once 'model/LoginState.php';
 require_once 'model/User.php';
 
 date_default_timezone_set('Europe/Stockholm');
@@ -22,7 +20,6 @@ ini_set('display_errors', 1);
 //CREATE OBJECTS OF THE MODELS
 $session = new \model\Session();
 $db = new Database;
-$loginState = new \model\LoginState();
 $user = new \model\User($db, $session);
 
 //CREATE OBJECTS OF THE VIEWS
@@ -33,7 +30,6 @@ $registerView = new \view\RegisterView();
 $layoutView = new \view\LayoutView($dateTimeView, $loginView, $registerView);
 
 // CREATE OBJECTS OF THE CONTROLLER
-$loginController = new \controller\LoginController($loginState, $loginView);
 $userController = new \controller\UserController($registerView, $loginView, $user);
 $mainController = new \controller\MainController($layoutView, $userController, $loginView, $registerView);
 
