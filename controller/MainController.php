@@ -57,6 +57,7 @@ class MainController {
                         $this->registerView->getRegisterPassword(), $this->registerView->getRegisterRepeatedPassword(), $this->db);
                     $this->registerController->registerResponseFromDatabase($registerInfo);
                     $response = $this->registerView->registerResponse($this->responseMessages::successfulRegistration);
+                    $this->loginView->setRegisteredUserName($registerInfo->getUserName());
                     $this->layoutView->echoHtml(false, $response, 'login');
                 } else {
                     $response = $this->registerView->registerResponse($this->responseMessages::noFeedback);
@@ -64,6 +65,7 @@ class MainController {
                 }
 
             } catch (\Exception $e) {
+                $this->registerView->setUserName($this->registerView->getRegisterUserName());
                 $this->layoutView->echoHtml(false, $e->getMessage(), 'register');
             }
 
@@ -79,8 +81,14 @@ class MainController {
 
         } else {
             // Logic for first path
-            $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
-            $this->layoutView->echoHtml(false, $response, 'login');
+            if ($this->loginController->isLoggedIn()) {
+                $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
+                $this->layoutView->echoHtml(true, $response, 'login');
+            } else {
+                $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
+                $this->layoutView->echoHtml(false, $response, 'login');
+            }
+
         }
 
     }

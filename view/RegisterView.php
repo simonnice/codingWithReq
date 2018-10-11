@@ -10,6 +10,8 @@ class RegisterView {
     private static $messageId = 'RegisterView::Message';
     private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 
+    private $userNameInField = false;
+
     public function responseRegister($message) {
 
         $response = $this->generateRegisterFormHTML($message);
@@ -31,6 +33,13 @@ class RegisterView {
      */
 
     private function generateRegisterFormHTML($message) {
+
+        $user;
+        if ($this->userNameInField) {
+            $user = $this->userNameInField;
+        } else {
+            $user = '';
+        }
         return '
         <h2>Register new user</h2>
             <form action="?register" form method="post">
@@ -39,7 +48,7 @@ class RegisterView {
                     <p id="' . self::$messageId . '">' . $message . '</p>
 
                     <label for="' . self::$name . '">Username :</label>
-                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="" />
+                    <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="' . $user . '" />
                     <br>
 
                     <label for="' . self::$password . '">Password :</label>
@@ -77,6 +86,10 @@ class RegisterView {
 
     public function registerResponse($message) {
         return $this->message = $message;
+    }
+
+    public function setUserName($userName) {
+        $this->userNameInField = $userName;
     }
 
     public function getRegisterUserName() {

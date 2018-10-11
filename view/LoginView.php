@@ -11,10 +11,7 @@ class LoginView {
     private static $keep = 'LoginView::KeepMeLoggedIn';
     private static $messageId = 'LoginView::Message';
 
-    public function __construct() {
-
-    }
-
+    private $userNameInField = false;
     /**
      * Create HTTP response
      *
@@ -60,6 +57,13 @@ class LoginView {
      * @return  void, BUT writes to standard output!
      */
     private function generateLoginFormHTML($message) {
+        $user;
+        if ($this->userNameInField) {
+            $user = $this->userNameInField;
+        } else {
+            $user = '';
+        }
+
         return '
 			<form method="post" form action="?">
 				<fieldset>
@@ -67,7 +71,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . (isset($_POST[self::$name]) ? $_POST[self::$name] : "") . '" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $user . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -96,6 +100,10 @@ class LoginView {
 
             return false;
         }
+    }
+
+    public function setRegisteredUserName($userName) {
+        $this->userNameInField = $userName;
     }
 
     public function doesUserWantToStayLoggedIn() {
