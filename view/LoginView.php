@@ -11,11 +11,8 @@ class LoginView {
     private static $keep = 'LoginView::KeepMeLoggedIn';
     private static $messageId = 'LoginView::Message';
 
-    // Read only access to User model
-    private $userManager;
+    public function __construct() {
 
-    public function __construct(\model\User $toBeViewed) {
-        $this->userManager = $toBeViewed;
     }
 
     /**

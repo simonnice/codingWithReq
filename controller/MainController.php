@@ -13,15 +13,13 @@ class MainController {
     private $session;
     private $db;
     private $responseMessages;
-    private $user;
 
     public function __construct() {
         $this->session = new \model\Session();
-        $this->db = new \model\Database();
-        $this->user = new \model\User($this->db, $this->session);
+        $this->db = new \model\Database($this->session);
 
         //CREATE OBJECTS OF THE VIEWS
-        $this->loginView = new \view\LoginView($this->user);
+        $this->loginView = new \view\LoginView();
         $this->dateTimeView = new \view\DateTimeView();
         $this->registerView = new \view\RegisterView();
         $this->responseMessages = new \view\Response();
@@ -40,14 +38,12 @@ class MainController {
         // Logic for determining paths in LoginView, fix incoming
         if ($this->loginView->isLoginButtonClicked()) {
             try {
-
-            }
-            if ($this->loginController->loginResponseFromDatabase()) {
-                $response = $this->responseMessages::welcomeMessage;
-                $this->layoutView->echoHtml(true, $response, 'login');
-            } else {
-                $response = $this->loginController->loginResponseFromDatabase();
-                $this->layoutView->echoHtml(false, $response, 'login');
+                $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
+                $this->loginController->loginResponseFromDatabase($loginInfo);
+                $successMessage = $this->responseMessages::welcomeMessage;
+                $this->layoutView->echoHtml(true, $successMessage, 'login');
+            } catch (\Exception $e) {
+                $this->layoutView->echoHtml(false, $e->getMessage(), 'login');
             }
 
             // Logic for determining paths in registerView - Fixed to handle new exception logic and Register class
