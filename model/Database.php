@@ -95,6 +95,25 @@ class Database {
         }
     }
 
+    public function doesInputUserMatchDbUser($username, $password) {
+
+        $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+        $this->bindValuesToPlaceholder(':name', $username);
+
+        if ($this->doesUserExist($username)) {
+            $row = $this->retrieveSingleObject();
+            $hashedPassword = $row->password;
+        } else {
+            return false;
+        }
+
+        if (password_verify($password, $hashedPassword)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function registerNewUser($validatedRegisterInput) {
 
         $this->data = $validatedRegisterInput;

@@ -19,15 +19,18 @@ class Login {
         
         if (!$this->db->doesInputUserMatchDbUser($userName, $password)) {
             throw new \Exception("Wrong name or password");
-        } 
-        
-        
-        else {
-            if ($this->session->isSessionSet()) {
-                $this->data['db_msg'] = "";
-            } else {
-                $this->data['db_msg'] = "Welcome";
-            }
         }
+        
+        $this->userName = $userName;
+        $this->password = $password;
+        
+    }
+
+    public function getUserName() {
+        return $this->userName;
+    }
+
+    public function getPassword(){
+        return $this->password;
     }
 }

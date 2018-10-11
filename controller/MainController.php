@@ -8,7 +8,7 @@ class MainController {
     private $loginView;
     private $registerView;
     private $dateTimeView;
-    private $userController;
+    private $loginController;
     private $registerController;
     private $session;
     private $db;
@@ -29,7 +29,7 @@ class MainController {
         $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView);
 
         // CREATE OBJECTS OF THE CONTROLLER
-        $this->userController = new \controller\UserController($this->loginView, $this->user, $this->session, $this->responseMessages);
+        $this->loginController = new \controller\LoginController($this->loginView, $this->user, $this->session, $this->responseMessages);
         $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->responseMessages, $this->db);
     }
 
@@ -39,12 +39,14 @@ class MainController {
 
         // Logic for determining paths in LoginView, fix incoming
         if ($this->loginView->isLoginButtonClicked()) {
+            try {
 
-            if ($this->userController->loginResponseFromDatabase()) {
+            }
+            if ($this->loginController->loginResponseFromDatabase()) {
                 $response = $this->responseMessages::welcomeMessage;
                 $this->layoutView->echoHtml(true, $response, 'login');
             } else {
-                $response = $this->userController->loginResponseFromDatabase();
+                $response = $this->loginController->loginResponseFromDatabase();
                 $this->layoutView->echoHtml(false, $response, 'login');
             }
 
@@ -68,7 +70,7 @@ class MainController {
             // Logic for determining paths Logout
         } else if ($this->loginView->isLogoutButtonClicked()) {
 
-            $responseArray = $this->userController->logoutResponse();
+            $responseArray = $this->loginController->logoutResponse();
             $this->layoutView->echoHtml(false, $responseArray, 'login');
         } else {
             // Logic for first path
@@ -81,13 +83,13 @@ class MainController {
 
 /*switch ($pageState) {
 case ($this->loginView->isLoginButtonClicked() == true):
-$responseArray = $this->userController->loginResponseFromDatabase();
+$responseArray = $this->loginController->loginResponseFromDatabase();
 $this->layoutView->echoHtml(false, $responseArray, 'login');
 break;
 
 case ($this->registerView->registerLinkIsClicked() == true);
 if ($this->registerView->isRegisterButtonClicked()) {
-$responseArray = $this->userController->registerResponseFromDatabase();
+$responseArray = $this->loginController->registerResponseFromDatabase();
 if (array_key_exists('db_msg', $responseArray)) {
 $this->layoutView->echoHtml(false, $responseArray, 'login');
 } else {
