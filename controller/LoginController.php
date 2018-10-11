@@ -1,15 +1,15 @@
 <?php
 namespace controller;
 
-class UserController extends MainController {
+class LoginController extends MainController {
 
     private $loginView;
-    private $user;
+    private $db;
     private $session;
 
-    public function __construct($login, $user, $session) {
+    public function __construct($login, $db, $session) {
         $this->loginView = $login;
-        $this->user = $user;
+        $this->db = $db;
         $this->session = $session;
     }
 
@@ -36,18 +36,9 @@ class UserController extends MainController {
     // IT IS POSSIBLE SINCE USER HAS A DB-CONNECTION, YOU CAN DO THIS IN
     // VALIDATEDLOGINFORMDATA
 
-    public function loginResponseFromDatabase() {
+    public function loginResponseFromDatabase($loginInfo) {
 
-        $loginInput = $this->loginInputResponse();
-        $validatedData = $this->validatedLoginFormData($loginInput);
-
-        if (empty($validatedData['name_err']) && empty($validatedData['password_err']) && empty($validatedData['db_err'])) {
-            $this->user->loginUser($validatedData['name']);
-            return true;
-
-        } else {
-            return $this->user->generateErrorResponseToView($validatedData);
-        }
+        $this->db->loginUser($loginInfo);
 
     }
 

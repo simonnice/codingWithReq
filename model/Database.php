@@ -17,15 +17,16 @@ class Database {
     private $pdoInstance;
     private $stmt;
     private $error;
+    private $session;
 
-    public function __construct() {
+    public function __construct($session) {
         // Set Data Source Name
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
         $options = array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         );
-
+        $this->session = $session;
         try {
             $this->pdoInstance = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (PDOException $e) {
@@ -135,6 +136,19 @@ class Database {
         } else {
             return false;
         }
+
+    }
+
+    public function loginUser($validatedUser) {
+
+        $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+        $this->bindValuesToPlaceholder(':name', $validatedUser);
+
+        $row = $this->retrieveSingleObject();
+
+        $this->session->createUserSessions($row);
+
+        return $row;
 
     }
 

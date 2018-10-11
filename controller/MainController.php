@@ -29,8 +29,8 @@ class MainController {
         $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView);
 
         // CREATE OBJECTS OF THE CONTROLLER
-        $this->loginController = new \controller\LoginController($this->loginView, $this->user, $this->session, $this->responseMessages);
-        $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->responseMessages, $this->db);
+        $this->loginController = new \controller\LoginController($this->loginView, $this->db, $this->session);
+        $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->db);
     }
 
     public function startApp() {
