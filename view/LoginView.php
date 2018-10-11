@@ -116,7 +116,7 @@ class LoginView {
         }
     }
 
-    public function returnedStringToOutput($message) {
+    public function responseLogin($message) {
         $this->message = $message;
     }
 

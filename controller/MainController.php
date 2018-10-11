@@ -33,15 +33,13 @@ class MainController {
 
     public function startApp() {
 
-        $response = '';
-
         // Logic for determining paths in LoginView, fix incoming
         if ($this->loginView->isLoginButtonClicked()) {
             try {
                 $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
                 $this->loginController->loginResponseFromDatabase($loginInfo);
-                $successMessage = $this->responseMessages::welcomeMessage;
-                $this->layoutView->echoHtml(true, $successMessage, 'login');
+                $response = $this->loginView->loginResponse($this->responseMessages::welcomeMessage);
+                $this->layoutView->echoHtml(true, $response, 'login');
             } catch (\Exception $e) {
                 $this->layoutView->echoHtml(false, $e->getMessage(), 'login');
             }
@@ -53,8 +51,8 @@ class MainController {
                     $registerInfo = new \model\Register($this->registerView->getRegisterUserName(),
                         $this->registerView->getRegisterPassword(), $this->registerView->getRegisterRepeatedPassword(), $this->db);
                     $this->registerController->registerResponseFromDatabase($registerInfo);
-                    $successMessage = $this->responseMessages::successfulRegistration;
-                    $this->layoutView->echoHtml(false, $successMessage, 'login');
+                    $response = $this->responseMessages::successfulRegistration;
+                    $this->layoutView->echoHtml(false, $response, 'login');
                 } else {
                     $this->layoutView->echoHtml(false, $response, 'register');
                 }
@@ -65,9 +63,13 @@ class MainController {
 
             // Logic for determining paths Logout
         } else if ($this->loginView->isLogoutButtonClicked()) {
+            if ($this->loginController->logoutResponse()) {
+                $response = $this->responseMessages::bye;
+                $this->layoutView->echoHtml(false, $response, 'login');
+            } else {
+                $this->layoutView->echoHtml(false, $response, 'login');
+            }
 
-            $responseArray = $this->loginController->logoutResponse();
-            $this->layoutView->echoHtml(false, $responseArray, 'login');
         } else {
             // Logic for first path
             $this->layoutView->echoHtml(false, $response, 'login');
