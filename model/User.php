@@ -20,42 +20,41 @@ class User {
     public function validateRegisterInputInForm($userInputRegister) {
 
         $this->data = $userInputRegister;
-        $returnString = "";
 
         $sanitizedName = filter_var($this->data['name'], FILTER_SANITIZE_STRING);
 
         // Validate name && password
         if (empty($this->data['name']) && empty($this->data['password'])) {
-            $returnString .= "Username has too few characters, at least 3 characters. <br>";
-            $returnString .= "Password has too few characters, at least 6 characters.";
-        } else
+            throw new \Exception("Username has too few characters, at least 3 characters.
+            Password has too few characters, at least 6 characters.");
+        }
 
         // Validate password
         if (strlen($this->data['password']) < 6) {
-            $returnString .= "Password has too few characters, at least 6 characters.";
-        } else
+            throw new \Exception("Password has too few characters, at least 6 characters.");
+        }
 
         // Validate name
         if (strlen($this->data['name']) < 3) {
-            $returnString .= "Username has too few characters, at least 3 characters.";
-        } else
+            throw new \Exception("Username has too few characters, at least 3 characters.");
+        }
 
         // Validate Confirm password && password
         if ($this->data['password'] !== $this->data['confirm_password']) {
-            $returnString .= "Passwords do not match.";
-        } else
+            throw new \Exception("Passwords do not match.");
+        }
 
         // Validate for invalid characters in name
         if ($this->data['name'] != $sanitizedName) {
-            $returnString .= "Username contains invalid characters.";
-        } else
+            throw new \Exception("Username contains invalid characters.");
+        }
 
         // Validate if User Exists
         if ($this->doesUserExist($this->data['name'])) {
-            $returnString .= "User exists, pick another username.";
+            throw new \Exception("User exists, pick another username.");
         }
 
-        return $returnString;
+        return $this->data;
 
     }
 
@@ -163,13 +162,8 @@ class User {
     }
 
     public function generateErrorResponseToView($arrayToFilter) {
-        $messageString = "";
-
+        $responseString = '';
         foreach ($arrayToFilter as $key => $value) {
-
-            if ($key == "name") {
-                $responseArray[$key] = $value;
-            }
 
             if ($key == "name_err") {
                 $responseArray[$key] = $value;
@@ -187,21 +181,11 @@ class User {
                 $responseArray[$key] = $value;
             }
         }
-        return $messageString;
+        return $responseArray;
     }
 
-    public function generateSuccessResponseToView($typeOfMessage) {
-        $successArray = array();
-        foreach ($arrayToFilter as $key => $value) {
-            if ($key == "db_msg") {
-                $successArray[$key] = $value;
-            }
+    public function generateSuccessResponseToView($typeOfSuccess) {
 
-            if ($key == "name") {
-                $successArray[$key] = $value;
-            }
-        }
-
-        return $successArray;
+        return $typeOfSuccess;
     }
 }
