@@ -63,21 +63,21 @@ class User {
         $this->data = $validatedRegisterInput;
 
         // Hashing password
-        $this->data['password'] = password_hash($this->data['password'], PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($this->data->getPassword(), PASSWORD_DEFAULT);
 
         // Register the user
         $this->database->prepareStatementWithQuerytoDb('INSERT INTO user (name, password) VALUES (:name, :password)');
 
         // Bind the values
-        $this->database->bindValuesToPlaceholder(':name', $this->data['name']);
-        $this->database->bindValuesToPlaceholder(':password', $this->data['password']);
+        $this->database->bindValuesToPlaceholder(':name', $this->data->getUserName());
+        $this->database->bindValuesToPlaceholder(':password', $hashedPassword);
 
         // Execute the statement
 
         if ($this->database->executeStatement()) {
             return true;
         } else {
-            throw new \Exception();
+            return false;
         }
 
     }

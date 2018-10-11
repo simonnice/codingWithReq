@@ -5,15 +5,15 @@ namespace controller;
 class RegisterController {
 
     private $registerView;
-    private $user;
     private $session;
     private $message;
+    private $user;
 
-    public function __construct($register, $user, $session, $message) {
-        $this->registerView = $register;
-        $this->user = $user;
+    public function __construct($registerView, $session, $message, $user) {
+        $this->registerView = $registerView;
         $this->session = $session;
         $this->message = $message;
+        $this->user = $user;
     }
 
     // Cleans up input from register form and returns it
@@ -41,17 +41,9 @@ class RegisterController {
 
     // Returns a boolean to determine if registration was successful or not
 
-    public function registerResponseFromDatabase() {
+    public function registerResponseFromDatabase($registerinfo) {
 
-        try {
-            $registerInput = $this->registerInputResponse();
-            $validatedData = $this->validatedRegisterFormData($registerInput);
-            $this->user->registerNewUser($validatedData);
-            return true;
-
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
+        $this->user->registerNewUser($registerinfo);
 
     }
 

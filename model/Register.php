@@ -8,12 +8,14 @@ class Register {
     private $passwordRepeat;
     private $db;
 
-    public function construct($userName, $password, $passwordRepeat, $db) {
+    public function __construct($userName, $password, $passwordRepeat, $db) {
 
         $this->db = $db;
 
+        $sanitizedName = filter_var($userName, FILTER_SANITIZE_STRING);
+
         // Validate name && password
-        if (empty($userName) && empty($password)) {
+        if (!$userName && !$password && !$passwordRepeat) {
             throw new \Exception("Username has too few characters, at least 3 characters.
             Password has too few characters, at least 6 characters.");
         }

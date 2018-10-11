@@ -13,6 +13,7 @@ class MainController {
     private $session;
     private $db;
     private $responseMessages;
+    private $user;
 
     public function __construct() {
         $this->session = new \model\Session();
@@ -29,7 +30,7 @@ class MainController {
 
         // CREATE OBJECTS OF THE CONTROLLER
         $this->userController = new \controller\UserController($this->loginView, $this->user, $this->session, $this->responseMessages);
-        $this->registerController = new \controller\RegisterController($this->registerView, $this->user, $this->session, $this->responseMessages);
+        $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->responseMessages, $this->user);
     }
 
     public function startApp() {
@@ -46,20 +47,23 @@ class MainController {
             }
 
         } else if ($this->registerView->registerLinkIsClicked()) {
-            if ($this->registerView->isRegisterButtonClicked()) {
-
-                if ($this->registerController->registerResponseFromDatabase() === true) {
-                    $response = $this->responseMessages::successfulRegistration;
-                    $this->layoutView->echoHtml(false, $response, 'login');
+            try {
+                if ($this->registerView->isRegisterButtonClicked()) {
+                    $registerInfo = new \model\Register($this->registerView->getRegisterUserName(),
+                        $this->registerView->getRegisterPassword(), $this->registerView->getRegisterRepeatedPassword(), $this->db);
+                    $this->registerController->registerResponseFromDatabase($registerInfo);
+                    $successMessage = $this->responseMessages::successfulRegistration;
+                    $this->layoutView->echoHtml(false, $successMessage, 'login');
                 } else {
-                    $response = $this->registerController->registerResponseFromDatabase();
+                    echo "This runs derp";
                     $this->layoutView->echoHtml(false, $response, 'register');
                 }
 
-            } else {
-
-                $this->layoutView->echoHtml(false, $response, 'register');
+            } catch (\Exception $e) {
+                echo "this runs";
+                $this->layoutView->echoHtml(false, $e->getMessage(), 'register');
             }
+
         } else if ($this->loginView->isLogoutButtonClicked()) {
 
             $responseArray = $this->userController->logoutResponse();
