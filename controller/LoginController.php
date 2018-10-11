@@ -38,13 +38,18 @@ class LoginController extends MainController {
 
     public function loginResponseFromDatabase($loginInfo) {
 
+        var_dump($loginInfo);
         $this->db->loginUser($loginInfo);
 
     }
 
     public function logoutResponse() {
-        $response = $this->user->logoutUser();
-        return $this->user->generateSuccessResponseToView($response);
+        $response = $this->db->logoutUser();
+        if ($response) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

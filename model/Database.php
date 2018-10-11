@@ -142,7 +142,7 @@ class Database {
     public function loginUser($validatedUser) {
 
         $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
-        $this->bindValuesToPlaceholder(':name', $validatedUser);
+        $this->bindValuesToPlaceholder(':name', $validatedUser->getUserName());
 
         $row = $this->retrieveSingleObject();
 
@@ -150,6 +150,15 @@ class Database {
 
         return $row;
 
+    }
+
+    public function logoutUser() {
+        if ($this->session->isSessionSet()) {
+            $this->session->destroyCurrentSession();
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
