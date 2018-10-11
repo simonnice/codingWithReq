@@ -16,8 +16,8 @@ class Session {
         session_start();
     }
 
-    public function createUserSessions($user) {
-        $_SESSION['user_name'] = $user->name;
+    public function createUserSession($user) {
+        $_SESSION['user_name'] = $user;
     }
 
     public function destroyCurrentSession() {

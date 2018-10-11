@@ -37,9 +37,14 @@ class MainController {
         if ($this->loginView->isLoginButtonClicked()) {
             try {
                 $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
-                $this->loginController->loginResponseFromDatabase($loginInfo);
-                $response = $this->loginView->loginResponse($this->responseMessages::welcomeMessage);
-                $this->layoutView->echoHtml(true, $response, 'login');
+                if ($this->loginController->loginStatus($loginInfo)) {
+                    $response = $this->loginView->loginResponse($this->responseMessages::welcomeMessage);
+                    $this->layoutView->echoHtml(true, $response, 'login');
+                } else {
+                    $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
+                    $this->layoutView->echoHtml(true, $response, 'login');
+                }
+
             } catch (\Exception $e) {
                 $this->layoutView->echoHtml(false, $e->getMessage(), 'login');
             }
@@ -84,7 +89,7 @@ class MainController {
 
 /*switch ($pageState) {
 case ($this->loginView->isLoginButtonClicked() == true):
-$responseArray = $this->loginController->loginResponseFromDatabase();
+$responseArray = $this->loginController->loginStatus();
 $this->layoutView->echoHtml(false, $responseArray, 'login');
 break;
 

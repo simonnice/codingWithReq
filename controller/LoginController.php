@@ -36,10 +36,13 @@ class LoginController extends MainController {
     // IT IS POSSIBLE SINCE USER HAS A DB-CONNECTION, YOU CAN DO THIS IN
     // VALIDATEDLOGINFORMDATA
 
-    public function loginResponseFromDatabase($loginInfo) {
-
-        $this->db->loginUser($loginInfo);
-
+    public function loginStatus($loginInfo) {
+        if (!$this->session->isSessionSet()) {
+            $this->session->createUserSession($loginInfo->getUserName());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function logoutResponse() {
