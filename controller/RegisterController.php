@@ -27,11 +27,6 @@ class RegisterController {
             'name' => trim($sanitizedName),
             'password' => trim($sanitizedPassword),
             'confirm_password' => trim($sanitizedRepeatPassword),
-            'db_msg' => '',
-            'name_err' => '',
-            'password_err' => '',
-            'confirm_password_err' => '',
-            'db_err' => '',
         ];
 
         return $data;
@@ -48,16 +43,14 @@ class RegisterController {
 
     public function registerResponseFromDatabase() {
 
-        $registerInput = $this->registerInputResponse();
-        $validatedData = $this->validatedRegisterFormData($registerInput);
-
-        if (empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['db_err'])) {
+        try {
+            $registerInput = $this->registerInputResponse();
+            $validatedData = $this->validatedRegisterFormData($registerInput);
             $this->user->registerNewUser($validatedData);
             return true;
 
-        } else {
-
-            return $validatedData;
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
 
     }

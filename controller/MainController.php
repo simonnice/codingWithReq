@@ -37,25 +37,23 @@ class MainController {
         $response = '';
 
         if ($this->loginView->isLoginButtonClicked()) {
-
-            $responseArray = $this->userController->loginResponseFromDatabase();
-            if (array_key_exists('db_msg', $responseArray)) {
-
-                $this->layoutView->echoHtml(true, $responseArray, 'login');
-
+            if ($this->userController->loginResponseFromDatabase()) {
+                $response = $this->responseMessages::welcomeMessage;
+                $this->layoutView->echoHtml(true, $response, 'login');
             } else {
-
-                $this->layoutView->echoHtml(false, $responseArray, 'login');
+                $response = $this->userController->loginResponseFromDatabase();
+                $this->layoutView->echoHtml(false, $response, 'login');
             }
 
         } else if ($this->registerView->registerLinkIsClicked()) {
             if ($this->registerView->isRegisterButtonClicked()) {
 
-                if ($this->registerController->registerResponseFromDatabase()) {
+                if ($this->registerController->registerResponseFromDatabase() === true) {
                     $response = $this->responseMessages::successfulRegistration;
                     $this->layoutView->echoHtml(false, $response, 'login');
                 } else {
-                    $this->layoutView->echoHtml(false, $responseArray, 'register');
+                    $response = $this->registerController->registerResponseFromDatabase();
+                    $this->layoutView->echoHtml(false, $response, 'register');
                 }
 
             } else {

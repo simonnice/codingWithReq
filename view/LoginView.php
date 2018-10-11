@@ -28,7 +28,7 @@ class LoginView {
     public function response($isLoggedIn, $message) {
 
         if ($isLoggedIn) {
-            $response = $this->generateLogoutButtonHTML($message['db_msg']);
+            $response = $this->generateLogoutButtonHTML($message);
         } else {
 
             $response = $this->generateloginFormHTML($message);
@@ -70,7 +70,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . (isset($_POST[self::$name]) ? $_POST[self::$name] : "") . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
