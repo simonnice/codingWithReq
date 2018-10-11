@@ -128,20 +128,6 @@ class User {
         return $this->generateSuccessResponseToView($this->data);
     }
 
-    public function doesUserExist($userName) {
-        $this->database->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
-
-        $this->database->bindValuesToPlaceholder(':name', $userName);
-
-        $row = $this->database->retrieveSingleObject();
-
-        if ($this->database->checkIfEntryExists() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function doesInputUserMatchDbUser($username, $password) {
 
         $this->database->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');

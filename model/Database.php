@@ -81,4 +81,18 @@ class Database {
         return $this->stmt->rowCount();
     }
 
+    public function doesUserExist($userName) {
+        $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+
+        $this->bindValuesToPlaceholder(':name', $userName);
+
+        $row = $this->retrieveSingleObject();
+
+        if ($this->checkIfEntryExists() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
