@@ -38,7 +38,6 @@ class LoginController extends MainController {
 
     public function loginResponseFromDatabase($loginInfo) {
 
-        var_dump($loginInfo);
         $this->db->loginUser($loginInfo);
 
     }

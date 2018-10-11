@@ -116,8 +116,8 @@ class LoginView {
         }
     }
 
-    public function responseLogin($message) {
-        $this->message = $message;
+    public function loginResponse($message) {
+        return $this->message = $message;
     }
 
     //CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES

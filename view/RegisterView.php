@@ -75,6 +75,10 @@ class RegisterView {
         }
     }
 
+    public function registerResponse($message) {
+        return $this->message = $message;
+    }
+
     public function getRegisterUserName() {
         return $_POST[self::$name];
     }

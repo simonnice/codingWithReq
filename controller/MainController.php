@@ -51,9 +51,10 @@ class MainController {
                     $registerInfo = new \model\Register($this->registerView->getRegisterUserName(),
                         $this->registerView->getRegisterPassword(), $this->registerView->getRegisterRepeatedPassword(), $this->db);
                     $this->registerController->registerResponseFromDatabase($registerInfo);
-                    $response = $this->responseMessages::successfulRegistration;
+                    $response = $this->registerView->registerResponse($this->responseMessages::successfulRegistration);
                     $this->layoutView->echoHtml(false, $response, 'login');
                 } else {
+                    $response = $this->registerView->registerResponse($this->responseMessages::noFeedback);
                     $this->layoutView->echoHtml(false, $response, 'register');
                 }
 
@@ -64,14 +65,16 @@ class MainController {
             // Logic for determining paths Logout
         } else if ($this->loginView->isLogoutButtonClicked()) {
             if ($this->loginController->logoutResponse()) {
-                $response = $this->responseMessages::bye;
+                $response = $this->loginView->loginResponse($this->responseMessages::bye);
                 $this->layoutView->echoHtml(false, $response, 'login');
             } else {
+                $response = $this->registerView->registerResponse($this->responseMessages::noFeedback);
                 $this->layoutView->echoHtml(false, $response, 'login');
             }
 
         } else {
             // Logic for first path
+            $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
             $this->layoutView->echoHtml(false, $response, 'login');
         }
 
