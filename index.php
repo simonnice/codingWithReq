@@ -2,7 +2,6 @@
 
 //INCLUDE THE FILES NEEDED...
 require_once 'config/Config.php';
-require_once 'helper/UrlRedirect.php';
 require_once 'model/Session.php';
 require_once 'model/Database.php';
 require_once 'model/Register.php';
@@ -15,7 +14,6 @@ require_once 'view/Response.php';
 require_once 'controller/MainController.php';
 require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
-require_once 'model/User.php';
 
 date_default_timezone_set('Europe/Stockholm');
 error_reporting(E_ALL);

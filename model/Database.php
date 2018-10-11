@@ -139,28 +139,4 @@ class Database {
 
     }
 
-    /* public function loginUser($validatedUser) {
-
-    $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
-    $this->bindValuesToPlaceholder(':name', $validatedUser->getUserName());
-
-    $row = $this->retrieveSingleObject();
-
-    if(!$this->session->isSessionSet(){
-    $this->session->createUserSessions($row);
-    })
-
-    return $row;
-
-    }*/
-
-    public function logoutUser() {
-        if ($this->session->isSessionSet()) {
-            $this->session->destroyCurrentSession();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }

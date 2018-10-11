@@ -33,7 +33,7 @@ class MainController {
 
     public function startApp() {
 
-        // Logic for determining paths in LoginView, fix incoming
+        // Logic for determining paths in LoginView - Fixed to handle new exception logic and Register class
         if ($this->loginView->isLoginButtonClicked()) {
             try {
                 $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
