@@ -95,4 +95,28 @@ class Database {
         }
     }
 
+    public function registerNewUser($validatedRegisterInput) {
+
+        $this->data = $validatedRegisterInput;
+
+        // Hashing password
+        $hashedPassword = password_hash($this->data->getPassword(), PASSWORD_DEFAULT);
+
+        // Register the user
+        $this->prepareStatementWithQuerytoDb('INSERT INTO user (name, password) VALUES (:name, :password)');
+
+        // Bind the values
+        $this->bindValuesToPlaceholder(':name', $this->data->getUserName());
+        $this->bindValuesToPlaceholder(':password', $hashedPassword);
+
+        // Execute the statement
+
+        if ($this->executeStatement()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }

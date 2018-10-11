@@ -30,14 +30,16 @@ class MainController {
 
         // CREATE OBJECTS OF THE CONTROLLER
         $this->userController = new \controller\UserController($this->loginView, $this->user, $this->session, $this->responseMessages);
-        $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->responseMessages, $this->user);
+        $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->responseMessages, $this->db);
     }
 
     public function startApp() {
 
         $response = '';
 
+        // Logic for determining paths in LoginView, fix incoming
         if ($this->loginView->isLoginButtonClicked()) {
+
             if ($this->userController->loginResponseFromDatabase()) {
                 $response = $this->responseMessages::welcomeMessage;
                 $this->layoutView->echoHtml(true, $response, 'login');
@@ -46,6 +48,7 @@ class MainController {
                 $this->layoutView->echoHtml(false, $response, 'login');
             }
 
+            // Logic for determining paths in registerView - Fixed to handle new exception logic and Register class
         } else if ($this->registerView->registerLinkIsClicked()) {
             try {
                 if ($this->registerView->isRegisterButtonClicked()) {
@@ -55,20 +58,20 @@ class MainController {
                     $successMessage = $this->responseMessages::successfulRegistration;
                     $this->layoutView->echoHtml(false, $successMessage, 'login');
                 } else {
-                    echo "This runs derp";
                     $this->layoutView->echoHtml(false, $response, 'register');
                 }
 
             } catch (\Exception $e) {
-                echo "this runs";
                 $this->layoutView->echoHtml(false, $e->getMessage(), 'register');
             }
 
+            // Logic for determining paths Logout
         } else if ($this->loginView->isLogoutButtonClicked()) {
 
             $responseArray = $this->userController->logoutResponse();
             $this->layoutView->echoHtml(false, $responseArray, 'login');
         } else {
+            // Logic for first path
             $this->layoutView->echoHtml(false, $response, 'login');
         }
 

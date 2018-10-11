@@ -7,13 +7,14 @@ class RegisterController {
     private $registerView;
     private $session;
     private $message;
-    private $user;
+    private $db;
 
-    public function __construct($registerView, $session, $message, $user) {
+    public function __construct($registerView, $session, $message, $db) {
         $this->registerView = $registerView;
         $this->session = $session;
         $this->message = $message;
-        $this->user = $user;
+        $this->db = $db;
+
     }
 
     // Cleans up input from register form and returns it
@@ -33,17 +34,9 @@ class RegisterController {
 
     }
 
-    // returns the response from validation in User Model
-
-    public function validatedRegisterFormData($data) {
-        return $validatedRegisterInput = $this->user->validateRegisterInputInForm($data);
-    }
-
-    // Returns a boolean to determine if registration was successful or not
-
     public function registerResponseFromDatabase($registerinfo) {
 
-        $this->user->registerNewUser($registerinfo);
+        $this->db->registerNewUser($registerinfo);
 
     }
 

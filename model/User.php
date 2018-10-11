@@ -17,6 +17,7 @@ class User {
     }
 
     // Will take in $this->data in the form of an array to validate
+    // DEPRECATED WHEN REGISTER CLASS CHECKS FOR ERRORS IN INPUT
     public function validateRegisterInputInForm($userInputRegister) {
 
         $this->data = $userInputRegister;
@@ -58,6 +59,7 @@ class User {
 
     }
 
+    // DATABASE LOGIC PERHAPS, MOVE TO DATBASE
     public function registerNewUser($validatedRegisterInput) {
 
         $this->data = $validatedRegisterInput;
