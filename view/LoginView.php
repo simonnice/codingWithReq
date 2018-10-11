@@ -60,6 +60,8 @@ class LoginView {
         $user;
         if ($this->userNameInField) {
             $user = $this->userNameInField;
+        } else if (isset($_POST[self::$name])) {
+            $user = $this->getLoginUserName();
         } else {
             $user = '';
         }

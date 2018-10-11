@@ -46,6 +46,7 @@ class MainController {
                 }
 
             } catch (\Exception $e) {
+                $this->loginView->setRegisteredUserName($this->loginView->getLoginUserName());
                 $this->layoutView->echoHtml(false, $e->getMessage(), 'login');
             }
 
