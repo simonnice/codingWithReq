@@ -11,8 +11,9 @@ class Register {
     public function construct($userName, $password, $passwordRepeat, $db) {
 
         $this->db = $db;
+
         // Validate name && password
-        if (empty($userName) && empty($password])) {
+        if (empty($userName) && empty($password)) {
             throw new \Exception("Username has too few characters, at least 3 characters.
             Password has too few characters, at least 6 characters.");
         }
@@ -28,7 +29,7 @@ class Register {
         }
 
         // Validate Confirm password && password
-        if ($password !== $passwordRepeat]) {
+        if ($password !== $passwordRepeat) {
             throw new \Exception("Passwords do not match.");
         }
 
@@ -41,5 +42,17 @@ class Register {
         if ($this->db->doesUserExist($userName)) {
             throw new \Exception("User exists, pick another username.");
         }
+
+        $this->userName = $userName;
+        $this->password = $password;
+        $this->passwordRepeat = $passwordRepeat;
+    }
+
+    public function getUserName(): string {
+        return $this->userName;
+    }
+
+    public function getPassword(): string {
+        return $this->password;
     }
 }
