@@ -15,7 +15,7 @@ class RegisterController {
 
     }
 
-    public function registerResponseFromDatabase($registerinfo) {
+    public function sendRegisterInfoToDb($registerinfo) {
 
         $this->db->registerNewUser($registerinfo);
 

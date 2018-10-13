@@ -56,7 +56,7 @@ class MainController {
                 if ($this->registerView->isRegisterButtonClicked()) {
                     $registerInfo = new \model\Register($this->registerView->getRegisterUserName(),
                         $this->registerView->getRegisterPassword(), $this->registerView->getRegisterRepeatedPassword(), $this->db);
-                    $this->registerController->registerResponseFromDatabase($registerInfo);
+                    $this->registerController->sendRegisterInfoToDb($registerInfo);
                     $response = $this->registerView->registerResponse($this->responseMessages::successfulRegistration);
                     $this->loginView->setRegisteredUserName($registerInfo->getUserName());
                     $this->layoutView->echoHtml(false, $response, 'login');
