@@ -13,36 +13,37 @@ class Cookie {
     }
 
     public function createCookie() {
-      return setCookie($this->name, $this->getValue())
+        return setCookie($this->getCookieName(), $this->getValue(), $this->getCookieTime());
+    }
+
+    public function deleteCookie() {
+        return setCookie($this->name, '', time() - 3600);
     }
 
     public function setCookieName($name) {
-      $this->name = $name;
+        $this->name = $name;
     }
 
     public function getCookieName() {
-      return $this->name;
+        return $this->name;
     }
 
     public function setCookieTime($time) {
-      $date = new DateTime();
-      $date->modify($time);
-      $this->time = $date->getTimeStamp();
+        $date = new DateTime();
+        $date->modify($time);
+        $this->time = $date->getTimeStamp();
     }
 
     public function getCookieTime() {
-      return $this->time;
+        return $this->time;
     }
 
     public function setCookieValue($value) {
-      $this->value = $value;
+        $this->value = $value;
     }
 
     public function getCookieValue() {
-      return $this->value;
+        return $this->value;
     }
-
-
-
 
 }
