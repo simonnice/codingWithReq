@@ -46,4 +46,13 @@ class Cookie {
         return $this->value;
     }
 
+    public function isCookieSet($name): bool {
+      if (isset($_COOKIE[$this->getCookieName($name)]) {
+        return true;
+      } else {
+        return false;
+      }
+
+    }
+
 }

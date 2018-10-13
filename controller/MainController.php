@@ -39,13 +39,14 @@ class MainController {
         if ($this->loginView->isLoginButtonClicked()) {
             try {
                 $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
-                $this->loginController->login($loginInfo);
                 if ($this->loginController->loggedInWithSession($loginInfo)) {
-                    $response = $this->loginView->loginResponse($this->responseMessages::welcomeMessage);
-                    $this->layoutView->echoHtml(true, $response, 'login');
-                } else {
                     $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
                     $this->layoutView->echoHtml(true, $response, 'login');
+                } else {
+                    $this->loginController->login($loginInfo);
+                    $response = $this->loginView->loginResponse($this->responseMessages::welcomeMessage);
+                    $this->layoutView->echoHtml(true, $response, 'login');
+
                 }
 
             } catch (\Exception $e) {
