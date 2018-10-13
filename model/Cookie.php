@@ -24,10 +24,22 @@ class Cookie {
       return $this->name;
     }
 
-    public function setTime($time) {
+    public function setCookieTime($time) {
       $date = new DateTime();
       $date->modify($time);
       $this->time = $date->getTimeStamp();
+    }
+
+    public function getCookieTime() {
+      return $this->time;
+    }
+
+    public function setCookieValue($value) {
+      $this->value = $value;
+    }
+
+    public function getCookieValue() {
+      return $this->value;
     }
 
 
