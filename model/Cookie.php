@@ -24,6 +24,12 @@ class Cookie {
       return $this->name;
     }
 
+    public function setTime($time) {
+      $date = new DateTime();
+      $date->modify($time);
+      $this->time = $date->getTimeStamp();
+    }
+
 
 
 
