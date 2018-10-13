@@ -89,7 +89,11 @@ class MainController {
 
         } else {
             // Logic for first path
-            if ($this->loginController->isLoggedIn()) {
+
+            if ($this->loginController->loggedInWithCookie()) {
+                $response = $this->loginView->loginResponse($this->responseMessages::welcomeCookie);
+                $this->layoutView->echoHtml(true, $response, 'login');
+            } else if ($this->loginController->isLoggedIn()) {
                 $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
                 $this->layoutView->echoHtml(true, $response, 'login');
             } else {
