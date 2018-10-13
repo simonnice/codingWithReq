@@ -39,9 +39,15 @@ class MainController {
         if ($this->loginView->isLoginButtonClicked()) {
             try {
                 $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
-                if ($this->loginController->loggedInWithCookie()) {
-                    $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
-                    $this->layoutView->echoHtml(true, $response, 'login');
+                if ($this->loginController->keepUserLoggedIn()) {
+                    if ($this->cookie->isCookieSet()) {
+                        $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
+                        $this->layoutView->echoHtml(true, $response, 'login');
+                    } else {
+                        $this->loginController->loginWithCookie($loginInfo);
+                        $response = $this->loginView->loginResponse($this->responseMessages::welcomeRemember);
+                        $this->layoutView->echoHtml(true, $response, 'login');
+                    }
                 } else if ($this->loginController->loggedInWithSession()) {
                     $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
                     $this->layoutView->echoHtml(true, $response, 'login');

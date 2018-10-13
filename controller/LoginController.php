@@ -19,13 +19,15 @@ class LoginController {
         if (!$this->session->isSessionSet()) {
             $this->session->createUserSession($loginInfo->getUserName());
         }
+    }
 
-        if ($this->keepUserLoggedIn()) {
-            $this->cookie->setCookieName('user_name');
-            $this->cookie->setCookieValue($loginInfo->getUserName());
-            $this->cookie->setCookieTime("+1 hour");
-            $this->cookie->createCookie();
-        }
+    public function loginWithCookie($loginInfo) {
+
+        $this->cookie->setCookieName('user_name');
+        $this->cookie->setCookieValue($loginInfo->getUserName());
+        $this->cookie->setCookieTime("+1 hour");
+        $this->cookie->createCookie();
+
     }
 
     public function loggedInWithSession() {
