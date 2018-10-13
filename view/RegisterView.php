@@ -37,7 +37,7 @@ class RegisterView {
         $user;
         if ($this->userNameInField) {
             $user = $this->userNameInField;
-            $user = preg_replace("/[^A-Za-z0-9]/", "", $user);
+            $user = strip_tags($user);
         } else {
             $user = '';
         }
