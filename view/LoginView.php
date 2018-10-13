@@ -12,13 +12,10 @@ class LoginView {
     private static $messageId = 'LoginView::Message';
 
     private $userNameInField = false;
-    /**
-     * Create HTTP response
-     *
-     * Should be called after a login attempt has been determined
-     *
-     * @return  void BUT writes to standard output and cookies!
-     */
+
+    public function __construct() {
+
+    }
     public function response($isLoggedIn, $message) {
 
         if ($isLoggedIn) {

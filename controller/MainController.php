@@ -13,10 +13,12 @@ class MainController {
     private $session;
     private $db;
     private $responseMessages;
+    private $cookie;
 
     public function __construct() {
         $this->session = new \model\Session();
         $this->db = new \model\Database($this->session);
+        $this->cookie = new \model\Cookie();
 
         //CREATE OBJECTS OF THE VIEWS
         $this->loginView = new \view\LoginView();
@@ -27,7 +29,7 @@ class MainController {
         $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView);
 
         // CREATE OBJECTS OF THE CONTROLLER
-        $this->loginController = new \controller\LoginController($this->loginView, $this->db, $this->session);
+        $this->loginController = new \controller\LoginController($this->loginView, $this->db, $this->session, $this->cookie);
         $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->db);
     }
 
@@ -37,7 +39,8 @@ class MainController {
         if ($this->loginView->isLoginButtonClicked()) {
             try {
                 $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
-                if ($this->loginController->loginStatus($loginInfo)) {
+                $this->loginController->login($loginInfo);
+                if ($this->loginController->loggedInWithSession($loginInfo)) {
                     $response = $this->loginView->loginResponse($this->responseMessages::welcomeMessage);
                     $this->layoutView->echoHtml(true, $response, 'login');
                 } else {
