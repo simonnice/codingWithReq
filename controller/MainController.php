@@ -39,7 +39,10 @@ class MainController {
         if ($this->loginView->isLoginButtonClicked()) {
             try {
                 $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
-                if ($this->loginController->loggedInWithSession($loginInfo)) {
+                if ($this->loginController->loggedInWithCookie()) {
+                    $response = $this->loginView->loginResponse($this->responseMessages::welcomeCookie);
+                    $this->layoutView->echoHtml(true, $response, 'login');
+                } else if ($this->loginController->loggedInWithSession()) {
                     $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
                     $this->layoutView->echoHtml(true, $response, 'login');
                 } else {

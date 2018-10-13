@@ -13,7 +13,7 @@ class Cookie {
     }
 
     public function createCookie() {
-        return setCookie($this->getCookieName(), $this->getValue(), $this->getCookieTime());
+        return setCookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
     }
 
     public function deleteCookie() {
@@ -29,7 +29,7 @@ class Cookie {
     }
 
     public function setCookieTime($time) {
-        $date = new DateTime();
+        $date = new \DateTime();
         $date->modify($time);
         $this->time = $date->getTimeStamp();
     }
@@ -46,12 +46,12 @@ class Cookie {
         return $this->value;
     }
 
-    public function isCookieSet($name): bool {
-      if (isset($_COOKIE[$this->getCookieName($name)]) {
-        return true;
-      } else {
-        return false;
-      }
+    public function isCookieSet(): bool {
+        if (isset($_COOKIE['user_name'])) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

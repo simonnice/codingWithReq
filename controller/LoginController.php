@@ -20,12 +20,12 @@ class LoginController {
             $this->session->createUserSession($loginInfo->getUserName());
         }
 
-        if ($this->keepUserLoggedIn() {
-            $this->cookie->setCookieName($loginInfo->getUserName());
+        if ($this->keepUserLoggedIn()) {
+            $this->cookie->setCookieName('user_name');
             $this->cookie->setCookieValue($loginInfo->getUserName());
-            $this->cookie->setTime("+1 hour");
+            $this->cookie->setCookieTime("+1 hour");
             $this->cookie->createCookie();
-     })
+        }
     }
 
     public function loggedInWithSession() {
@@ -36,8 +36,12 @@ class LoginController {
         }
     }
 
-    public function loggedInWithCookie(){
-        
+    public function loggedInWithCookie() {
+        if ($this->cookie->isCookieSet()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function logoutUser() {
@@ -68,7 +72,7 @@ class LoginController {
     }
 
     public function keepUserLoggedIn(): bool {
-        if ($loginView->doesUserWantToStayLoggedIn()) {
+        if ($this->loginView->doesUserWantToStayLoggedIn()) {
             return true;
         } else {
             return false;
