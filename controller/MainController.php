@@ -40,15 +40,14 @@ class MainController {
     public function startApp() {
         if ($this->loginView->isLoginButtonClicked()) {
             $this->loginLogic();
-
+        } else if ($this->postView->isCreatePostLinkClicked()) {
+            $this->postLogic();
         } else if ($this->registerView->registerLinkIsClicked()) {
             $this->registerLogic();
 
         } else if ($this->loginView->isLogoutButtonClicked()) {
             $this->logoutLogic();
 
-        } else if ($this->loginView->isCreatePostLinkClicked()) {
-            $this->postLogic();
         } else {
             $this->StartLogic();
 
@@ -61,11 +60,12 @@ class MainController {
             if ($this->postView->isCreatePostButtonClicked()) {
                 $postInfo = new \model\Post($this->postView->getActiveUser(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
                 $this->postController->sendPostInfoToDB($postInfo);
-                $response = $this->postView->generatePostFormHtml($this->responseMessages::successfulPost);
+                $response = $this->postView->postResponse($this->responseMessages::successfulPost);
                 $this->layoutView->echoHtml(true, $response, 'post');
             } else {
-                echo "this runs";
-                $response = $this->postView->generatePostFormHtml($this->responseMessages::noFeedback);
+
+                $response = $this->postView->postResponse($this->responseMessages::noFeedback);
+                var_dump($response);
                 $this->layoutView->echoHtml(true, $response, 'post');
             }
 

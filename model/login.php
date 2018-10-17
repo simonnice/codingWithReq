@@ -9,7 +9,7 @@ class Login {
     private $userId;
     private $db;
 
-    public function __construct($userName, $password, $userId, $db) {
+    public function __construct($userName, $password, $db) {
         $this->db = $db;
 
         if (!$userName) {

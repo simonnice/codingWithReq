@@ -17,7 +17,7 @@ class LoginController {
 
     public function login($loginInfo) {
         if (!$this->session->isSessionSet()) {
-            $this->session->createUserSession($loginInfo->getUserName());
+            $this->session->createUserSession($loginInfo->getUserName(), $loginInfo->getUserId());
         }
     }
 

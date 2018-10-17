@@ -115,6 +115,15 @@ class Database {
         }
     }
 
+    public function getUserIdFromDB($userName) {
+        $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+        $this->bindValuesToPlaceholder(':name', $userName);
+
+        $row = $this->retrieveSingleObject();
+
+        return $row->id;
+    }
+
     public function registerNewUser($validatedRegisterInput) {
 
         $this->data = $validatedRegisterInput;
@@ -142,10 +151,10 @@ class Database {
     public function createNewPost($validatedPostInput) {
         $this->data = $validatedPostInput;
 
-        $this->prepareStatementWithQuerytoDb('INSERT INTO posts(title, userId, body) VALUES (:title, :userId, :body)');
+        $this->prepareStatementWithQuerytoDb('INSERT INTO posts(title, user_id, body) VALUES (:title, :user_id, :body)');
 
         $this->bindValuesToPlaceholder(':title', $this->data->getTitle());
-        $this->bindValuesToPlaceholder(':userId', $this->data->getUserId());
+        $this->bindValuesToPlaceholder(':user_id', $this->data->getUserId());
         $this->bindValuesToPlaceholder(':body', $this->data->getBody());
 
         if ($this->executeStatement()) {

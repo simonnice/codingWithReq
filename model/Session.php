@@ -16,9 +16,9 @@ class Session {
         session_start();
     }
 
-    public function createUserSession($user) {
-        $_SESSION['user_id'] = $user
-        $_SESSION['user_name'] = $user;
+    public function createUserSession($userName, $userId) {
+        $_SESSION['user_id'] = $userId;
+        $_SESSION['user_name'] = $userName;
     }
 
     public function destroyCurrentSession() {
@@ -34,7 +34,7 @@ class Session {
         }
     }
 
-    public function getCurrentUser() {
-        return $_SESSION['user_name'];
+    public function getCurrentUserId() {
+        return $_SESSION['user_id'];
     }
 }

@@ -12,7 +12,7 @@ class RegisterView {
 
     private $userNameInField = false;
 
-    public function responseRegister($message) {
+    public function RegisterHtmlRender($message) {
 
         $response = $this->generateRegisterFormHTML($message);
 

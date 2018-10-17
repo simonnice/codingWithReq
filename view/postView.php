@@ -14,9 +14,23 @@ class postView {
         $this->sessionToRead = $session;
     }
 
+    public function generatePostLink() {
+        $postLink = '?post';
+        return '
+      <a href="' . $postLink . '">Create a new post</a>
+  ';
+    }
+
+    public function postHtmlRender($message) {
+
+        $response = $this->generatePostFormHtml($message);
+
+        return $response;
+    }
+
     public function generatePostFormHtml($message) {
         return '
-			<form method="post" form action="?posts">
+			<form method="post" form action="?post">
 				<fieldset>
 					<legend>Write a new post here!</legend>
 					<p id="' . self::$messageId . '">' . $message . '</p>
@@ -41,6 +55,19 @@ class postView {
         }
     }
 
+    public function isCreatePostLinkClicked() {
+        if (isset($_GET['post'])) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    public function postResponse($message) {
+        return $this->message = $message;
+    }
+
     public function getPostTitle() {
         return $_POST[self::$title];
     }
@@ -50,6 +77,6 @@ class postView {
     }
 
     public function getActiveUser() {
-        return $this->sessionToRead->getCurrentUser();
+        return $this->sessionToRead->getCurrentUserId();
     }
 }

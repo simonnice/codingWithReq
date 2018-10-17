@@ -18,16 +18,16 @@ class LayoutView {
         if ($view == "login") {
             return $this->loginView->response($isLoggedIn, $msg);
         } else if ($view == "register") {
-            return $this->registerView->responseRegister($msg);
+            return $this->registerView->registerHtmlRender($msg);
         } else if ($view == "post") {
-            return $this->postView->generatePostFormHtml($msg);
+            return $this->postView->postHtmlRender($msg);
         }
     }
 
     public function linkLoader($view, $isLoggedIn) {
 
         if ($view == 'login' && $isLoggedIn == true) {
-            return;
+            return $this->postView->generatePostLink();
         } else if ($view == 'login') {
             return $this->registerView->generateRegisterLink();
         } else {
