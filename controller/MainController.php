@@ -52,6 +52,9 @@ class MainController {
 
     public function postLogic() {
         try {
+            if ($this->postView->isCreatePostByttonClicked()) {
+
+            }
 
         } catch (\Exception $e) {
 
