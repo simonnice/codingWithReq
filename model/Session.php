@@ -32,4 +32,8 @@ class Session {
             return false;
         }
     }
+
+    public function getCurrentUser() {
+        return $_SESSION['user_name'];
+    }
 }

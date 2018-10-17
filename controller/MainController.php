@@ -23,7 +23,7 @@ class MainController {
 
         //CREATE OBJECTS OF THE VIEWS
         $this->loginView = new \view\LoginView();
-        $this->postView = new \view\postView();
+        $this->postView = new \view\postView($this->session);
         $this->dateTimeView = new \view\DateTimeView();
         $this->registerView = new \view\RegisterView();
         $this->responseMessages = new \view\Response();
@@ -58,6 +58,7 @@ class MainController {
         try {
             if ($this->postView->isCreatePostButtonClicked()) {
                 $postInfo = new \model\Post($this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
+                $response =
                 $this->layoutView->echoHtml(true, $response, 'post');
             }
 
