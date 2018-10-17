@@ -6,9 +6,10 @@ class Login {
 
     private $username;
     private $password;
+    private $userId;
     private $db;
 
-    public function __construct($userName, $password, $db) {
+    public function __construct($userName, $password, $userId, $db) {
         $this->db = $db;
 
         if (!$userName) {
@@ -26,6 +27,8 @@ class Login {
         $this->userName = $userName;
         $this->password = $password;
 
+        $this->userId = $this->db->getUserIdFromDB($userName);
+
     }
 
     public function getUserName(): string {
@@ -34,5 +37,9 @@ class Login {
 
     public function getPassword(): string {
         return $this->password;
+    }
+
+    public function getUserId(): int {
+        return $this->userId;
     }
 }

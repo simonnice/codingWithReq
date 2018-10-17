@@ -6,16 +6,17 @@ class postView {
     private static $title = 'postView::title';
     private static $body = 'postView::body';
     private static $createPost = 'postView::createPost';
+    private static $messageId = 'postView::messageId';
 
     private $sessionToRead;
 
-    public __construct($session) {
-      $this->sessionToRead = $session;
+    public function __construct($session) {
+        $this->sessionToRead = $session;
     }
 
-    private function generatePostFormHtml() {
+    public function generatePostFormHtml($message) {
         return '
-			<form method="post" form action="posts">
+			<form method="post" form action="?posts">
 				<fieldset>
 					<legend>Write a new post here!</legend>
 					<p id="' . self::$messageId . '">' . $message . '</p>
@@ -24,7 +25,7 @@ class postView {
 					<input type="text" id="' . self::$title . '" name="' . self::$title . '" value="" />
 
 					<label for="' . self::$body . '">Body :</label>
-          <textarea id="' . self::$body . '" name="' . self::$body . '" />
+          <input type="text" id="' . self::$body . '" name="' . self::$body . '" value="" />
 
 					<input type="submit" name="' . self::$createPost . '" value="Create Post" />
 				</fieldset>
@@ -33,7 +34,7 @@ class postView {
     }
 
     public function isCreatePostButtonClicked() {
-        if (isset($_POST[self::$createPost])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return true;
         } else {
             return false;
@@ -49,6 +50,6 @@ class postView {
     }
 
     public function getActiveUser() {
-        $this->sessionToRead->getCurrentUser();
+        return $this->sessionToRead->getCurrentUser();
     }
 }

@@ -4,7 +4,7 @@ namespace view;
 class LoginView {
     private static $login = 'LoginView::Login';
     private static $logout = 'LoginView::Logout';
-    private static $createPost = 'LoginView::createPost';
+    private static $post = 'LoginView::Post';
     private static $name = 'LoginView::UserName';
     private static $password = 'LoginView::Password';
     private static $cookieName = 'LoginView::CookieName';
@@ -44,7 +44,7 @@ class LoginView {
         return '
 			<form  method="post" form action="?" >
                 <p id="' . self::$messageId . '">' . $message . '</p>
-                <input type="submit" name="' . self::$createPost . '" value="Create new Post"/><br>
+                <input type="submit" name="' . self::$post . '" value="Create new Post"/><br>
                 <input type="submit" name="' . self::$logout . '"
                  value="logout"/>
 
@@ -128,7 +128,7 @@ class LoginView {
     }
 
     public function isCreatePostLinkClicked() {
-        if (isset($_POST[self::$createPost])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return true;
         } else {
 

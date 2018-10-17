@@ -3,16 +3,16 @@ namespace controller;
 
 class PostController {
 
-    private $loginView;
     private $db;
     private $session;
-    private $cookie;
 
-    public function __construct($login, $db, $session, $cookie) {
-        $this->loginView = $login;
+    public function __construct($db, $session) {
         $this->db = $db;
         $this->session = $session;
-        $this->cookie = $cookie;
+    }
+
+    public function sendPostInfoToDB($postInfo) {
+        $this->db->createNewPost($postInfo);
     }
 
 }

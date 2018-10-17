@@ -17,6 +17,7 @@ require_once 'view/Response.php';
 require_once 'controller/MainController.php';
 require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
+require_once 'controller/PostController.php';
 
 date_default_timezone_set('Europe/Stockholm');
 error_reporting(E_ALL);

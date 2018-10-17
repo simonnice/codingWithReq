@@ -8,10 +8,9 @@ class Post {
     private $userId;
     private $title;
     private $body;
-    private $createdAt;
 
     public function __construct($userId, $title, $body, $db) {
-        $this->db = new Database;
+        $this->db = $db;
 
         if (!$title) {
             throw new \Exception("Title is missing");

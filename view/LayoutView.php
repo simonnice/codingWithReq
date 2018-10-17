@@ -5,11 +5,13 @@ class LayoutView {
     private $dateTimeView;
     private $loginView;
     private $registerView;
+    private $postView;
 
-    public function __construct($dateTime, $login, $register) {
+    public function __construct($dateTime, $login, $register, $post) {
         $this->dateTimeView = $dateTime;
         $this->loginView = $login;
         $this->registerView = $register;
+        $this->postView = $post;
     }
 
     public function viewLoader($view, $msg, $isLoggedIn) {
@@ -17,6 +19,8 @@ class LayoutView {
             return $this->loginView->response($isLoggedIn, $msg);
         } else if ($view == "register") {
             return $this->registerView->responseRegister($msg);
+        } else if ($view == "post") {
+            return $this->postView->generatePostFormHtml($msg);
         }
     }
 

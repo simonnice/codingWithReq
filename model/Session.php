@@ -17,6 +17,7 @@ class Session {
     }
 
     public function createUserSession($user) {
+        $_SESSION['user_id'] = $user
         $_SESSION['user_name'] = $user;
     }
 

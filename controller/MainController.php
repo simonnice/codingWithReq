@@ -11,6 +11,7 @@ class MainController {
     private $dateTimeView;
     private $loginController;
     private $registerController;
+    private $postController;
     private $session;
     private $db;
     private $responseMessages;
@@ -28,11 +29,12 @@ class MainController {
         $this->registerView = new \view\RegisterView();
         $this->responseMessages = new \view\Response();
 
-        $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView);
+        $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView, $this->postView);
 
         // CREATE OBJECTS OF THE CONTROLLER
         $this->loginController = new \controller\LoginController($this->loginView, $this->db, $this->session, $this->cookie);
         $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->db);
+        $this->postController = new \controller\postController($this->db, $this->session);
     }
 
     public function startApp() {
@@ -58,12 +60,17 @@ class MainController {
         try {
             if ($this->postView->isCreatePostButtonClicked()) {
                 $postInfo = new \model\Post($this->postView->getActiveUser(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
-                $response =
+                $this->postController->sendPostInfoToDB($postInfo);
+                $response = $this->postView->generatePostFormHtml($this->responseMessages::successfulPost);
+                $this->layoutView->echoHtml(true, $response, 'post');
+            } else {
+                echo "this runs";
+                $response = $this->postView->generatePostFormHtml($this->responseMessages::noFeedback);
                 $this->layoutView->echoHtml(true, $response, 'post');
             }
 
         } catch (\Exception $e) {
-
+            $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
         }
     }
 
