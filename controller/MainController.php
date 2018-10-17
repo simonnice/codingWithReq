@@ -6,6 +6,7 @@ class MainController {
 
     private $layoutView;
     private $loginView;
+    private $postView;
     private $registerView;
     private $dateTimeView;
     private $loginController;
@@ -22,6 +23,7 @@ class MainController {
 
         //CREATE OBJECTS OF THE VIEWS
         $this->loginView = new \view\LoginView();
+        $this->postView = new \view\postView();
         $this->dateTimeView = new \view\DateTimeView();
         $this->registerView = new \view\RegisterView();
         $this->responseMessages = new \view\Response();
@@ -43,6 +45,8 @@ class MainController {
         } else if ($this->loginView->isLogoutButtonClicked()) {
             $this->logoutLogic();
 
+        } else if ($this->loginView->isCreatePostLinkClicked()) {
+            $this->postLogic();
         } else {
             $this->StartLogic();
 
@@ -54,6 +58,7 @@ class MainController {
         try {
             if ($this->postView->isCreatePostButtonClicked()) {
                 $postInfo = new \model\Post($this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
+                $this->layoutView->echoHtml(true, $response, 'post');
             }
 
         } catch (\Exception $e) {

@@ -3,6 +3,16 @@ namespace view;
 
 class postView {
 
+    private static $title = 'postView::title';
+    private static $body = 'postView::body';
+    private static $createPost = 'postView::createPost';
+
+    private $sessionToRead;
+
+    public __construct($session) {
+      $this->sessionToRead = $session;
+    }
+
     private function generatePostFormHtml() {
         return '
 			<form method="post" form action="posts">
@@ -22,12 +32,23 @@ class postView {
 		';
     }
 
-
-    public function isCreatePostButtonClicked() [
-      if (isset($_POST[self::$createPost])) {
-        return true;
-    } else {
-        return false;
+    public function isCreatePostButtonClicked() {
+        if (isset($_POST[self::$createPost])) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    ]
+
+    public function getPostTitle() {
+        return $_POST[self::$title];
+    }
+
+    public function getPostBody() {
+        return $_POST[self::$body];
+    }
+
+    public function getActiveUser() {
+        return $_
+    }
 }

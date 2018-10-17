@@ -139,4 +139,10 @@ class Database {
 
     }
 
+    public function createNewPost($validatedPostInput) {
+        $this->data = $validatedPostInput;
+
+        $this->prepareStatementWithQuerytoDb('INSERT INTO posts(title, body) VALUES (:title, :body)');
+    }
+
 }
