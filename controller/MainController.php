@@ -50,6 +50,14 @@ class MainController {
 
     }
 
+    public function postLogic() {
+        try {
+
+        } catch (\Exception $e) {
+
+        }
+    }
+
     public function registerLogic() {
         try {
             if ($this->registerView->isRegisterButtonClicked()) {

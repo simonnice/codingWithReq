@@ -127,6 +127,15 @@ class LoginView {
         }
     }
 
+    public function isCreatePostButtonClicked() {
+        if (isset($_POST[self::$createPost])) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
     public function loginResponse($message) {
         return $this->message = $message;
     }
