@@ -9,7 +9,7 @@ require_once 'model/Login.php';
 require_once 'model/Cookie.php';
 require_once 'model/Post.php';
 require_once 'view/LoginView.php';
-require_once 'view/postView.php';
+require_once 'view/PostView.php';
 require_once 'view/RegisterView.php';
 require_once 'view/DateTimeView.php';
 require_once 'view/LayoutView.php';
