@@ -142,7 +142,11 @@ class Database {
     public function createNewPost($validatedPostInput) {
         $this->data = $validatedPostInput;
 
-        $this->prepareStatementWithQuerytoDb('INSERT INTO posts(title, body) VALUES (:title, :body)');
+        $this->prepareStatementWithQuerytoDb('INSERT INTO posts(title, userId body) VALUES (:title, :userId, :body)');
+
+        $this->bindValuesToPlaceholder(':title', $this->data->getPostTitle());
+        $this->bindValuesToPlaceholder(':userId', $this->data->getUserId());
+        $this->bindValuesToPlaceholder(':body', $this->data->getPostBody());
     }
 
 }

@@ -5,12 +5,12 @@ namespace Model;
 class Post {
 
     private $db;
-    private $user_id;
+    private $userId;
     private $title;
     private $body;
     private $createdAt;
 
-    public function __construct($user_id, $title, $body, $createdAt, $db) {
+    public function __construct($userId, $title, $body, $db) {
         $this->db = new Database;
 
         if (!$title) {
@@ -21,10 +21,9 @@ class Post {
             throw new \Exception("Body is missing");
         }
 
-        $this->user_id = $user_id;
+        $this->userId = $userId;
         $this->title = $title;
         $this->body = $body;
-        $this->createdAt = $createdAt;
 
     }
 
@@ -34,6 +33,10 @@ class Post {
 
     public function getBody(): string {
         return $this->body;
+    }
+
+    public function getUserId(): int {
+        return $this->userId;
     }
 
 }

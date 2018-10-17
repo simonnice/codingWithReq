@@ -57,7 +57,7 @@ class MainController {
     public function postLogic() {
         try {
             if ($this->postView->isCreatePostButtonClicked()) {
-                $postInfo = new \model\Post($this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
+                $postInfo = new \model\Post($this->postView->getActiveUser(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
                 $response =
                 $this->layoutView->echoHtml(true, $response, 'post');
             }

@@ -49,6 +49,6 @@ class postView {
     }
 
     public function getActiveUser() {
-        return $_
+        $this->sessionToRead->getCurrentUser();
     }
 }
