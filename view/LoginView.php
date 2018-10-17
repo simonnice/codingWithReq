@@ -127,7 +127,7 @@ class LoginView {
         }
     }
 
-    public function isCreatePostButtonClicked() {
+    public function isCreatePostLinkClicked() {
         if (isset($_POST[self::$createPost])) {
             return true;
         } else {

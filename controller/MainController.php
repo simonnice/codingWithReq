@@ -52,8 +52,8 @@ class MainController {
 
     public function postLogic() {
         try {
-            if ($this->postView->isCreatePostByttonClicked()) {
-
+            if ($this->postView->isCreatePostButtonClicked()) {
+                $postInfo = new \model\Post($this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
             }
 
         } catch (\Exception $e) {

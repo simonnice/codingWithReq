@@ -16,9 +16,18 @@ class postView {
 					<label for="' . self::$body . '">Body :</label>
           <textarea id="' . self::$body . '" name="' . self::$body . '" />
 
-					<input type="submit" name="' . self::$submitPost . '" value="Create Post" />
+					<input type="submit" name="' . self::$createPost . '" value="Create Post" />
 				</fieldset>
 			</form>
 		';
     }
+
+
+    public function isCreatePostButtonClicked() [
+      if (isset($_POST[self::$createPost])) {
+        return true;
+    } else {
+        return false;
+    }
+    ]
 }
