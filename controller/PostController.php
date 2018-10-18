@@ -15,8 +15,8 @@ class PostController {
         $this->db->createNewPost($postInfo);
     }
 
-    public function getPostsFromDB($activeUserId) {
-        return $this->db->getPosts($activeUserId);
+    public function getPostsFromDB($user) {
+        return $this->db->getPosts($user);
     }
 
 }

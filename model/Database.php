@@ -77,7 +77,7 @@ class Database {
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function retrieveMultipleObjects(){
+    public function retrieveMultipleObjects() {
         $this->executeStatement();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
@@ -169,10 +169,14 @@ class Database {
         }
     }
 
-    public function getPosts($userId) {
-        $this->prepareStatementWithQuerytoDb('SELECT * FROM posts');
+    public function getPosts($id) {
+        $this->prepareStatementWithQuerytoDb('SELECT * FROM posts WHERE user_id = :userId');
 
-        $results = $this->r
+        $this->bindValuesToPlaceholder(':userId', $id);
+
+        $result = $this->retrieveMultipleObjects();
+
+        return $result;
     }
 
 }

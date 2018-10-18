@@ -14,17 +14,12 @@ class PostView {
         $this->sessionToRead = $session;
     }
 
-    public function generatePostLink() {
+    public function generatePostLinks() {
         $postLink = '?post';
-        return '
-      <a href="' . $postLink . '">Create a new post</a>
-  ';
-    }
-
-    public function generateShowPostLink() {
         $showLink = '?show';
         return '
-      <a href="' . $showLink . '">View all posts</a>
+      <a href="' . $postLink . '">Create a new post</a>
+      <a href="' . $showLink . '">Show all your posts</a>
   ';
     }
 
@@ -55,22 +50,24 @@ class PostView {
     }
 
     public function generateShowPostHtml($message) {
+
         return '
-			<form method="post" form action="?post">
-				<fieldset>
-					<legend>Write a new post here!</legend>
-					<p id="' . self::$messageId . '">' . $message . '</p>
+        <h1>Here are your posts!</h1>
+        ' . $this->generateListOfPosts($message) . '
 
-					<label for="' . self::$title . '">Title :</label>
-					<input type="text" id="' . self::$title . '" name="' . self::$title . '" value="" />
+     ';
+    }
 
-					<label for="' . self::$body . '">Body :</label>
-          <input type="text" id="' . self::$body . '" name="' . self::$body . '" value="" />
+    public function generateListOfPosts($data) {
+        $list = '';
+        foreach ($data as $post) {
+            $list .= '<h3> ' . $post->title . ' </h3>
+                      <p>  ' . $post->body . ' </p>
+                      <hr>
 
-					<input type="submit" name="' . self::$createPost . '" value="Create Post" />
-				</fieldset>
-			</form>
-		';
+            ';
+        }
+        return $list;
     }
 
     public function isCreatePostButtonClicked() {
@@ -90,6 +87,15 @@ class PostView {
         }
     }
 
+    public function isShowPostsLinkClicked() {
+        if (isset($_GET['show'])) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
     public function postResponse($message) {
         return $this->message = $message;
     }
@@ -102,7 +108,8 @@ class PostView {
         return $_POST[self::$body];
     }
 
-    public function getActiveUser() {
+    public function getActiveUserId() {
         return $this->sessionToRead->getCurrentUserId();
     }
+
 }

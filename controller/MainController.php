@@ -41,7 +41,9 @@ class MainController {
         if ($this->loginView->isLoginButtonClicked()) {
             $this->loginLogic();
         } else if ($this->postView->isCreatePostLinkClicked()) {
-            $this->postLogic();
+            $this->CreatePostLogic();
+        } else if ($this->postView->isShowPostsLinkClicked()) {
+            $this->showPostsLogic();
         } else if ($this->registerView->registerLinkIsClicked()) {
             $this->registerLogic();
 
@@ -55,22 +57,29 @@ class MainController {
 
     }
 
-    public function postLogic() {
+    public function createPostLogic() {
         try {
             if ($this->postView->isCreatePostButtonClicked()) {
-                $postInfo = new \model\Post($this->postView->getActiveUser(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
+                echo "this runs if create Link is clicked";
+                $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
                 $this->postController->sendPostInfoToDB($postInfo);
                 $response = $this->postView->postResponse($this->responseMessages::successfulPost);
                 $this->layoutView->echoHtml(true, $response, 'post');
-            } //else if ($this->postView->isShowPostsLinkClicked()) {
-            //$response = $this->postController->getPostsFromDB($this->postView->getActiveUser());
-            else {
-
+            } else {
+                echo "this runs if nothing is clicked";
                 $response = $this->postView->postResponse($this->responseMessages::noFeedback);
-
                 $this->layoutView->echoHtml(true, $response, 'post');
             }
 
+        } catch (\Exception $e) {
+            $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
+        }
+    }
+
+    public function showPostsLogic() {
+        try {
+            $response = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
+            $this->layoutView->echoHtml(true, $response, 'show');
         } catch (\Exception $e) {
             $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
         }

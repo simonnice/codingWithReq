@@ -37,4 +37,8 @@ class Session {
     public function getCurrentUserId() {
         return $_SESSION['user_id'];
     }
+
+    public function getCurrentUser() {
+        return $_SESSION['user_name'];
+    }
 }

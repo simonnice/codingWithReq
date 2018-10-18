@@ -21,13 +21,15 @@ class LayoutView {
             return $this->registerView->registerHtmlRender($msg);
         } else if ($view == "post") {
             return $this->postView->postHtmlRender($msg);
+        } else if ($view == "show") {
+            return $this->postView->generateShowPostHtml($msg);
         }
     }
 
     public function linkLoader($view, $isLoggedIn) {
 
         if ($view == 'login' && $isLoggedIn == true) {
-            return $this->postView->generatePostLink();
+            return $this->postView->generatePostLinks();
         } else if ($view == 'login') {
             return $this->registerView->generateRegisterLink();
         } else {
