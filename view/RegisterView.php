@@ -12,14 +12,14 @@ class RegisterView {
 
     private $userNameInField = false;
 
-    public function RegisterHtmlRender($message) {
+    public function RegisterHtmlRender($message): string {
 
         $response = $this->generateRegisterFormHTML($message);
 
         return $response;
     }
 
-    public function generateRegisterLink() {
+    public function generateRegisterLink(): string {
         $registerLink = '?register';
         return '
         <a href="' . $registerLink . '">Register a new user</a>
@@ -32,7 +32,7 @@ class RegisterView {
      * @return  void, BUT writes to standard output!
      */
 
-    private function generateRegisterFormHTML($message) {
+    private function generateRegisterFormHTML($message): string {
 
         $user;
         if ($this->userNameInField) {
@@ -68,7 +68,7 @@ class RegisterView {
             ';
     }
 
-    public function registerLinkIsClicked() {
+    public function registerLinkIsClicked(): bool {
         if (isset($_GET['register'])) {
             return true;
         } else {
@@ -76,7 +76,7 @@ class RegisterView {
             return false;
         }
     }
-    public function isRegisterButtonClicked() {
+    public function isRegisterButtonClicked(): bool {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return true;
         } else {
@@ -85,23 +85,23 @@ class RegisterView {
         }
     }
 
-    public function registerResponse($message) {
+    public function registerResponse($message): string {
         return $this->message = $message;
     }
 
-    public function setUserName($userName) {
+    public function setUserName($userName): void {
         $this->userNameInField = $userName;
     }
 
-    public function getRegisterUserName() {
+    public function getRegisterUserName(): string {
         return $_POST[self::$name];
     }
 
-    public function getRegisterPassword() {
+    public function getRegisterPassword(): string {
         return $_POST[self::$password];
     }
 
-    public function getRegisterRepeatedPassword() {
+    public function getRegisterRepeatedPassword(): string {
         return $_POST[self::$passwordRepeat];
     }
 }
