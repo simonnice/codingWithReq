@@ -5,6 +5,7 @@ namespace model;
 class Session {
 
     private $sessionId;
+    private $sessionUser;
 
     public function __construct() {
         if (!isset($_SESSION)) {
@@ -12,21 +13,21 @@ class Session {
         }
     }
 
-    public function startSession() {
+    public function startSession(): void {
         session_start();
     }
 
-    public function createUserSession($userName, $userId) {
+    public function createUserSession($userName, $userId): void {
         $_SESSION['user_id'] = $userId;
         $_SESSION['user_name'] = $userName;
     }
 
-    public function destroyCurrentSession() {
+    public function destroyCurrentSession(): void {
         session_unset();
         session_destroy();
     }
 
-    public function isSessionSet() {
+    public function isSessionSet(): bool {
         if (isset($_SESSION['user_name'])) {
             return true;
         } else {
@@ -34,11 +35,11 @@ class Session {
         }
     }
 
-    public function getCurrentUserId() {
+    public function getCurrentUserId(): void {
         return $_SESSION['user_id'];
     }
 
-    public function getCurrentUser() {
+    public function getCurrentUser(): void {
         return $_SESSION['user_name'];
     }
 }

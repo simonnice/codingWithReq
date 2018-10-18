@@ -66,28 +66,28 @@ class Database {
 
     // Adding an execute method to execute the prepared statement
 
-    public function executeStatement() {
+    public function executeStatement(): bool {
         return $this->stmt->execute();
     }
 
     // Adding a method for retrieving a single object from DB
 
-    public function retrieveSingleObject() {
+    public function retrieveSingleObject(): object {
         $this->executeStatement();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function retrieveMultipleObjects() {
+    public function retrieveMultipleObjects(): array{
         $this->executeStatement();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     // Adding a method to check for entries in DB
-    public function checkIfEntryExists() {
+    public function checkIfEntryExists(): int {
         return $this->stmt->rowCount();
     }
 
-    public function doesUserExist($userName) {
+    public function doesUserExist($userName): bool {
         $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
 
         $this->bindValuesToPlaceholder(':name', $userName);
@@ -101,7 +101,7 @@ class Database {
         }
     }
 
-    public function doesInputUserMatchDbUser($username, $password) {
+    public function doesInputUserMatchDbUser($username, $password): bool {
 
         $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
         $this->bindValuesToPlaceholder(':name', $username);
@@ -120,7 +120,7 @@ class Database {
         }
     }
 
-    public function getUserIdFromDB($userName) {
+    public function getUserIdFromDB($userName): int {
         $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
         $this->bindValuesToPlaceholder(':name', $userName);
 
@@ -129,7 +129,7 @@ class Database {
         return $row->id;
     }
 
-    public function registerNewUser($validatedRegisterInput) {
+    public function registerNewUser($validatedRegisterInput): bool {
 
         $this->data = $validatedRegisterInput;
 
@@ -153,7 +153,7 @@ class Database {
 
     }
 
-    public function createNewPost($validatedPostInput) {
+    public function createNewPost($validatedPostInput): bool {
         $this->data = $validatedPostInput;
 
         $this->prepareStatementWithQuerytoDb('INSERT INTO posts(title, user_id, body) VALUES (:title, :user_id, :body)');
@@ -169,7 +169,7 @@ class Database {
         }
     }
 
-    public function getPosts($id) {
+    public function getPosts($id): array{
         $this->prepareStatementWithQuerytoDb('SELECT * FROM posts WHERE user_id = :userId');
 
         $this->bindValuesToPlaceholder(':userId', $id);

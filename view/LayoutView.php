@@ -14,7 +14,7 @@ class LayoutView {
         $this->postView = $post;
     }
 
-    public function viewLoader($view, $msg, $isLoggedIn) {
+    public function viewLoader($view, $msg, $isLoggedIn): string {
         if ($view == "login") {
             return $this->loginView->response($isLoggedIn, $msg);
         } else if ($view == "register") {
@@ -26,7 +26,7 @@ class LayoutView {
         }
     }
 
-    public function linkLoader($view, $isLoggedIn) {
+    public function linkLoader($view, $isLoggedIn): string {
 
         if ($view == 'login' && $isLoggedIn == true) {
             return $this->postView->generatePostLinks();
@@ -37,7 +37,7 @@ class LayoutView {
         }
     }
 
-    public function echoHtml($isLoggedIn, $msg, $view) {
+    public function echoHtml($isLoggedIn, $msg, $view): void {
 
         echo '<!DOCTYPE html>
       <html>
@@ -59,7 +59,7 @@ class LayoutView {
     ';
     }
 
-    private function renderIsLoggedIn($isLoggedIn) {
+    private function renderIsLoggedIn($isLoggedIn): string {
         if ($isLoggedIn) {
             return '<h2>Logged in</h2>';
         } else {

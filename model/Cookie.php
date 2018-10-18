@@ -12,19 +12,19 @@ class Cookie {
 
     }
 
-    public function createCookie() {
+    public function createCookie(): bool {
         return setCookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
     }
 
-    public function deleteCookie() {
+    public function deleteCookie(): bool {
         return setCookie($this->name, '', time() - 3600);
     }
 
-    public function setCookieName($name) {
+    public function setCookieName($name): string {
         $this->name = $name;
     }
 
-    public function getCookieName() {
+    public function getCookieName(): string {
         return $this->name;
     }
 
@@ -34,15 +34,15 @@ class Cookie {
         $this->time = $date->getTimeStamp();
     }
 
-    public function getCookieTime() {
+    public function getCookieTime(): string {
         return $this->time;
     }
 
-    public function setCookieValue($value) {
+    public function setCookieValue($value): string {
         $this->value = $value;
     }
 
-    public function getCookieValue() {
+    public function getCookieValue(): string {
         return $this->value;
     }
 

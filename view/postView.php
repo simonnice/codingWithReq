@@ -10,11 +10,11 @@ class PostView {
 
     private $sessionToRead;
 
-    public function __construct($session) {
+    public function __construct($session):void {
         $this->sessionToRead = $session;
     }
 
-    public function generatePostLinks() {
+    public function generatePostLinks(): string {
         $postLink = '?post';
         $showLink = '?show';
         return '
@@ -23,14 +23,14 @@ class PostView {
   ';
     }
 
-    public function postHtmlRender($message) {
+    public function postHtmlRender($message): string {
 
         $response = $this->generatePostFormHtml($message);
 
         return $response;
     }
 
-    public function generatePostFormHtml($message) {
+    public function generatePostFormHtml($message): string {
         return '
 			<form method="post" form action="?post">
 				<fieldset>
@@ -49,7 +49,7 @@ class PostView {
 		';
     }
 
-    public function generateShowPostHtml($list) {
+    public function generateShowPostHtml($list): string {
 
         return '
         <h1>Here are your posts!</h1>
@@ -58,7 +58,7 @@ class PostView {
      ';
     }
 
-    public function generateListOfPosts($data) {
+    public function generateListOfPosts($data): string {
         $list = '';
         foreach ($data as $post) {
             $list .= '<hr>
@@ -72,7 +72,7 @@ class PostView {
         return $list;
     }
 
-    public function isCreatePostButtonClicked() {
+    public function isCreatePostButtonClicked(): bool {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return true;
         } else {
@@ -80,7 +80,7 @@ class PostView {
         }
     }
 
-    public function isCreatePostLinkClicked() {
+    public function isCreatePostLinkClicked(): bool {
         if (isset($_GET['post'])) {
             return true;
         } else {
@@ -89,7 +89,7 @@ class PostView {
         }
     }
 
-    public function isShowPostsLinkClicked() {
+    public function isShowPostsLinkClicked(): bool {
         if (isset($_GET['show'])) {
             return true;
         } else {
@@ -98,19 +98,19 @@ class PostView {
         }
     }
 
-    public function postResponse($message) {
+    public function postResponse($message): string {
         return $this->message = $message;
     }
 
-    public function getPostTitle() {
+    public function getPostTitle(): string {
         return $_POST[self::$title];
     }
 
-    public function getPostBody() {
+    public function getPostBody(): string {
         return $_POST[self::$body];
     }
 
-    public function getActiveUserId() {
+    public function getActiveUserId(): int {
         return $this->sessionToRead->getCurrentUserId();
     }
 

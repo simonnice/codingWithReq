@@ -17,7 +17,7 @@ class LoginView {
     public function __construct() {
 
     }
-    public function response($isLoggedIn, $message) {
+    public function response($isLoggedIn, $message): string {
 
         if ($isLoggedIn) {
             $response = $this->generateLoggedInHTML($message);
@@ -28,7 +28,7 @@ class LoginView {
         return $response;
     }
 
-    public function generateLoginLink() {
+    public function generateLoginLink(): string {
         $loginLink = '?';
         return '
         <a href="' . $loginLink . '">Back to Login</a>
@@ -40,7 +40,7 @@ class LoginView {
      * @param $message, String output message
      * @return  void, BUT writes to standard output!
      */
-    private function generateLoggedInHTML($message) {
+    private function generateLoggedInHTML($message): string {
         return '
 			<form  method="post" form action="?" >
                 <p id="' . self::$messageId . '">' . $message . '</p>
@@ -56,7 +56,7 @@ class LoginView {
      * @param $message, String output message
      * @return  void, BUT writes to standard output!
      */
-    private function generateLoginFormHTML($message) {
+    private function generateLoginFormHTML($message): string {
         $user;
         if ($this->userNameInField) {
             $user = $this->userNameInField;
@@ -87,15 +87,15 @@ class LoginView {
 		';
     }
 
-    public function getLoginUserName() {
+    public function getLoginUserName(): string {
         return $_POST[self::$name];
     }
 
-    public function getLoginPassword() {
+    public function getLoginPassword(): string {
         return $_POST[self::$password];
     }
 
-    public function isLoginButtonClicked() {
+    public function isLoginButtonClicked(): bool {
         if (isset($_POST[self::$login])) {
             return true;
         } else {
@@ -104,11 +104,11 @@ class LoginView {
         }
     }
 
-    public function setRegisteredUserName($userName) {
+    public function setRegisteredUserName($userName): void {
         $this->userNameInField = $userName;
     }
 
-    public function doesUserWantToStayLoggedIn() {
+    public function doesUserWantToStayLoggedIn(): bool {
         if (isset($_POST[self::$keep])) {
             return true;
         } else {
@@ -117,7 +117,7 @@ class LoginView {
         }
     }
 
-    public function isLogoutButtonClicked() {
+    public function isLogoutButtonClicked(): bool {
         if (isset($_POST[self::$logout])) {
             return true;
         } else {
@@ -126,7 +126,7 @@ class LoginView {
         }
     }
 
-    public function loginResponse($message) {
+    public function loginResponse($message): string {
         return $this->message = $message;
     }
 
