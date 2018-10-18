@@ -20,10 +20,6 @@ class Post {
             throw new \Exception("Body is missing. You will need to add one.");
         }
 
-        if (strlen($body < 1)) {
-            throw new \Exception("You need to atleast write something in your post!");
-        }
-
         $this->userId = $userId;
         $this->title = $title;
         $this->body = $body;

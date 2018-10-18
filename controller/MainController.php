@@ -62,9 +62,9 @@ class MainController {
                 $this->postController->sendPostInfoToDB($postInfo);
                 $response = $this->postView->postResponse($this->responseMessages::successfulPost);
                 $this->layoutView->echoHtml(true, $response, 'post');
-            } else if ($this->postView->isShowPostsLinkClicked()) {
-                $response = $this->postController->getPostsFromDB($this->postView->getActiveUser());
-            } else {
+            } //else if ($this->postView->isShowPostsLinkClicked()) {
+            //$response = $this->postController->getPostsFromDB($this->postView->getActiveUser());
+            else {
 
                 $response = $this->postView->postResponse($this->responseMessages::noFeedback);
 

@@ -77,6 +77,11 @@ class Database {
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    public function retrieveMultipleObjects(){
+        $this->executeStatement();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     // Adding a method to check for entries in DB
     public function checkIfEntryExists() {
         return $this->stmt->rowCount();
@@ -162,6 +167,12 @@ class Database {
         } else {
             return false;
         }
+    }
+
+    public function getPosts($userId) {
+        $this->prepareStatementWithQuerytoDb('SELECT * FROM posts');
+
+        $results = $this->r
     }
 
 }
