@@ -32,9 +32,9 @@ class MainController {
         $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView, $this->postView);
 
         // CREATE OBJECTS OF THE CONTROLLER
-        $this->loginController = new \controller\LoginController($this->loginView, $this->db, $this->session, $this->cookie);
-        $this->registerController = new \controller\RegisterController($this->registerView, $this->session, $this->db);
-        $this->postController = new \controller\postController($this->db, $this->session);
+        $this->loginController = new \controller\LoginController($this->loginView, $this->session, $this->cookie);
+        $this->registerController = new \controller\RegisterController($this->session, $this->db);
+        $this->postController = new \controller\postController($this->db);
     }
 
     public function startApp() {
@@ -60,13 +60,13 @@ class MainController {
     public function createPostLogic() {
         try {
             if ($this->postView->isCreatePostButtonClicked()) {
-                echo "this runs if create Link is clicked";
+
                 $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
                 $this->postController->sendPostInfoToDB($postInfo);
                 $response = $this->postView->postResponse($this->responseMessages::successfulPost);
                 $this->layoutView->echoHtml(true, $response, 'post');
             } else {
-                echo "this runs if nothing is clicked";
+
                 $response = $this->postView->postResponse($this->responseMessages::noFeedback);
                 $this->layoutView->echoHtml(true, $response, 'post');
             }
@@ -146,7 +146,6 @@ class MainController {
     }
 
     public function StartLogic() {
-        // Logic for first path
         if ($this->loginController->loggedInWithCookie()) {
             $response = $this->loginView->loginResponse($this->responseMessages::welcomeCookie);
             $this->layoutView->echoHtml(true, $response, 'login');

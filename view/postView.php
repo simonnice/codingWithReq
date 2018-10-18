@@ -49,11 +49,11 @@ class PostView {
 		';
     }
 
-    public function generateShowPostHtml($message) {
+    public function generateShowPostHtml($list) {
 
         return '
         <h1>Here are your posts!</h1>
-        ' . $this->generateListOfPosts($message) . '
+        ' . $this->generateListOfPosts($list) . '
 
      ';
     }
@@ -61,8 +61,10 @@ class PostView {
     public function generateListOfPosts($data) {
         $list = '';
         foreach ($data as $post) {
-            $list .= '<h3> ' . $post->title . ' </h3>
+            $list .= '<hr>
+                      <h3> ' . $post->title . ' </h3>
                       <p>  ' . $post->body . ' </p>
+                      <p>Posted at : <i>  ' . $post->created_at . ' </i></p>
                       <hr>
 
             ';

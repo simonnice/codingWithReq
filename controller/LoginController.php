@@ -4,13 +4,11 @@ namespace controller;
 class LoginController {
 
     private $loginView;
-    private $db;
     private $session;
     private $cookie;
 
-    public function __construct($login, $db, $session, $cookie) {
+    public function __construct($login, $session, $cookie) {
         $this->loginView = $login;
-        $this->db = $db;
         $this->session = $session;
         $this->cookie = $cookie;
     }
@@ -27,6 +25,8 @@ class LoginController {
         $this->cookie->setCookieValue($loginInfo->getUserName());
         $this->cookie->setCookieTime("+1 hour");
         $this->cookie->createCookie();
+
+        $this->login($loginInfo);
 
     }
 

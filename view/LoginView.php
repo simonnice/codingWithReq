@@ -130,9 +130,4 @@ class LoginView {
         return $this->message = $message;
     }
 
-    //CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-    private function getRequestUserName() {
-        //RETURN REQUEST VARIABLE: USERNAME
-    }
-
 }

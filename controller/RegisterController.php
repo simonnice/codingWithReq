@@ -4,12 +4,11 @@ namespace controller;
 
 class RegisterController {
 
-    private $registerView;
     private $session;
     private $db;
 
-    public function __construct($registerView, $session, $db) {
-        $this->registerView = $registerView;
+    public function __construct($session, $db) {
+
         $this->session = $session;
         $this->db = $db;
 

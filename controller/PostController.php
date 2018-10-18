@@ -4,11 +4,10 @@ namespace controller;
 class PostController {
 
     private $db;
-    private $session;
 
-    public function __construct($db, $session) {
+    public function __construct($db) {
         $this->db = $db;
-        $this->session = $session;
+
     }
 
     public function sendPostInfoToDB($postInfo) {
