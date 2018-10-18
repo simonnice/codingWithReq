@@ -1,7 +1,7 @@
 <?php
 namespace view;
 
-class postView {
+class PostView {
 
     private static $title = 'postView::title';
     private static $body = 'postView::body';
@@ -21,6 +21,13 @@ class postView {
   ';
     }
 
+    public function generateShowPostLink() {
+        $showLink = '?show';
+        return '
+      <a href="' . $showLink . '">View all posts</a>
+  ';
+    }
+
     public function postHtmlRender($message) {
 
         $response = $this->generatePostFormHtml($message);
@@ -29,6 +36,25 @@ class postView {
     }
 
     public function generatePostFormHtml($message) {
+        return '
+			<form method="post" form action="?post">
+				<fieldset>
+					<legend>Write a new post here!</legend>
+					<p id="' . self::$messageId . '">' . $message . '</p>
+
+					<label for="' . self::$title . '">Title :</label>
+					<input type="text" id="' . self::$title . '" name="' . self::$title . '" value="" />
+
+					<label for="' . self::$body . '">Body :</label>
+          <input type="text" id="' . self::$body . '" name="' . self::$body . '" value="" />
+
+					<input type="submit" name="' . self::$createPost . '" value="Create Post" />
+				</fieldset>
+			</form>
+		';
+    }
+
+    public function generateShowPostHtml($message) {
         return '
 			<form method="post" form action="?post">
 				<fieldset>
