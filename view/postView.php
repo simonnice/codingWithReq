@@ -10,7 +10,7 @@ class PostView {
 
     private $sessionToRead;
 
-    public function __construct($session):void {
+    public function __construct($session) {
         $this->sessionToRead = $session;
     }
 

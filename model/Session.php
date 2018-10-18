@@ -35,11 +35,11 @@ class Session {
         }
     }
 
-    public function getCurrentUserId(): void {
+    public function getCurrentUserId(): string {
         return $_SESSION['user_id'];
     }
 
-    public function getCurrentUser(): void {
+    public function getCurrentUser(): string {
         return $_SESSION['user_name'];
     }
 }

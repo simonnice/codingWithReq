@@ -169,6 +169,10 @@ class Database {
         }
     }
 
+    public function deletePost($id) {
+        $this->db->prepareStatementWithQuerytoDb('DELETE FROM posts WHERE id = :id');
+    }
+
     public function getPosts($id): array{
         $this->prepareStatementWithQuerytoDb('SELECT * FROM posts WHERE user_id = :userId');
 
