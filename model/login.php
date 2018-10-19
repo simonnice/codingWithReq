@@ -1,5 +1,8 @@
 <?php
 
+// Looking Good
+// 19/10-18
+
 namespace model;
 
 class Login {
@@ -26,7 +29,6 @@ class Login {
 
         $this->userName = $userName;
         $this->password = $password;
-
         $this->userId = $this->db->getUserIdFromDB($userName);
 
     }

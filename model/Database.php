@@ -4,6 +4,10 @@
 // This is part of the refactor of CodingWithReq
 // I'm starting with switching to prepared statements
 // Through the use of PDO and a Database class
+
+// Looks pretty good, could have been smaller with some further refactoring
+// Check if all methods are used
+// 19/10-18
 namespace model;
 
 use PDO;
@@ -65,7 +69,6 @@ class Database {
     }
 
     // Adding an execute method to execute the prepared statement
-
     public function executeStatement(): bool {
         return $this->stmt->execute();
     }

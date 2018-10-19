@@ -1,11 +1,11 @@
 <?php
 
+// Looking good, all methods used
+// 19/10-18
+
 namespace model;
 
 class Session {
-
-    private $sessionId;
-    private $sessionUser;
 
     public function __construct() {
         if (!isset($_SESSION)) {

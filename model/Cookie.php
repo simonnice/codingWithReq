@@ -1,5 +1,8 @@
 <?php
 
+// Looking good
+// Delete cookie is not in use since I didnt finish that implementation
+// 19/10-18
 namespace model;
 
 class Cookie {
@@ -8,19 +11,15 @@ class Cookie {
     private $value = "";
     private $time;
 
-    public function __construct() {
-
+    public function createCookie(): void {
+        setCookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
     }
 
-    public function createCookie(): bool {
-        return setCookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
+    public function deleteCookie(): void {
+        setCookie('user_name', '', 1);
     }
 
-    public function deleteCookie(): bool {
-        return setCookie($this->name, '', time() - 3600);
-    }
-
-    public function setCookieName($name): string {
+    public function setCookieName($name): void {
         $this->name = $name;
     }
 
@@ -28,7 +27,7 @@ class Cookie {
         return $this->name;
     }
 
-    public function setCookieTime($time) {
+    public function setCookieTime($time): void {
         $date = new \DateTime();
         $date->modify($time);
         $this->time = $date->getTimeStamp();
@@ -38,7 +37,7 @@ class Cookie {
         return $this->time;
     }
 
-    public function setCookieValue($value): string {
+    public function setCookieValue($value): void {
         $this->value = $value;
     }
 

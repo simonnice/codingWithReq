@@ -1,4 +1,8 @@
 <?php
+
+// Looking good
+// Has a couple of unused getters
+// 19/10-18
 namespace view;
 
 class PostView {
@@ -25,7 +29,7 @@ class PostView {
   ';
     }
 
-    public function postHtmlRender($message): string {
+    public function generatePostHtml($message): string {
 
         $response = $this->generatePostFormHtml($message);
 
@@ -80,7 +84,7 @@ class PostView {
     }
 
     public function isCreatePostButtonClicked(): bool {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST[self::$createPost])) {
             return true;
         } else {
             return false;
@@ -96,7 +100,7 @@ class PostView {
         }
     }
 
-    public function isDeleteLinkClicked(): bool {
+    public function isDeleteButtonClicked(): bool {
         if (isset($_POST[self::$deletePost])) {
             return true;
         } else {

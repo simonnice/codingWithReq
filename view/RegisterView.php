@@ -12,7 +12,7 @@ class RegisterView {
 
     private $userNameInField = false;
 
-    public function RegisterHtmlRender($message): string {
+    public function generateRegisterHtml($message): string {
 
         $response = $this->generateRegisterFormHTML($message);
 
@@ -25,12 +25,6 @@ class RegisterView {
         <a href="' . $registerLink . '">Register a new user</a>
 		';
     }
-
-    /**
-     * Generate HTML code on the output buffer for the register button
-     * @param $message, String output message
-     * @return  void, BUT writes to standard output!
-     */
 
     private function generateRegisterFormHTML($message): string {
 
@@ -68,7 +62,7 @@ class RegisterView {
             ';
     }
 
-    public function registerLinkIsClicked(): bool {
+    public function isRegisterLinkClicked(): bool {
         if (isset($_GET['register'])) {
             return true;
         } else {

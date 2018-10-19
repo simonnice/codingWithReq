@@ -13,7 +13,7 @@ require_once 'view/PostView.php';
 require_once 'view/RegisterView.php';
 require_once 'view/DateTimeView.php';
 require_once 'view/LayoutView.php';
-require_once 'view/Response.php';
+require_once 'view/UserFeedback.php';
 require_once 'controller/MainController.php';
 require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';

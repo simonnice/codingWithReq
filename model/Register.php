@@ -1,5 +1,7 @@
 <?php
 
+// Looking good - All dependencies needed
+// 19/10 - 18
 namespace model;
 
 class Register {

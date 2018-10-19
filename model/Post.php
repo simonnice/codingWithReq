@@ -1,16 +1,16 @@
 <?php
 
+// Remove one dependency, looking good now
+// 19/10 - 18
 namespace Model;
 
 class Post {
 
-    private $db;
     private $userId;
     private $title;
     private $body;
 
-    public function __construct($userId, $title, $body, $db) {
-        $this->db = $db;
+    public function __construct($userId, $title, $body) {
 
         if (!$title) {
             throw new \Exception("Title is missing. You will need to add one.");

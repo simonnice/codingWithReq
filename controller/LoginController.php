@@ -49,6 +49,9 @@ class LoginController {
     public function logoutUser() {
         if ($this->session->isSessionSet()) {
             $this->session->destroyCurrentSession();
+            if ($this->cookie->isCookieSet()) {
+                $this->cookie->deleteCookie();
+            }
             return true;
         } else {
             return false;
@@ -63,22 +66,6 @@ class LoginController {
             return false;
         }
 
-    }
-
-    public function isLoggedIn() {
-        if ($this->session->isSessionSet()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function keepUserLoggedIn(): bool {
-        if ($this->loginView->doesUserWantToStayLoggedIn()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace view;
 
-class Response {
+class UserFeedback {
     const noFeedback = "";
     const successfulPost = "Post Created!";
     const successfulRegistration = "Registered new user.";

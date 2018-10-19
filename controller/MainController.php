@@ -14,7 +14,7 @@ class MainController {
     private $postController;
     private $session;
     private $db;
-    private $responseMessages;
+    private $userFeedback;
     private $cookie;
 
     public function __construct() {
@@ -27,13 +27,13 @@ class MainController {
         $this->postView = new \view\postView($this->session);
         $this->dateTimeView = new \view\DateTimeView();
         $this->registerView = new \view\RegisterView();
-        $this->responseMessages = new \view\Response();
+        $this->userFeedback = new \view\UserFeedback();
 
         $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView, $this->postView);
 
         // CREATE OBJECTS OF THE CONTROLLER
         $this->loginController = new \controller\LoginController($this->loginView, $this->session, $this->cookie);
-        $this->registerController = new \controller\RegisterController($this->session, $this->db);
+        $this->registerController = new \controller\RegisterController($this->db);
         $this->postController = new \controller\postController($this->db);
     }
 
@@ -44,9 +44,9 @@ class MainController {
             $this->CreatePostLogic();
         } else if ($this->postView->isShowPostsLinkClicked()) {
             $this->showPostsLogic(false);
-        } else if ($this->postView->isDeleteLinkClicked()) {
+        } else if ($this->postView->isDeleteButtonClicked()) {
             $this->showPostsLogic(true);
-        } else if ($this->registerView->registerLinkIsClicked()) {
+        } else if ($this->registerView->isRegisterLinkClicked()) {
             $this->registerLogic();
 
         } else if ($this->loginView->isLogoutButtonClicked()) {
@@ -65,11 +65,11 @@ class MainController {
 
                 $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
                 $this->postController->sendPostInfoToDB($postInfo);
-                $response = $this->postView->postResponse($this->responseMessages::successfulPost);
+                $response = $this->postView->postResponse($this->userFeedback::successfulPost);
                 $this->layoutView->echoHtml(true, $response, 'post');
             } else {
 
-                $response = $this->postView->postResponse($this->responseMessages::noFeedback);
+                $response = $this->postView->postResponse($this->userFeedback::noFeedback);
                 $this->layoutView->echoHtml(true, $response, 'post');
             }
 
@@ -102,11 +102,11 @@ class MainController {
                 $registerInfo = new \model\Register($this->registerView->getRegisterUserName(),
                     $this->registerView->getRegisterPassword(), $this->registerView->getRegisterRepeatedPassword(), $this->db);
                 $this->registerController->sendRegisterInfoToDb($registerInfo);
-                $response = $this->registerView->registerResponse($this->responseMessages::successfulRegistration);
+                $response = $this->registerView->registerResponse($this->userFeedback::successfulRegistration);
                 $this->loginView->setRegisteredUserName($registerInfo->getUserName());
                 $this->layoutView->echoHtml(false, $response, 'login');
             } else {
-                $response = $this->registerView->registerResponse($this->responseMessages::noFeedback);
+                $response = $this->registerView->registerResponse($this->userFeedback::noFeedback);
                 $this->layoutView->echoHtml(false, $response, 'register');
             }
 
@@ -121,21 +121,21 @@ class MainController {
 
         try {
             $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
-            if ($this->loginController->keepUserLoggedIn()) {
+            if ($this->loginView->doesUserWantToStayLoggedIn()) {
                 if ($this->cookie->isCookieSet()) {
-                    $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
+                    $response = $this->loginView->loginResponse($this->userFeedback::noFeedback);
                     $this->layoutView->echoHtml(true, $response, 'login');
                 } else {
                     $this->loginController->loginWithCookie($loginInfo);
-                    $response = $this->loginView->loginResponse($this->responseMessages::welcomeRemember);
+                    $response = $this->loginView->loginResponse($this->userFeedback::welcomeRemember);
                     $this->layoutView->echoHtml(true, $response, 'login');
                 }
             } else if ($this->loginController->loggedInWithSession()) {
-                $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
+                $response = $this->loginView->loginResponse($this->userFeedback::noFeedback);
                 $this->layoutView->echoHtml(true, $response, 'login');
             } else {
                 $this->loginController->login($loginInfo);
-                $response = $this->loginView->loginResponse($this->responseMessages::welcomeMessage);
+                $response = $this->loginView->loginResponse($this->userFeedback::welcomeMessage);
                 $this->layoutView->echoHtml(true, $response, 'login');
 
             }
@@ -148,23 +148,23 @@ class MainController {
 
     public function logoutLogic() {
         if ($this->loginController->logoutResponse()) {
-            $response = $this->loginView->loginResponse($this->responseMessages::bye);
+            $response = $this->loginView->loginResponse($this->userFeedback::bye);
             $this->layoutView->echoHtml(false, $response, 'login');
         } else {
-            $response = $this->registerView->registerResponse($this->responseMessages::noFeedback);
+            $response = $this->registerView->registerResponse($this->userFeedback::noFeedback);
             $this->layoutView->echoHtml(false, $response, 'login');
         }
     }
 
     public function StartLogic() {
         if ($this->loginController->loggedInWithCookie()) {
-            $response = $this->loginView->loginResponse($this->responseMessages::welcomeCookie);
+            $response = $this->loginView->loginResponse($this->userFeedback::welcomeCookie);
             $this->layoutView->echoHtml(true, $response, 'login');
-        } else if ($this->loginController->isLoggedIn()) {
-            $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
+        } else if ($this->loginController->loggedInWithSession()) {
+            $response = $this->loginView->loginResponse($this->userFeedback::noFeedback);
             $this->layoutView->echoHtml(true, $response, 'login');
         } else {
-            $response = $this->loginView->loginResponse($this->responseMessages::noFeedback);
+            $response = $this->loginView->loginResponse($this->userFeedback::noFeedback);
             $this->layoutView->echoHtml(false, $response, 'login');
         }
     }
