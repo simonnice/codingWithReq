@@ -7,6 +7,8 @@ class PostView {
     private static $body = 'postView::body';
     private static $createPost = 'postView::createPost';
     private static $messageId = 'postView::messageId';
+    private static $deletePost = 'postView::deletePost';
+    private static $postId = 'postView::postId';
 
     private $sessionToRead;
 
@@ -53,17 +55,21 @@ class PostView {
 
         return '
         <h1>Here are your posts!</h1>
+        <form method="post" form action="?delete">
         ' . $this->generateListOfPosts($list) . '
-
+        </form>
      ';
     }
 
     public function generateListOfPosts($data): string {
         $list = '';
+        $deletePost = '?delete';
         foreach ($data as $post) {
             $list .= '<hr>
+                      <input type="hidden" name="id" value=" ' . $post->id . '" />
                       <h3> ' . $post->title . ' </h3>
                       <p>  ' . $post->body . ' </p>
+                      <input type="submit" name="deletePost" value="Delete post" />
                       <p>Posted at : <i>  ' . $post->created_at . ' </i></p>
                       <hr>
 
@@ -89,6 +95,14 @@ class PostView {
         }
     }
 
+    public function isDeleteLinkClicked(): bool {
+        if (isset($_POST['id'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function isShowPostsLinkClicked(): bool {
         if (isset($_GET['show'])) {
             return true;
@@ -108,6 +122,10 @@ class PostView {
 
     public function getPostBody(): string {
         return $_POST[self::$body];
+    }
+
+    public function getPostId(): int {
+        return $_POST['name'];
     }
 
     public function getActiveUserId(): int {

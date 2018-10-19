@@ -43,7 +43,9 @@ class MainController {
         } else if ($this->postView->isCreatePostLinkClicked()) {
             $this->CreatePostLogic();
         } else if ($this->postView->isShowPostsLinkClicked()) {
-            $this->showPostsLogic();
+            $this->showPostsLogic(false);
+        } else if ($this->postView->isDeleteLinkClicked()) {
+            $this->showPostsLogic(true);
         } else if ($this->registerView->registerLinkIsClicked()) {
             $this->registerLogic();
 
@@ -76,10 +78,19 @@ class MainController {
         }
     }
 
-    public function showPostsLogic() {
+    public function showPostsLogic($isDeleteRequest) {
         try {
-            $response = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
-            $this->layoutView->echoHtml(true, $response, 'show');
+            if ($isDeleteRequest) {
+                echo 'The ' . $_POST['id'] . ' submit button was pressed';
+                $this->postController->deletePostFromDB($this->session->getCurrentUserId());
+                $response = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
+                $this->layoutView->echoHtml(true, $response, 'show');
+            } else {
+
+                $response = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
+                $this->layoutView->echoHtml(true, $response, 'show');
+            }
+
         } catch (\Exception $e) {
             $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
         }

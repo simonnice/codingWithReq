@@ -170,7 +170,15 @@ class Database {
     }
 
     public function deletePost($id) {
-        $this->db->prepareStatementWithQuerytoDb('DELETE FROM posts WHERE id = :id');
+        $this->prepareStatementWithQuerytoDb('DELETE FROM posts WHERE user_id = :user_id');
+
+        $this->bindValuesToPlaceholder(':user_id', $id);
+
+        if ($this->executeStatement()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getPosts($id): array{
