@@ -2,168 +2,64 @@
 namespace view;
 
 class LayoutView {
+    private $dateTimeView;
+    private $loginView;
+    private $registerView;
+    private $postView;
 
-    public function echoHtml($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $registerView, $lc, $rc) {
-
-        if (isset($_SESSION['loggedInUser'])) {
-            $isLoggedIn = true;
-        } else {
-            $isLoggedIn = false;
-        }
-
-        if ($isLoggedIn == false) {
-
-            $isRegisterLinkClicked = $rc->checkIfRegisterIsClicked();
-            if ($isRegisterLinkClicked == true) {
-                $isValidRegisterInputs = $rc->registerResponseFromDatabase();
-
-                if ($isValidRegisterInputs === true) {
-                    echo '<!DOCTYPE html>
-                    <html>
-                      <head>
-                        <meta charset="utf-8">
-                        <title>Login Example</title>
-                      </head>
-                      <body>
-                        <h1>Assignment 2</h1>
-                        <a href="?">Back to login</a>
-                        ' . $this->renderIsLoggedIn($isLoggedIn) . '
-
-                        <div class="container">
-                        ' . $v->response('Registered new user.', $isLoggedIn) . '
-                        ' . $dtv->show() . '
-                        </div>
-                       </body>
-                    </html>
-                  ';
-                } else {
-                    echo '<!DOCTYPE html>
-                    <html>
-                      <head>
-                        <meta charset="utf-8">
-                        <title>Login Example</title>
-                      </head>
-                      <body>
-                        <h1>Assignment 2</h1>
-                        <a href="?">Back to login</a>
-                        ' . $this->renderIsLoggedIn($isLoggedIn) . '
-
-                        <div class="container">
-                        ' . $registerView->responseRegister($isRegisterLinkClicked, $isValidRegisterInputs) . '
-                        ' . $dtv->show() . '
-                        </div>
-                       </body>
-                    </html>
-                  ';
-                }
-
-            } else {
-                $loginStatusArray = $lc->checkLoginCredentials();
-
-                if (current($loginStatusArray) === true) {
-                    $isLoggedIn = true;
-                    if (next($loginStatusArray) === true) {
-                        $welcomeString = 'Welcome and you will be remembered';
-                    } else {
-                        $welcomeString = 'Welcome';
-                    }
-                    echo '<!DOCTYPE html>
-                    <html>
-                      <head>
-                        <meta charset="utf-8">
-                        <title>Login Example</title>
-                      </head>
-                      <body>
-                        <h1>Assignment 2</h1>
-                        ' . $this->renderIsLoggedIn($isLoggedIn) . '
-
-                        <div class="container">
-                            ' . $v->response($welcomeString, $isLoggedIn) . '
-
-                            ' . $dtv->show() . '
-                        </div>
-                       </body>
-                    </html>
-                  ';
-                } else {
-                    $isLoggedIn = false;
-                    echo '<!DOCTYPE html>
-                    <html>
-                      <head>
-                        <meta charset="utf-8">
-                        <title>Login Example</title>
-                      </head>
-                      <body>
-                        <h1>Assignment 2</h1>
-                        ' . $registerView->responseRegister($isRegisterLinkClicked, '') . '
-                        ' . $this->renderIsLoggedIn($isLoggedIn) . '
-
-                        <div class="container">
-                            ' . $v->response($loginStatusArray, $isLoggedIn) . '
-
-                            ' . $dtv->show() . '
-                        </div>
-                       </body>
-                    </html>
-                  ';
-                }
-
-            }
-
-        } else if ($isLoggedIn == true) {
-            $isLogoutButtonClicked = $lc->checkIfLogoutButtonIsClicked();
-            if ($isLogoutButtonClicked == true) {
-                $isLoggedIn = false;
-                echo '<!DOCTYPE html>
-            <html>
-              <head>
-                <meta charset="utf-8">
-                <title>Login Example</title>
-              </head>
-              <body>
-                <h1>Assignment 2</h1>
-                ' . $registerView->responseRegister(false, '') . '
-                ' . $this->renderIsLoggedIn($isLoggedIn) . '
-
-                <div class="container">
-                ' . $v->response('Bye bye!', $isLoggedIn) . '
-
-                ' . $dtv->show() . '
-                </div>
-               </body>
-            </html>
-            ';
-            } else {
-                if (isset($_COOKIE['username'])) {
-                    $welcomeString = 'Welcome back with cookie';
-                } else {
-                    $welcomeString = 'Welcome';
-                }
-                echo '<!DOCTYPE html>
-                <html>
-                  <head>
-                    <meta charset="utf-8">
-                    <title>Login Example</title>
-                  </head>
-                  <body>
-                    <h1>Assignment 2</h1>
-                    ' . $this->renderIsLoggedIn($isLoggedIn) . '
-                        <p>' . $welcomeString . '</p>
-                    <div class="container">
-                    ' . $v->response('', $isLoggedIn) . '
-
-                    ' . $dtv->show() . '
-                    </div>
-                   </body>
-                </html>
-                ';
-            }
-
-        }
-
+    public function __construct($dateTime, $login, $register, $post) {
+        $this->dateTimeView = $dateTime;
+        $this->loginView = $login;
+        $this->registerView = $register;
+        $this->postView = $post;
     }
 
-    private function renderIsLoggedIn($isLoggedIn) {
+    public function viewLoader($view, $msg, $isLoggedIn): string {
+        if ($view == "login") {
+            return $this->loginView->response($isLoggedIn, $msg);
+        } else if ($view == "register") {
+            return $this->registerView->registerHtmlRender($msg);
+        } else if ($view == "post") {
+            return $this->postView->postHtmlRender($msg);
+        } else if ($view == "show") {
+            return $this->postView->generateShowPostHtml($msg);
+        }
+    }
+
+    public function linkLoader($view, $isLoggedIn): string {
+
+        if ($view == 'login' && $isLoggedIn == true) {
+            return $this->postView->generatePostLinks();
+        } else if ($view == 'login') {
+            return $this->registerView->generateRegisterLink();
+        } else {
+            return $this->loginView->generateLoginLink();
+        }
+    }
+
+    public function echoHtml($isLoggedIn, $msg, $view): void {
+
+        echo '<!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Login Example</title>
+        </head>
+        <body>
+          <h1>Assignment 2</h1>
+          ' . $this->linkLoader($view, $isLoggedIn) . '
+          ' . $this->renderIsLoggedIn($isLoggedIn) . '
+
+          <div class="container">
+              ' . $this->viewLoader($view, $msg, $isLoggedIn) . '
+              ' . $this->dateTimeView->show() . '
+          </div>
+         </body>
+      </html>
+    ';
+    }
+
+    private function renderIsLoggedIn($isLoggedIn): string {
         if ($isLoggedIn) {
             return '<h2>Logged in</h2>';
         } else {

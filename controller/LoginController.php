@@ -1,53 +1,83 @@
 <?php
-
 namespace controller;
 
-require_once 'model/User.php';
+class LoginController {
 
-class loginController {
-
-    private $state;
     private $loginView;
+    private $session;
+    private $cookie;
 
-    public function __construct(\model\LoginState $state, $login) {
-        $this->state = $state;
+    public function __construct($login, $session, $cookie) {
         $this->loginView = $login;
+        $this->session = $session;
+        $this->cookie = $cookie;
     }
 
-    /**
-     * Handle a login request to the site
-     *
-     */
-
-    public function checkLoginCredentials() {
-        if ($this->loginView->isLoginButtonClicked() == true) {
-            $userName = $this->loginView->getLoginUserName();
-            $password = $this->loginView->getLoginPassword();
-
-            if ($this->loginView->doesUserWantToStayLoggedIn() == true) {
-                $keepMeLoggedIn = true;
-            } else {
-                $keepMeLoggedIn = false;
-            }
-
-            $actualUser = new \model\User($userName, $password, $keepMeLoggedIn);
-            try {
-
-                $this->state->validateLoginInputData($actualUser);
-
-                return $arrayOfValues = array("value" => $this->state->validateDatabaseQuery($actualUser, $conn), "keepLoggedIn" => $keepMeLoggedIn);
-
-            } catch (\Exception $e) {
-                return $e->getMessage();
-            }
+    public function login($loginInfo) {
+        if (!$this->session->isSessionSet()) {
+            $this->session->createUserSession($loginInfo->getUserName(), $loginInfo->getUserId());
         }
     }
 
-    public function checkIfLogoutButtonIsClicked() {
-        if ($this->loginView->isLogoutButtonClicked() == true) {
-            setcookie('username', null, time() - 3600);
-            session_destroy();
+    public function loginWithCookie($loginInfo) {
+
+        $this->cookie->setCookieName('user_name');
+        $this->cookie->setCookieValue($loginInfo->getUserName());
+        $this->cookie->setCookieTime("+1 hour");
+        $this->cookie->createCookie();
+
+        $this->login($loginInfo);
+
+    }
+
+    public function loggedInWithSession() {
+        if ($this->session->isSessionSet()) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function loggedInWithCookie() {
+        if ($this->cookie->isCookieSet()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function logoutUser() {
+        if ($this->session->isSessionSet()) {
+            $this->session->destroyCurrentSession();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function logoutResponse() {
+        $response = $this->logoutUser();
+        if ($response) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function isLoggedIn() {
+        if ($this->session->isSessionSet()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function keepUserLoggedIn(): bool {
+        if ($this->loginView->doesUserWantToStayLoggedIn()) {
+            return true;
+        } else {
+            return false;
         }
     }
 
