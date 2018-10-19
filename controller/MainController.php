@@ -82,7 +82,6 @@ class MainController {
         try {
             if ($isDeleteRequest) {
                 $postToDelete = $this->postView->getPostId();
-                echo $postToDelete;
                 $this->postController->deletePostFromDB($this->session->getCurrentUserId(), $postToDelete);
                 $response = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
                 $this->layoutView->echoHtml(true, $response, 'show');

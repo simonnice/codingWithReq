@@ -70,7 +70,7 @@ class PostView {
                       <input type="hidden" name="id" value=" ' . $post->id . '" />
                       <h3> ' . $post->title . ' </h3>
                       <p>  ' . $post->body . ' </p>
-                      <input type="submit" name="deletePost" value="Delete post" />
+                      <input type="submit" name="' . self::$deletePost . '" value="Delete post" />
                       <p>Posted at : <i>  ' . $post->created_at . ' </i></p>
                       <hr>
                       </form>
@@ -97,7 +97,7 @@ class PostView {
     }
 
     public function isDeleteLinkClicked(): bool {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST[self::$deletePost])) {
             return true;
         } else {
             return false;
