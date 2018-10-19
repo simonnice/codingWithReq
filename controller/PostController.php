@@ -18,8 +18,8 @@ class PostController {
         return $this->db->getPosts($user);
     }
 
-    public function deletePostFromDB($userId) {
-        $this->db->deletePost($userId);
+    public function deletePostFromDB($userId, $postId) {
+        $this->db->deletePost($userId, $postId);
     }
 
 }

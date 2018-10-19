@@ -55,9 +55,9 @@ class PostView {
 
         return '
         <h1>Here are your posts!</h1>
-        <form method="post" form action="?delete">
+
         ' . $this->generateListOfPosts($list) . '
-        </form>
+
      ';
     }
 
@@ -66,13 +66,14 @@ class PostView {
         $deletePost = '?delete';
         foreach ($data as $post) {
             $list .= '<hr>
+                    <form method="post" form action="?delete">
                       <input type="hidden" name="id" value=" ' . $post->id . '" />
                       <h3> ' . $post->title . ' </h3>
                       <p>  ' . $post->body . ' </p>
                       <input type="submit" name="deletePost" value="Delete post" />
                       <p>Posted at : <i>  ' . $post->created_at . ' </i></p>
                       <hr>
-
+                      </form>
             ';
         }
         return $list;
@@ -96,7 +97,7 @@ class PostView {
     }
 
     public function isDeleteLinkClicked(): bool {
-        if (isset($_POST['id'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return true;
         } else {
             return false;
@@ -125,7 +126,7 @@ class PostView {
     }
 
     public function getPostId(): int {
-        return $_POST['name'];
+        return $_POST['id'];
     }
 
     public function getActiveUserId(): int {

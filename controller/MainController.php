@@ -81,8 +81,9 @@ class MainController {
     public function showPostsLogic($isDeleteRequest) {
         try {
             if ($isDeleteRequest) {
-                echo 'The ' . $_POST['id'] . ' submit button was pressed';
-                $this->postController->deletePostFromDB($this->session->getCurrentUserId());
+                $postToDelete = $this->postView->getPostId();
+                echo $postToDelete;
+                $this->postController->deletePostFromDB($this->session->getCurrentUserId(), $postToDelete);
                 $response = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
                 $this->layoutView->echoHtml(true, $response, 'show');
             } else {

@@ -169,10 +169,11 @@ class Database {
         }
     }
 
-    public function deletePost($id) {
-        $this->prepareStatementWithQuerytoDb('DELETE FROM posts WHERE user_id = :user_id');
+    public function deletePost($userId, $postId) {
+        $this->prepareStatementWithQuerytoDb('DELETE FROM posts WHERE user_id = :user_id AND id = :id ');
 
-        $this->bindValuesToPlaceholder(':user_id', $id);
+        $this->bindValuesToPlaceholder(':user_id', $userId);
+        $this->bindValuesToPlaceholder(':id', $postId);
 
         if ($this->executeStatement()) {
             return true;
