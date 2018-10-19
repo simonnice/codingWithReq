@@ -132,5 +132,5 @@ class PostView {
     public function getActiveUserId(): int {
         return $this->sessionToRead->getCurrentUserId();
     }
-
+// fix
 }
