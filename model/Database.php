@@ -72,12 +72,12 @@ class Database {
 
     // Adding a method for retrieving a single object from DB
 
-    public function retrieveSingleObject(): object {
+    public function retrieveSingleObject() {
         $this->executeStatement();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function retrieveMultipleObjects(): array{
+    public function retrieveMultipleObjects() {
         $this->executeStatement();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
