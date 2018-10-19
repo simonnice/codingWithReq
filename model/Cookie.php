@@ -1,7 +1,6 @@
 <?php
 
 // Looking good
-// Delete cookie is not in use since I didnt finish that implementation
 // 19/10-18
 namespace model;
 

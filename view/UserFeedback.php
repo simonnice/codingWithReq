@@ -4,6 +4,7 @@ namespace view;
 
 class UserFeedback {
     const noFeedback = "";
+    const successfulDeletion = "Post Deleted!";
     const successfulPost = "Post Created!";
     const successfulRegistration = "Registered new user.";
     const welcomeMessage = "Welcome";
