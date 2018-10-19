@@ -37,28 +37,6 @@ class MainController {
         $this->postController = new \controller\postController($this->db);
     }
 
-    /*public function startApp() {
-    if ($this->loginView->isLoginButtonClicked()) {
-    $this->loginLogic();
-    } else if ($this->postView->isCreatePostLinkClicked()) {
-    $this->createPostLogic();
-    } else if ($this->postView->isShowPostsLinkClicked()) {
-    $this->showPostsLogic(false);
-    } else if ($this->postView->isDeleteButtonClicked()) {
-    $this->showPostsLogic(true);
-    } else if ($this->registerView->isRegisterLinkClicked()) {
-    $this->registerLogic();
-
-    } else if ($this->loginView->isLogoutButtonClicked()) {
-    $this->logoutLogic();
-
-    } else {
-    $this->StartLogic();
-
-    }
-
-    }*/
-
     public function startApp() {
         $scenario = true;
         switch ($scenario) {
@@ -93,42 +71,22 @@ class MainController {
 
     public function createPostLogic() {
         try {
-            $createPostScenario = true;
-            switch ($createPostScenario) {
-                case $this->postView->isCreatePostButtonClicked():
-                    $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
-                    $this->postController->sendPostInfoToDB($postInfo);
-                    $responseToUser = $this->postView->postResponse($this->userFeedback::successfulPost);
-                    $this->layoutView->echoHtml(true, $responseToUser, 'post');
-                    break;
+            if ($this->postView->isCreatePostButtonClicked()) {
 
-                default:
-                    $responseToUser = $this->postView->postResponse($this->userFeedback::noFeedback);
-                    $this->layoutView->echoHtml(true, $responseToUser, 'post');
+                $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
+                $this->postController->sendPostInfoToDB($postInfo);
+                $responseToUser = $this->postView->postResponse($this->userFeedback::successfulPost);
+                $this->layoutView->echoHtml(true, $responseToUser, 'post');
+            } else {
+
+                $responseToUser = $this->postView->postResponse($this->userFeedback::noFeedback);
+                $this->layoutView->echoHtml(true, $responseToUser, 'post');
             }
+
         } catch (\Exception $e) {
             $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
         }
     }
-
-    /*public function createPostLogic() {
-    try {
-    if ($this->postView->isCreatePostButtonClicked()) {
-
-    $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
-    $this->postController->sendPostInfoToDB($postInfo);
-    $responseToUser = $this->postView->postResponse($this->userFeedback::successfulPost);
-    $this->layoutView->echoHtml(true, $responseToUser, 'post');
-    } else {
-
-    $responseToUser = $this->postView->postResponse($this->userFeedback::noFeedback);
-    $this->layoutView->echoHtml(true, $responseToUser, 'post');
-    }
-
-    } catch (\Exception $e) {
-    $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
-    }
-    }*/
 
     public function showPostsLogic($isDeleteRequest) {
         try {
