@@ -58,7 +58,8 @@ class PostView {
     public function generateShowPostHtml($list): string {
 
         return '
-        <h1>Here are your posts!</h1>
+        <h1>View your existing posts below:</h1>
+        <hr>
 
         ' . $this->generateListOfPosts($list) . '
 
