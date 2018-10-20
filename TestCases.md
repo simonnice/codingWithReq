@@ -31,4 +31,53 @@ Add image later
 
 ***
 
+## Test Case 5.3: Successful creation of new post
+
+### Input
+* Test case 1.7 - Successful login with correct Username and Password.
+* Click on "Create new post" link.
+* Enter something in the Title field.
+* Enter something in the Body field.
+* Click "Create Post" button.
+
+### Output:
+* Message: "Post Created"
+
+Add image later
+
+***
+
+## Test Case 6.1 Show user created posts - no posts exist
+
+### Input
+* Test case 1.7 - Successful login with correct Username and Password.
+* Click on "Show all your posts" link.
+
+### Output:
+* Header: "View your existing posts below:"
+* No posts listed.
+
+Add image later
+
+***
+
+## Test Case 6.2 Show user created posts - Posts exist
+
+### Input
+* Test case 1.7 - Successful login with correct Username and Password.
+* Test case 5.3 - Successful creation of new post.
+* Click on "back to login" link.
+* Click on "Show all your posts" link.
+
+### Output:
+* Header: "View your existing posts below:"
+* Added posts shows upp in list.
+
+Add image later
+
+
+
+
+
+
 
