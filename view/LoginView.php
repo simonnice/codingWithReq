@@ -10,8 +10,6 @@ class LoginView {
     private static $post = 'LoginView::Post';
     private static $name = 'LoginView::UserName';
     private static $password = 'LoginView::Password';
-    private static $cookieName = 'LoginView::CookieName';
-    private static $cookiePassword = 'LoginView::CookiePassword';
     private static $keep = 'LoginView::KeepMeLoggedIn';
     private static $messageId = 'LoginView::Message';
 
