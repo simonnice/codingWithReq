@@ -25,7 +25,7 @@ class Cookie {
     }
 
     public function getCookieName() {
-        return 'user_name';
+        return $this->name;
     }
 
     public function getCookieTime(): string {
@@ -46,11 +46,11 @@ class Cookie {
     }
 
     public function createCookie() {
-        \setcookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
+        setCookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
     }
 
     public function deleteCookie() {
-        \setcookie('user_name', '', 1);
+        setCookie('user_name', '', 1);
     }
 
 }

@@ -68,12 +68,4 @@ class LoginController {
 
     }
 
-    public function keepUserLoggedIn(): bool {
-        if ($this->loginView->doesUserWantToStayLoggedIn()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
