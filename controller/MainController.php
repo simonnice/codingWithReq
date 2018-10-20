@@ -45,23 +45,14 @@ class MainController {
                 break;
 
             case $this->postView->isCreatePostLinkClicked():
-                if ($this->session->isNotActiveUser()) {
-                    redirect('?');
-                }
                 $this->createPostLogic();
                 break;
 
             case $this->postView->isShowPostsLinkClicked():
-                if ($this->session->isNotActiveUser()) {
-                    redirect('?');
-                }
                 $this->showPostsLogic(false);
                 break;
 
             case $this->postView->isDeleteButtonClicked():
-                if ($this->session->isNotActiveUser()) {
-                    redirect('?');
-                }
                 $this->showPostsLogic(true);
                 break;
 
@@ -70,9 +61,6 @@ class MainController {
                 break;
 
             case $this->loginView->isLogoutButtonClicked():
-                if ($this->session->isNotActiveUser()) {
-                    redirect('?');
-                }
                 $this->logoutLogic();
                 break;
 
