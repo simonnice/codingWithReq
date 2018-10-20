@@ -1,7 +1,7 @@
 <?php
 
 // Looking good
-// Has a couple of unused getters
+// Has a couple of unused getters s
 // 19/10-18
 namespace view;
 
