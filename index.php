@@ -24,6 +24,6 @@ date_default_timezone_set('Europe/Stockholm');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-//CREATE OBJECTS OF THE MODELS
+// Instantiate main controller for running application
 $mainController = new \controller\MainController();
 $mainController->runApplication();
