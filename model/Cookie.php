@@ -18,9 +18,9 @@ class Cookie {
         \setcookie('user_name', '', 1);
     }
 
-    public function setCookieName($name) {
-        $this->name = $name;
-    }
+    /* public function setCookieName($name) {
+    $this->name = $name;
+    }*/
 
     public function getCookieName() {
         return 'user_name';
