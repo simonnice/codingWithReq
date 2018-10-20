@@ -22,6 +22,7 @@ class LoginController {
     public function loginWithCookie($loginInfo) {
 
         $this->cookie->setCookieName('user_name');
+        echo $this->cookie->getCookieName();
         $this->cookie->setCookieValue($loginInfo->getUserName());
         $this->cookie->setCookieTime("+1 hour");
         $this->cookie->createCookie();
