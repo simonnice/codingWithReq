@@ -29,7 +29,7 @@ class LoginView {
     public function generateLoginLink(): string {
         $loginLink = '?';
         return '
-        <a href="' . $loginLink . '">Back to Login</a>
+        <a href="' . $loginLink . '">Back to login</a>
 		';
     }
 
