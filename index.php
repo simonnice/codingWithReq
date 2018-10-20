@@ -2,6 +2,7 @@
 
 //INCLUDE THE FILES NEEDED...
 require_once 'config/Config.php';
+require_once 'helper/redirect.php';
 require_once 'model/Session.php';
 require_once 'model/Database.php';
 require_once 'model/Register.php';

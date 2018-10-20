@@ -45,14 +45,23 @@ class MainController {
                 break;
 
             case $this->postView->isCreatePostLinkClicked():
+                if ($this->session->isNotActiveUser()) {
+                    redirect('?');
+                }
                 $this->createPostLogic();
                 break;
 
             case $this->postView->isShowPostsLinkClicked():
+                if ($this->session->isNotActiveUser()) {
+                    redirect('?');
+                }
                 $this->showPostsLogic(false);
                 break;
 
             case $this->postView->isDeleteButtonClicked():
+                if ($this->session->isNotActiveUser()) {
+                    redirect('?');
+                }
                 $this->showPostsLogic(true);
                 break;
 
@@ -61,6 +70,9 @@ class MainController {
                 break;
 
             case $this->loginView->isLogoutButtonClicked():
+                if ($this->session->isNotActiveUser()) {
+                    redirect('?');
+                }
                 $this->logoutLogic();
                 break;
 
@@ -72,7 +84,6 @@ class MainController {
     public function createPostLogic() {
         try {
             if ($this->postView->isCreatePostButtonClicked()) {
-
                 $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
                 $this->postController->sendPostInfoToDB($postInfo);
                 $responseToUser = $this->postView->postResponse($this->userFeedback::successfulPost);

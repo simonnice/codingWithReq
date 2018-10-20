@@ -35,6 +35,14 @@ class Session {
         }
     }
 
+    public function isNotActiveUser(): bool {
+        if (!isset($_SESSION['user_name'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getCurrentUserId(): string {
         return $_SESSION['user_id'];
     }
