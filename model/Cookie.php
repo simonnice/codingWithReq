@@ -10,23 +10,23 @@ class Cookie {
     private $value = "";
     private $time;
 
-    public function createCookie(): void {
+    public function createCookie() {
         \setcookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
     }
 
-    public function deleteCookie(): void {
+    public function deleteCookie() {
         \setcookie('user_name', '', 1);
     }
 
-    public function setCookieName($name): void {
+    public function setCookieName($name) {
         $this->name = $name;
     }
 
-    public function getCookieName(): string {
+    public function getCookieName() {
         return $this->name;
     }
 
-    public function setCookieTime($time): void {
+    public function setCookieTime($time) {
         $date = new \DateTime();
         $date->modify($time);
         $this->time = $date->getTimeStamp();
@@ -36,15 +36,15 @@ class Cookie {
         return $this->time;
     }
 
-    public function setCookieValue($value): void {
+    public function setCookieValue($value) {
         $this->value = $value;
     }
 
-    public function getCookieValue(): string {
+    public function getCookieValue() {
         return $this->value;
     }
 
-    public function isCookieSet(): bool {
+    public function isCookieSet() {
         if (isset($_COOKIE['user_name'])) {
             return true;
         } else {
