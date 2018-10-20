@@ -1,4 +1,8 @@
 <?php
+
+// Looking good
+// Has a couple of unused getters
+// 19/10-18
 namespace view;
 
 class PostView {
@@ -25,7 +29,7 @@ class PostView {
   ';
     }
 
-    public function postHtmlRender($message): string {
+    public function generatePostHtml($message): string {
 
         $response = $this->generatePostFormHtml($message);
 
@@ -54,7 +58,8 @@ class PostView {
     public function generateShowPostHtml($list): string {
 
         return '
-        <h1>Here are your posts!</h1>
+        <h1>View your existing posts below:</h1>
+        <hr>
 
         ' . $this->generateListOfPosts($list) . '
 
@@ -70,7 +75,7 @@ class PostView {
                       <input type="hidden" name="id" value=" ' . $post->id . '" />
                       <h3> ' . $post->title . ' </h3>
                       <p>  ' . $post->body . ' </p>
-                      <input type="submit" name="deletePost" value="Delete post" />
+                      <input type="submit" name="' . self::$deletePost . '" value="Delete post" />
                       <p>Posted at : <i>  ' . $post->created_at . ' </i></p>
                       <hr>
                       </form>
@@ -80,7 +85,7 @@ class PostView {
     }
 
     public function isCreatePostButtonClicked(): bool {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST[self::$createPost])) {
             return true;
         } else {
             return false;
@@ -96,8 +101,8 @@ class PostView {
         }
     }
 
-    public function isDeleteLinkClicked(): bool {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function isDeleteButtonClicked(): bool {
+        if (isset($_POST[self::$deletePost])) {
             return true;
         } else {
             return false;
@@ -132,5 +137,5 @@ class PostView {
     public function getActiveUserId(): int {
         return $this->sessionToRead->getCurrentUserId();
     }
-
+// fix
 }

@@ -1,4 +1,9 @@
 <?php
+
+// Looking good
+// High abstraction on functions
+// No unneded dependencies
+// 19/10-18
 namespace controller;
 
 class PostController {

@@ -1,11 +1,11 @@
 <?php
 
+// Looking good, all methods used
+// 19/10-18
+
 namespace model;
 
 class Session {
-
-    private $sessionId;
-    private $sessionUser;
 
     public function __construct() {
         if (!isset($_SESSION)) {
@@ -29,6 +29,14 @@ class Session {
 
     public function isSessionSet(): bool {
         if (isset($_SESSION['user_name'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isNotActiveUser(): bool {
+        if (!isset($_SESSION['user_name'])) {
             return true;
         } else {
             return false;

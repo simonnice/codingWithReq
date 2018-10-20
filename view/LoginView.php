@@ -1,4 +1,7 @@
 <?php
+
+// First pass looking good
+// 19/10-18
 namespace view;
 
 class LoginView {
@@ -14,13 +17,10 @@ class LoginView {
 
     private $userNameInField = false;
 
-    public function __construct() {
-
-    }
-    public function response($isLoggedIn, $message): string {
+    public function generateLoginHtml($isLoggedIn, $message): string {
 
         if ($isLoggedIn) {
-            $response = $this->generateLoggedInHTML($message);
+            $response = $this->generateLoggedInFormHtml($message);
         } else {
 
             $response = $this->generateloginFormHTML($message);
@@ -35,12 +35,7 @@ class LoginView {
 		';
     }
 
-    /**
-     * Generate HTML code on the output buffer for the logout button
-     * @param $message, String output message
-     * @return  void, BUT writes to standard output!
-     */
-    private function generateLoggedInHTML($message): string {
+    private function generateLoggedInFormHtml($message): string {
         return '
 			<form  method="post" form action="?" >
                 <p id="' . self::$messageId . '">' . $message . '</p>
@@ -51,11 +46,6 @@ class LoginView {
 		';
     }
 
-    /**
-     * Generate HTML code on the output buffer for the logout button
-     * @param $message, String output message
-     * @return  void, BUT writes to standard output!
-     */
     private function generateLoginFormHTML($message): string {
         $user;
         if ($this->userNameInField) {

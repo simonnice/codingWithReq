@@ -16,11 +16,11 @@ class LayoutView {
 
     public function viewLoader($view, $msg, $isLoggedIn): string {
         if ($view == "login") {
-            return $this->loginView->response($isLoggedIn, $msg);
+            return $this->loginView->generateLoginHtml($isLoggedIn, $msg);
         } else if ($view == "register") {
-            return $this->registerView->registerHtmlRender($msg);
+            return $this->registerView->generateRegisterHtml($msg);
         } else if ($view == "post") {
-            return $this->postView->postHtmlRender($msg);
+            return $this->postView->generatePostHtml($msg);
         } else if ($view == "show") {
             return $this->postView->generateShowPostHtml($msg);
         }

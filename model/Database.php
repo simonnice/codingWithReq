@@ -4,6 +4,10 @@
 // This is part of the refactor of CodingWithReq
 // I'm starting with switching to prepared statements
 // Through the use of PDO and a Database class
+
+// Looks pretty good, could have been smaller with some further refactoring
+// Check if all methods are used
+// 19/10-18
 namespace model;
 
 use PDO;
@@ -65,19 +69,18 @@ class Database {
     }
 
     // Adding an execute method to execute the prepared statement
-
     public function executeStatement(): bool {
         return $this->stmt->execute();
     }
 
     // Adding a method for retrieving a single object from DB
 
-    public function retrieveSingleObject(): object {
+    public function retrieveSingleObject() {
         $this->executeStatement();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function retrieveMultipleObjects(): array{
+    public function retrieveMultipleObjects() {
         $this->executeStatement();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
