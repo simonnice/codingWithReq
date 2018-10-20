@@ -23,7 +23,7 @@ class Cookie {
     }
 
     public function getCookieName() {
-        return $this->name;
+        return 'user_name';
     }
 
     public function setCookieTime($time) {
