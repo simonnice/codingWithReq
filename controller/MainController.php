@@ -66,6 +66,7 @@ class MainController {
 
             default:
                 $this->StartLogic();
+                echo "this runs";
         }
     }
 
