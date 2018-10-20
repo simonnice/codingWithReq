@@ -11,11 +11,11 @@ class Cookie {
     private $time;
 
     public function createCookie(): void {
-        \setCookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
+        \setcookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
     }
 
     public function deleteCookie(): void {
-        \setCookie('user_name', '', 1);
+        \setcookie('user_name', '', 1);
     }
 
     public function setCookieName($name): void {
