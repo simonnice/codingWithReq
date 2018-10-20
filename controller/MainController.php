@@ -22,7 +22,7 @@ class MainController {
         $this->db = new \model\Database($this->session);
         $this->cookie = new \model\Cookie();
 
-        //CREATE OBJECTS OF THE VIEWS
+        //CREATE OBJECTS OF THE VIEWSS
         $this->loginView = new \view\LoginView();
         $this->postView = new \view\postView($this->session);
         $this->dateTimeView = new \view\DateTimeView();
