@@ -130,7 +130,7 @@ class MainController {
 
         try {
             $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
-            if ($this->loginView->doesUserWantToStayLoggedIn()) {
+            if ($this->loginController->keepUserLoggedIn()) {
                 if ($this->cookie->isCookieSet()) {
                     $responseToUser = $this->loginView->loginResponse($this->userFeedback::noFeedback);
                     $this->layoutView->echoHtml(true, $responseToUser, 'login');
