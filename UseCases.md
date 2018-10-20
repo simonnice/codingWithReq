@@ -1,4 +1,4 @@
-UC1 Create new post
+# UC1 Create new post
 ## Main scenario
 1. Starts when a user wants to add a post.
 2. System asks for a title and a body for the post.
