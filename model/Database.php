@@ -1,13 +1,5 @@
 <?php
 
-// PDO Database class
-// This is part of the refactor of CodingWithReq
-// I'm starting with switching to prepared statements
-// Through the use of PDO and a Database class
-
-// Looks pretty good, could have been smaller with some further refactoring
-// Check if all methods are used
-// 19/10-18
 namespace model;
 
 use PDO;
@@ -24,7 +16,6 @@ class Database {
     private $session;
 
     public function __construct($session) {
-        // Set Data Source Name
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
         $options = array(
             PDO::ATTR_PERSISTENT => true,
@@ -68,12 +59,9 @@ class Database {
         $this->stmt->bindValue($phParam, $value, $type);
     }
 
-    // Adding an execute method to execute the prepared statement
     public function executeStatement(): bool {
         return $this->stmt->execute();
     }
-
-    // Adding a method for retrieving a single object from DB
 
     public function retrieveSingleObject() {
         $this->executeStatement();
@@ -85,7 +73,6 @@ class Database {
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // Adding a method to check for entries in DB
     public function checkIfEntryExists(): int {
         return $this->stmt->rowCount();
     }
@@ -136,17 +123,12 @@ class Database {
 
         $this->data = $validatedRegisterInput;
 
-        // Hashing password
         $hashedPassword = password_hash($this->data->getPassword(), PASSWORD_DEFAULT);
 
-        // Register the user
         $this->prepareStatementWithQuerytoDb('INSERT INTO user (name, password) VALUES (:name, :password)');
 
-        // Bind the values
         $this->bindValuesToPlaceholder(':name', $this->data->getUserName());
         $this->bindValuesToPlaceholder(':password', $hashedPassword);
-
-        // Execute the statement
 
         if ($this->executeStatement()) {
             return true;

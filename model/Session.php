@@ -1,8 +1,5 @@
 <?php
 
-// Looking good, all methods used
-// 19/10-18
-
 namespace model;
 
 class Session {

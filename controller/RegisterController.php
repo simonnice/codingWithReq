@@ -1,10 +1,5 @@
 <?php
 
-// Looking good
-// No unneeded dependencies
-// Maybe a little too small to be worth it?
-// 19/10-18
-
 namespace controller;
 
 class RegisterController {
@@ -17,7 +12,7 @@ class RegisterController {
 
     }
 
-    public function sendRegisterInfoToDb($registerinfo) {
+    public function sendRegisterInfoToDB($registerinfo) {
 
         $this->db->registerNewUser($registerinfo);
 

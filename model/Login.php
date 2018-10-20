@@ -1,8 +1,5 @@
 <?php
 
-// Looking Good
-// 19/10-18
-
 namespace model;
 
 class Login {

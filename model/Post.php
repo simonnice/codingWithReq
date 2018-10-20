@@ -1,7 +1,5 @@
 <?php
 
-// Remove one dependency, looking good now
-// 19/10 - 18
 namespace Model;
 
 class Post {

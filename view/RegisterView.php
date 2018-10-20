@@ -62,6 +62,22 @@ class RegisterView {
             ';
     }
 
+    public function setUserName($userName): void {
+        $this->userNameInField = $userName;
+    }
+
+    public function getRegisterUserName(): string {
+        return $_POST[self::$name];
+    }
+
+    public function getRegisterPassword(): string {
+        return $_POST[self::$password];
+    }
+
+    public function getRegisterRepeatedPassword(): string {
+        return $_POST[self::$passwordRepeat];
+    }
+
     public function isRegisterLinkClicked(): bool {
         if (isset($_GET['register'])) {
             return true;
@@ -83,19 +99,4 @@ class RegisterView {
         return $this->message = $message;
     }
 
-    public function setUserName($userName): void {
-        $this->userNameInField = $userName;
-    }
-
-    public function getRegisterUserName(): string {
-        return $_POST[self::$name];
-    }
-
-    public function getRegisterPassword(): string {
-        return $_POST[self::$password];
-    }
-
-    public function getRegisterRepeatedPassword(): string {
-        return $_POST[self::$passwordRepeat];
-    }
 }

@@ -1,7 +1,5 @@
 <?php
 
-// First pass looking good
-// 19/10-18
 namespace view;
 
 class LoginView {
@@ -75,6 +73,10 @@ class LoginView {
 		';
     }
 
+    public function setRegisteredUserName($userName): void {
+        $this->userNameInField = $userName;
+    }
+
     public function getLoginUserName(): string {
         return $_POST[self::$name];
     }
@@ -90,10 +92,6 @@ class LoginView {
 
             return false;
         }
-    }
-
-    public function setRegisteredUserName($userName): void {
-        $this->userNameInField = $userName;
     }
 
     public function doesUserWantToStayLoggedIn(): bool {

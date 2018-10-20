@@ -37,106 +37,53 @@ class MainController {
         $this->postController = new \controller\postController($this->db);
     }
 
-    public function startApp() {
+    // Function for running the main application, handles routing of scenarios.
+    public function runApplication() {
         $scenario = true;
         switch ($scenario) {
             case $this->loginView->isLoginButtonClicked():
-                $this->loginLogic();
+                $this->loginUserScenario();
                 break;
 
             case $this->postView->isCreatePostLinkClicked():
                 if ($this->session->isNotActiveUser()) {
                     redirect('?');
                 }
-                $this->createPostLogic();
+                $this->createPostScenario();
                 break;
 
             case $this->postView->isShowPostsLinkClicked():
                 if ($this->session->isNotActiveUser()) {
                     redirect('?');
                 }
-                $this->showPostsLogic(false);
+                $this->showPostsScenario(false);
                 break;
 
             case $this->postView->isDeleteButtonClicked():
-                $this->showPostsLogic(true);
+                if ($this->session->isNotActiveUser()) {
+                    redirect('?');
+                }
+                $this->showPostsScenario(true);
                 break;
 
             case $this->registerView->isRegisterLinkClicked():
-                $this->registerLogic();
+                $this->registerUserScenario();
                 break;
 
             case $this->loginView->isLogoutButtonClicked():
                 if ($this->session->isNotActiveUser()) {
                     redirect('?');
                 }
-                $this->logoutLogic();
+                $this->logoutUserScenario();
                 break;
 
             default:
-                $this->StartLogic();
+                $this->defaultPageScenario();
 
         }
     }
 
-    public function createPostLogic() {
-        try {
-            if ($this->postView->isCreatePostButtonClicked()) {
-                $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
-                $this->postController->sendPostInfoToDB($postInfo);
-                $responseToUser = $this->postView->postResponse($this->userFeedback::successfulPost);
-                $this->layoutView->echoHtml(true, $responseToUser, 'post');
-            } else {
-
-                $responseToUser = $this->postView->postResponse($this->userFeedback::noFeedback);
-                $this->layoutView->echoHtml(true, $responseToUser, 'post');
-            }
-
-        } catch (\Exception $e) {
-            $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
-        }
-    }
-
-    public function showPostsLogic($isDeleteRequest) {
-        try {
-            if ($isDeleteRequest) {
-                $postToDelete = $this->postView->getPostId();
-                $this->postController->deletePostFromDB($this->session->getCurrentUserId(), $postToDelete);
-                $responseToUser = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
-                $this->layoutView->echoHtml(true, $responseToUser, 'show');
-            } else {
-
-                $responseToUser = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
-                $this->layoutView->echoHtml(true, $responseToUser, 'show');
-            }
-
-        } catch (\Exception $e) {
-            $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
-        }
-    }
-
-    public function registerLogic() {
-        try {
-            if ($this->registerView->isRegisterButtonClicked()) {
-                $registerInfo = new \model\Register($this->registerView->getRegisterUserName(),
-                    $this->registerView->getRegisterPassword(), $this->registerView->getRegisterRepeatedPassword(), $this->db);
-                $this->registerController->sendRegisterInfoToDb($registerInfo);
-                $responseToUser = $this->registerView->registerResponse($this->userFeedback::successfulRegistration);
-                $this->loginView->setRegisteredUserName($registerInfo->getUserName());
-                $this->layoutView->echoHtml(false, $responseToUser, 'login');
-            } else {
-                $responseToUser = $this->registerView->registerResponse($this->userFeedback::noFeedback);
-                $this->layoutView->echoHtml(false, $responseToUser, 'register');
-            }
-
-        } catch (\Exception $e) {
-            $this->registerView->setUserName($this->registerView->getRegisterUserName());
-            $this->layoutView->echoHtml(false, $e->getMessage(), 'register');
-        }
-
-    }
-
-    public function loginLogic() {
+    public function loginUserScenario() {
 
         try {
             $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
@@ -165,7 +112,64 @@ class MainController {
         }
     }
 
-    public function logoutLogic() {
+    public function createPostScenario() {
+        try {
+            if ($this->postView->isCreatePostButtonClicked()) {
+                $postInfo = new \model\Post($this->postView->getActiveUserId(), $this->postView->getPostTitle(), $this->postView->getPostBody(), $this->db);
+                $this->postController->sendPostInfoToDB($postInfo);
+                $responseToUser = $this->postView->postResponse($this->userFeedback::successfulPost);
+                $this->layoutView->echoHtml(true, $responseToUser, 'post');
+            } else {
+
+                $responseToUser = $this->postView->postResponse($this->userFeedback::noFeedback);
+                $this->layoutView->echoHtml(true, $responseToUser, 'post');
+            }
+
+        } catch (\Exception $e) {
+            $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
+        }
+    }
+
+    public function showPostsScenario($isDeleteRequest) {
+        try {
+            if ($isDeleteRequest) {
+                $postToDelete = $this->postView->getPostId();
+                $this->postController->deletePostFromDB($this->session->getCurrentUserId(), $postToDelete);
+                $responseToUser = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
+                $this->layoutView->echoHtml(true, $responseToUser, 'show');
+            } else {
+
+                $responseToUser = $this->postController->getPostsFromDB($this->session->getCurrentUserId());
+                $this->layoutView->echoHtml(true, $responseToUser, 'show');
+            }
+
+        } catch (\Exception $e) {
+            $this->layoutView->echoHtml(true, $e->getMessage(), 'post');
+        }
+    }
+
+    public function registerUserScenario() {
+        try {
+            if ($this->registerView->isRegisterButtonClicked()) {
+                $registerInfo = new \model\Register($this->registerView->getRegisterUserName(),
+                    $this->registerView->getRegisterPassword(), $this->registerView->getRegisterRepeatedPassword(), $this->db);
+                $this->registerController->sendRegisterInfoToDB($registerInfo);
+                $responseToUser = $this->registerView->registerResponse($this->userFeedback::successfulRegistration);
+                $this->loginView->setRegisteredUserName($registerInfo->getUserName());
+                $this->layoutView->echoHtml(false, $responseToUser, 'login');
+            } else {
+                $responseToUser = $this->registerView->registerResponse($this->userFeedback::noFeedback);
+                $this->layoutView->echoHtml(false, $responseToUser, 'register');
+            }
+
+        } catch (\Exception $e) {
+            $this->registerView->setUserName($this->registerView->getRegisterUserName());
+            $this->layoutView->echoHtml(false, $e->getMessage(), 'register');
+        }
+
+    }
+
+    public function logoutUserScenario() {
         if ($this->loginController->logoutResponse()) {
             $responseToUser = $this->loginView->loginResponse($this->userFeedback::bye);
             $this->layoutView->echoHtml(false, $responseToUser, 'login');
@@ -175,7 +179,7 @@ class MainController {
         }
     }
 
-    public function StartLogic() {
+    public function defaultPageScenario() {
         if ($this->loginController->loggedInWithCookie()) {
             $responseToUser = $this->loginView->loginResponse($this->userFeedback::welcomeCookie);
             $this->layoutView->echoHtml(true, $responseToUser, 'login');

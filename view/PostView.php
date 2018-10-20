@@ -1,8 +1,5 @@
 <?php
 
-// Looking good
-// Has a couple of unused getters ss
-// 19/10-18
 namespace view;
 
 class PostView {
@@ -84,6 +81,14 @@ class PostView {
         return $list;
     }
 
+    public function getPostId(): int {
+        return $_POST['id'];
+    }
+
+    public function getActiveUserId(): int {
+        return $this->sessionToRead->getCurrentUserId();
+    }
+
     public function isCreatePostButtonClicked(): bool {
         if (isset($_POST[self::$createPost])) {
             return true;
@@ -122,20 +127,4 @@ class PostView {
         return $this->message = $message;
     }
 
-    public function getPostTitle(): string {
-        return $_POST[self::$title];
-    }
-
-    public function getPostBody(): string {
-        return $_POST[self::$body];
-    }
-
-    public function getPostId(): int {
-        return $_POST['id'];
-    }
-
-    public function getActiveUserId(): int {
-        return $this->sessionToRead->getCurrentUserId();
-    }
-// fix
 }

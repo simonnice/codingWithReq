@@ -26,4 +26,4 @@ ini_set('display_errors', 1);
 
 //CREATE OBJECTS OF THE MODELS
 $mainController = new \controller\MainController();
-$mainController->startApp();
+$mainController->runApplication();
