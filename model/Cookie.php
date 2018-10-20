@@ -11,7 +11,7 @@ class Cookie {
     private $time;
 
     public function createCookie(): void {
-        setCookie($this->getCookieName(), $this->getCookieValue(), $this->getCookieTime());
+        setCookie($this->getCookieName('user_name'), $this->getCookieValue(), $this->getCookieTime());
     }
 
     public function deleteCookie(): void {
@@ -22,8 +22,8 @@ class Cookie {
         $this->name = $name;
     }
 
-    public function getCookieName(): string {
-        return $this->name;
+    public function getCookieName($inputtedName): string {
+        return $inputtedName;
     }
 
     public function setCookieTime($time): void {
