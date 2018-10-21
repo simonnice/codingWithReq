@@ -29,7 +29,7 @@ Below is the code for creating the database as they appear in my project:
   `name` varchar(100) COLLATE latin1_bin NOT NULL,
   `password` varchar(100) COLLATE latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
-  ~~~~ ``` 
+  ~~~~ 
 
 
 
