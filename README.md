@@ -64,8 +64,11 @@ Running version of the application can be found here:
 
 http://104.248.170.11/codingWithReq/
 
+Test user for fast testing:
 Username: Admin
 Password: Password
+
+you can of course also create your own users!
 
 ## Test Cases and Use Cases
 The Test Cases and Use Cases covering the new functionalities can be found in separate files in this project root.<br/>
