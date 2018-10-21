@@ -19,7 +19,7 @@ Total percentage on automated tests = 81%.
 To be able to test this application locally, you will need to create a database with the correct tables and also create a Config file for storing the credentials for accessing said database.
 
 ### Create Database
-Create a database and add tables for user and posts
+Create a database and add tables for user and posts.
 Below is the code for creating the database as they appear in my project:
 
 #### Users:
@@ -44,6 +44,16 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 ~~~~
 
+### Add a Config file
+Below you will find the layout of the Config file I used. Replace the placeholder values with values that represent your database.
+~~~~
+<?php
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', 'chosenPassword');
+define('DB_NAME', 'chosenName');
+define('URLROOT', 'http://localhost/codingWithReqFinal//codingWithReq');
+~~~~
 
 ## New functionalities
 I implemented a way for users to write their own posts and view them for later use, like a personal notebook. The time the posts were made is recorded so that some kind of time keeping can be maintained. The user can also remove posts that are no longer important. Only the users own posts are visible. I have also created new Use Cases and Test Cases for these functionalities to make sure that they work as intended.
