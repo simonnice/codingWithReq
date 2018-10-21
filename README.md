@@ -33,6 +33,17 @@ CREATE TABLE `user` (
   ~~~~ 
 
 
+#### Posts
+~~~~
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) COLLATE latin1_bin NOT NULL,
+  `body` text COLLATE latin1_bin NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+~~~~
+
 
 ## New functionalities
 I implemented a way for users to write their own posts and view them for later use, like a personal notebook. The time the posts were made is recorded so that some kind of time keeping can be maintained. The user can also remove posts that are no longer important. Only the users own posts are visible. I have also created new Use Cases and Test Cases for these functionalities to make sure that they work as intended.
