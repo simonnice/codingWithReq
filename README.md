@@ -22,6 +22,9 @@ To be able to test this application locally, you will need to create a database 
 Create a database and add tables for user and posts
 Below is the code for creating the database as they appear in my project:
 
+#### Users:
+
+
 
 
 
