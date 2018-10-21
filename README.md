@@ -23,6 +23,8 @@ Create a database and add tables for user and posts
 Below is the code for creating the database as they appear in my project:
 
 #### Users:
+
+~~~~ This is a piece of code in a block ~~~~ 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE latin1_bin NOT NULL,
