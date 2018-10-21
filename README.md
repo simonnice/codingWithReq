@@ -52,7 +52,7 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', 'chosenPassword');
 define('DB_NAME', 'chosenName');
-define('URLROOT', 'http://localhost/codingWithReqFinal//codingWithReq');
+define('URLROOT', 'your root url for application');
 ~~~~
 
 ## New functionalities
@@ -66,6 +66,10 @@ http://104.248.170.11/codingWithReq/
 
 Username: Admin
 Password: Password
+
+## Test Cases and Use Cases
+The new Test Cases and Use Cases covering the new functionalities can be found in separate files in this project root.
+
 
 
 
