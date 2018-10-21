@@ -64,10 +64,10 @@ Running version of the application can be found here:
 
 http://104.248.170.11/codingWithReq/
 
-Test user for fast testing:
-Username: Admin
-Password: Password
-<br/>
+Test user for fast testing:<br/>
+Username: Admin<br/>
+Password: Password<br/>
+
 you can of course also create your own users!
 
 ## Test Cases and Use Cases
