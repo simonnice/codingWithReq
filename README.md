@@ -68,7 +68,7 @@ Username: Admin
 Password: Password
 
 ## Test Cases and Use Cases
-The new Test Cases and Use Cases covering the new functionalities can be found in separate files in this project root.<br/>
+The Test Cases and Use Cases covering the new functionalities can be found in separate files in this project root.<br/>
 [Test Cases](https://github.com/simonnice/codingWithReq/blob/master/TestCases.md)<br/>
 [Use Cases](https://github.com/simonnice/codingWithReq/blob/master/UseCases.md)
 
