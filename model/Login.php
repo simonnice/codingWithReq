@@ -24,8 +24,11 @@ class Login {
             throw new \Exception("Wrong name or password");
         }
 
-        $this->userName = $userName;
-        $this->password = $password;
+        $sanitizedName = htmlspecialchars($userName);
+        $sanitizedPassword = htmlspecialchars($password);
+
+        $this->userName = $sanitizedName;
+        $this->password = $sanitizedPassword;
         $this->userId = $this->db->getUserIdFromDB($userName);
 
     }

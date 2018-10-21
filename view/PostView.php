@@ -85,6 +85,14 @@ class PostView {
         return $_POST['id'];
     }
 
+    public function getPostTitle(): string {
+        return $_POST[self::$title];
+    }
+
+    public function getPostBody(): string {
+        return $_POST[self::$body];
+    }
+
     public function getActiveUserId(): int {
         return $this->sessionToRead->getCurrentUserId();
     }

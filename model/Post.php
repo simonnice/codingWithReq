@@ -18,9 +18,12 @@ class Post {
             throw new \Exception("Body is missing. You will need to add one.");
         }
 
+        $sanitizedTitle = htmlspecialchars($title);
+        $sanitizedBody = htmlspecialchars($body);
+
         $this->userId = $userId;
-        $this->title = $title;
-        $this->body = $body;
+        $this->title = $sanitizedTitle;
+        $this->body = $sanitizedBody;
 
     }
 

@@ -45,8 +45,11 @@ class Register {
             throw new \Exception("User exists, pick another username.");
         }
 
-        $this->userName = $userName;
-        $this->password = $password;
+        $sanitizedName = htmlspecialchars($userName);
+        $sanitizedPassword = htmlspecialchars($password);
+
+        $this->userName = $sanitizedName;
+        $this->password = $sanitizedPassword;
         $this->passwordRepeat = $passwordRepeat;
     }
 
