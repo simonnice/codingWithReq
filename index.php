@@ -20,9 +20,8 @@ require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
 require_once 'controller/PostController.php';
 
+// Setting default timezone
 date_default_timezone_set('Europe/Stockholm');
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 // Instantiate main controller for running application
 $mainController = new \controller\MainController();

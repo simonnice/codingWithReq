@@ -14,7 +14,8 @@ class LayoutView {
         $this->postView = $post;
     }
 
-    public function viewLoader($view, $msg, $isLoggedIn): string {
+    // Loads c
+    public function generateSpecificViewHtml($view, $msg, $isLoggedIn): string {
         if ($view == "login") {
             return $this->loginView->generateLoginHtml($isLoggedIn, $msg);
         } else if ($view == "register") {
@@ -26,8 +27,7 @@ class LayoutView {
         }
     }
 
-    public function linkLoader($view, $isLoggedIn): string {
-
+    public function generateSpecificLinkHtml($view, $isLoggedIn): string {
         if ($view == 'login' && $isLoggedIn == true) {
             return $this->postView->generatePostLinks();
         } else if ($view == 'login') {
@@ -47,11 +47,11 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
-          ' . $this->linkLoader($view, $isLoggedIn) . '
+          ' . $this->generateSpecificLinkHtml($view, $isLoggedIn) . '
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
           <div class="container">
-              ' . $this->viewLoader($view, $msg, $isLoggedIn) . '
+              ' . $this->generateSpecificViewHtml($view, $msg, $isLoggedIn) . '
               ' . $this->dateTimeView->show() . '
           </div>
          </body>

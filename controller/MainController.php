@@ -22,7 +22,7 @@ class MainController {
         $this->db = new \model\Database($this->session);
         $this->cookie = new \model\Cookie();
 
-        //CREATE OBJECTS OF THE VIEWSS
+        //CREATE OBJECTS OF THE VIEWS
         $this->loginView = new \view\LoginView();
         $this->postView = new \view\postView($this->session);
         $this->dateTimeView = new \view\DateTimeView();
@@ -31,7 +31,7 @@ class MainController {
 
         $this->layoutView = new \view\LayoutView($this->dateTimeView, $this->loginView, $this->registerView, $this->postView);
 
-        // CREATE OBJECTS OF THE CONTROLLER
+        // CREATE OBJECTS OF THE CONTROLLERs
         $this->loginController = new \controller\LoginController($this->loginView, $this->session, $this->cookie);
         $this->registerController = new \controller\RegisterController($this->db);
         $this->postController = new \controller\postController($this->db);
@@ -47,21 +47,21 @@ class MainController {
 
             case $this->postView->isCreatePostLinkClicked():
                 if ($this->session->isNotActiveUser()) {
-                    redirect('?');
+                    redirectToPageUrl('?');
                 }
                 $this->createPostScenario();
                 break;
 
             case $this->postView->isShowPostsLinkClicked():
                 if ($this->session->isNotActiveUser()) {
-                    redirect('?');
+                    redirectToPageUrl('?');
                 }
                 $this->showPostsScenario(false);
                 break;
 
             case $this->postView->isDeleteButtonClicked():
                 if ($this->session->isNotActiveUser()) {
-                    redirect('?');
+                    redirectToPageUrl('?');
                 }
                 $this->showPostsScenario(true);
                 break;
@@ -72,7 +72,7 @@ class MainController {
 
             case $this->loginView->isLogoutButtonClicked():
                 if ($this->session->isNotActiveUser()) {
-                    redirect('?');
+                    redirectToPageUrl('?');
                 }
                 $this->logoutUserScenario();
                 break;

@@ -92,8 +92,8 @@ class Database {
     }
 
     public function doesInputUserMatchDbUser($username, $password): bool {
-
         $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+
         $this->bindValuesToPlaceholder(':name', $username);
 
         if ($this->doesUserExist($username)) {
@@ -112,6 +112,7 @@ class Database {
 
     public function getUserIdFromDB($userName): int {
         $this->prepareStatementWithQuerytoDb('SELECT * FROM user WHERE name = :name');
+
         $this->bindValuesToPlaceholder(':name', $userName);
 
         $row = $this->retrieveSingleObject();
@@ -120,7 +121,6 @@ class Database {
     }
 
     public function registerNewUser($validatedRegisterInput): bool {
-
         $this->data = $validatedRegisterInput;
 
         $hashedPassword = password_hash($this->data->getPassword(), PASSWORD_DEFAULT);
