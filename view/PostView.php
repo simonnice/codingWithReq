@@ -27,7 +27,6 @@ class PostView {
     }
 
     public function generatePostHtml($message): string {
-
         $response = $this->generatePostFormHtml($message);
 
         return $response;

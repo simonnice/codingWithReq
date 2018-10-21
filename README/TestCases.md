@@ -11,7 +11,7 @@
 * Message: "Title is missing. You will need to add one."
 
 
-Add image later
+
 
 ***
 
@@ -27,8 +27,6 @@ Add image later
 ### Output:
 * Message: "Body is missing. You will need to add one."
 
-Add image later
-
 ***
 
 ## Test Case 5.3: Successful creation of new post
@@ -43,8 +41,6 @@ Add image later
 ### Output:
 * Message: "Post Created"
 
-Add image later
-
 ***
 
 ## Test Case 6.1: Show user created posts - no posts exist
@@ -56,8 +52,6 @@ Add image later
 ### Output:
 * Header: "View your existing posts below:"
 * No posts listed.
-
-Add image later
 
 ***
 
@@ -73,7 +67,7 @@ Add image later
 * Header: "View your existing posts below:"
 * Added posts shows upp in list.
 
-Add image later
+***
 
 ## Test Case 7.1: Successful deletion of post
 
@@ -88,12 +82,4 @@ Add image later
 * Test Case 6.1 or 6.2 depending on existing amount of posts.
 * Deleted post is not present in the list.
 
-Add image later
-
-
-
-
-
-
-
-
+***

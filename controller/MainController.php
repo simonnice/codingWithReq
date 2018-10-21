@@ -84,7 +84,6 @@ class MainController {
     }
 
     public function loginUserScenario() {
-
         try {
             $loginInfo = new \model\Login($this->loginView->getLoginUserName(), $this->loginView->getLoginPassword(), $this->db);
             if ($this->loginView->doesUserWantToStayLoggedIn()) {

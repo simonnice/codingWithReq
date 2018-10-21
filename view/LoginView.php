@@ -3,6 +3,7 @@
 namespace view;
 
 class LoginView {
+
     private static $login = 'LoginView::Login';
     private static $logout = 'LoginView::Logout';
     private static $post = 'LoginView::Post';
@@ -44,6 +45,7 @@ class LoginView {
 
     private function generateLoginFormHTML($message): string {
         $user;
+
         if ($this->userNameInField) {
             $user = $this->userNameInField;
         } else if (isset($_POST[self::$name])) {

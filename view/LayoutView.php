@@ -2,6 +2,7 @@
 namespace view;
 
 class LayoutView {
+
     private $dateTimeView;
     private $loginView;
     private $registerView;
@@ -14,7 +15,6 @@ class LayoutView {
         $this->postView = $post;
     }
 
-    // Loads c
     public function generateSpecificViewHtml($view, $msg, $isLoggedIn): string {
         if ($view == "login") {
             return $this->loginView->generateLoginHtml($isLoggedIn, $msg);
